@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pinnacle SMP</title>
+  <style>
+    :root {
+      --bg: #090b10;
+      --bg-soft: #101521;
+      --panel: rgba(17, 23, 36, 0.88);
+      --panel-2: rgba(22, 30, 46, 0.92);
+      --line: rgba(120, 150, 190, 0.18);
+      --text: #eef3ff;
+      --muted: #9ba8c7;
+      --green: #5fff9c;
+      --cyan: #57d5ff;
+      --blue: #7aa2ff;
+      --gold: #ffd66b;
+      --danger: #ff6c8f;
+      --shadow: 0 18px 48px rgba(0, 0, 0, 0.45);
+      --radius: 22px;
+      --max: 1240px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(87, 213, 255, 0.14), transparent 28%),
+        radial-gradient(circle at top right, rgba(95, 255, 156, 0.12), transparent 24%),
+        linear-gradient(180deg, #0b0f16 0%, #080a0f 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 32px 32px;
+      mask-image: linear-gradient(180deg, rgba(255,255,255,0.55), transparent 80%);
+      opacity: 0.22;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(calc(100% - 32px), var(--max));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(16px);
+      background: rgba(7, 10, 15, 0.72);
+      border-bottom: 1px solid rgba(122, 162, 255, 0.12);
+    }
+
+    .nav-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      min-height: 82px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .brand-badge {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      background:
+        linear-gradient(135deg, rgba(95,255,156,0.28), rgba(87,213,255,0.18)),
+        #111a2a;
+      border: 1px solid rgba(95,255,156,0.35);
+      box-shadow: inset 0 0 24px rgba(95,255,156,0.08), 0 10px 24px rgba(0,0,0,0.35);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .brand-badge::before,
+    .brand-badge::after {
+      content: "";
+      position: absolute;
+      background: rgba(255,255,255,0.13);
+    }
+
+    .brand-badge::before {
+      inset: 8px;
+      border-radius: 8px;
+      box-shadow:
+        10px 0 0 rgba(255,255,255,0.12),
+        0 10px 0 rgba(255,255,255,0.12),
+        10px 10px 0 rgba(255,255,255,0.06);
+    }
+
+    .brand span { font-size: 1rem; }
+
+    nav ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    nav li {
+      position: relative;
+    }
+
+    nav > ul > li > a,
+    nav > ul > li > button {
+      appearance: none;
+      border: 0;
+      background: transparent;
+      color: var(--text);
+      font: inherit;
+      padding: 12px 14px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    nav > ul > li > a:hover,
+    nav > ul > li > button:hover,
+    nav > ul > li > a:focus,
+    nav > ul > li > button:focus {
+      background: rgba(122, 162, 255, 0.12);
+      color: white;
+      outline: none;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: calc(100% + 10px);
+      left: 0;
+      min-width: 210px;
+      padding: 10px;
+      background: rgba(10, 14, 22, 0.96);
+      border: 1px solid rgba(122, 162, 255, 0.16);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      display: none;
+    }
+
+    .dropdown:hover .dropdown-menu,
+    .dropdown:focus-within .dropdown-menu {
+      display: block;
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 11px 12px;
+      border-radius: 10px;
+      color: var(--muted);
+    }
+
+    .dropdown-menu a:hover {
+      background: rgba(95,255,156,0.1);
+      color: var(--text);
+    }
+
+    .hero {
+      position: relative;
+      padding: 84px 0 48px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.9fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .hero-card,
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-card {
+      padding: 36px;
+      background:
+        linear-gradient(135deg, rgba(87,213,255,0.12), rgba(95,255,156,0.09)),
+        linear-gradient(180deg, rgba(18,24,37,0.96), rgba(11,15,24,0.96));
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(122, 162, 255, 0.12);
+      color: #cdd9ff;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    h1, h2, h3, h4 { margin: 0 0 14px; line-height: 1.05; }
+    h1 {
+      font-size: clamp(2.7rem, 6vw, 5.2rem);
+      letter-spacing: -0.05em;
+      max-width: 10ch;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 62ch;
+      color: var(--muted);
+      font-size: 1.06rem;
+      line-height: 1.75;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 18px;
+      border-radius: 14px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      transition: 0.2s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--green), var(--cyan));
+      color: #05110b;
+    }
+
+    .btn-primary:hover { transform: translateY(-2px); }
+
+    .btn-secondary {
+      background: rgba(122,162,255,0.11);
+      border-color: rgba(122,162,255,0.18);
+      color: var(--text);
+    }
+
+    .stats-card {
+      padding: 28px;
+      display: grid;
+      gap: 18px;
+      background:
+        radial-gradient(circle at top right, rgba(122,162,255,0.16), transparent 40%),
+        linear-gradient(180deg, rgba(18,24,37,0.96), rgba(11,15,24,0.96));
+    }
+
+    .server-card {
+      background: var(--panel-2);
+      border: 1px solid rgba(95,255,156,0.16);
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .server-ip {
+      margin-top: 6px;
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      color: var(--green);
+    }
+
+    .status-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .status-item {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      padding: 16px;
+    }
+
+    .status-item strong {
+      display: block;
+      font-size: 1.3rem;
+      margin-bottom: 6px;
+    }
+
+    .section {
+      padding: 34px 0;
+    }
+
+    .section-heading {
+      margin-bottom: 18px;
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .section-heading p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 64ch;
+      line-height: 1.7;
+    }
+
+    .news-grid,
+    .gallery-grid,
+    .info-grid,
+    .join-grid {
+      display: grid;
+      gap: 20px;
+    }
+
+    .news-grid { grid-template-columns: repeat(3, 1fr); }
+    .gallery-grid { grid-template-columns: repeat(4, 1fr); }
+    .info-grid { grid-template-columns: repeat(3, 1fr); }
+    .join-grid { grid-template-columns: 1fr 1fr; }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .news-card {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      min-height: 100%;
+    }
+
+    .tag {
+      display: inline-flex;
+      width: fit-content;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(255, 214, 107, 0.1);
+      color: var(--gold);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .card p, .card li {
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .rules-list {
+      display: grid;
+      gap: 14px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .rules-list li {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.05);
+      padding: 14px 16px;
+      border-radius: 16px;
+    }
+
+    .gallery-item {
+      aspect-ratio: 1 / 1;
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      position: relative;
+      background:
+        linear-gradient(145deg, rgba(95,255,156,0.14), rgba(87,213,255,0.08)),
+        linear-gradient(180deg, #162033, #0d121c);
+      box-shadow: var(--shadow);
+    }
+
+    .gallery-item::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(transparent 0 60%, rgba(0,0,0,0.6)),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: auto, 24px 24px, 24px 24px;
+    }
+
+    .gallery-label {
+      position: absolute;
+      left: 16px;
+      bottom: 16px;
+      right: 16px;
+      font-weight: 700;
+      z-index: 1;
+    }
+
+    .about-list {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .apply-steps {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .site-footer {
+      margin-top: 48px;
+      border-top: 1px solid rgba(122, 162, 255, 0.12);
+      background: rgba(5, 7, 11, 0.85);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr 1fr;
+      gap: 28px;
+      padding: 42px 0;
+    }
+
+    .footer-brand p,
+    .footer-col a {
+      color: var(--muted);
+      line-height: 1.9;
+    }
+
+    .footer-col h4 {
+      margin-bottom: 10px;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #d8e2ff;
+    }
+
+    .footer-links {
+      display: grid;
+      gap: 6px;
+    }
+
+    .footer-col a:hover { color: var(--green); }
+
+    .footer-bottom {
+      padding: 0 0 28px;
+      color: #7f89a1;
+      font-size: 0.95rem;
+    }
+
+    .mobile-note {
+      display: none;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 1100px) {
+      .hero-grid,
+      .join-grid,
+      .footer-grid,
+      .news-grid,
+      .gallery-grid,
+      .info-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .footer-grid > :first-child {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .nav-wrap {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 14px 0;
+      }
+
+      nav ul {
+        width: 100%;
+        gap: 6px;
+      }
+
+      nav > ul > li > a,
+      nav > ul > li > button {
+        padding: 10px 12px;
+      }
+
+      .dropdown-menu {
+        position: static;
+        display: block;
+        margin-top: 8px;
+      }
+
+      .hero,
+      .section {
+        padding-top: 28px;
+      }
+
+      .hero-grid,
+      .news-grid,
+      .gallery-grid,
+      .info-grid,
+      .join-grid,
+      .footer-grid,
+      .status-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-card,
+      .stats-card,
+      .card {
+        padding: 22px;
+      }
+
+      h1 { max-width: none; }
+      .mobile-note { display: block; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a href="#home" class="brand">
+        <div class="brand-badge" aria-hidden="true"></div>
+        <span>Pinnacle SMP</span>
+      </a>
+
+      <nav aria-label="Main navigation">
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#rules">Server Rules</a></li>
+          <li class="dropdown">
+            <button aria-haspopup="true" aria-expanded="false">Join ▾</button>
+            <div class="dropdown-menu">
+              <a href="#about-us">About Us</a>
+              <a href="#apply-here">Apply Here</a>
+            </div>
+          </li>
+          <li><a href="#news">Server News</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div class="hero-card">
+          <div class="eyebrow">Modern Survival • Community Focused</div>
+          <h1>Build higher on Pinnacle SMP</h1>
+          <p>
+            A sleek community-driven survival server with a polished gaming-site feel, a friendly member base,
+            and a world built for long-term stories, projects, and events. This layout gives Pinnacle SMP a
+            modern home while keeping subtle Minecraft-inspired energy in the visuals.
+          </p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#apply-here">Apply to Join</a>
+            <a class="btn btn-secondary" href="#news">Read Server News</a>
+          </div>
+        </div>
+
+        <aside class="panel stats-card">
+          <div class="server-card">
+            <div class="tag">Featured Server</div>
+            <h3 style="margin-top: 12px;">Ready for your next world?</h3>
+            <p class="mobile-note">Replace the sample server details below with your real information.</p>
+            <div class="server-ip">play.pinnaclesmp.net</div>
+          </div>
+
+          <div class="status-grid">
+            <div class="status-item">
+              <strong>24/7</strong>
+              <span>Server uptime</span>
+            </div>
+            <div class="status-item">
+              <strong>Events</strong>
+              <span>Community nights</span>
+            </div>
+            <div class="status-item">
+              <strong>Vanilla+</strong>
+              <span>Light enhancements</span>
+            </div>
+          </div>
+
+          <div class="card" style="padding:18px; background: rgba(255,255,255,0.03); border-radius:18px;">
+            <h3>Why players stay</h3>
+            <p>
+              Long-term worlds, community trust, tasteful plugins, and an atmosphere that feels welcoming
+              without losing that premium multiplayer gaming vibe.
+            </p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="news">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <div class="eyebrow">Latest Updates</div>
+            <h2>Server News</h2>
+          </div>
+          <p>
+            Use this area for season launches, event announcements, maintenance updates, or community highlights.
+          </p>
+        </div>
+
+        <div class="news-grid">
+          <article class="card news-card">
+            <span class="tag">Season Update</span>
+            <h3>Season refresh and world polish</h3>
+            <p>
+              Kick off a fresh chapter with new builds, improved spawn presentation, and a clean place for players
+              to establish their next big project.
+            </p>
+            <a href="#" style="color: var(--cyan); font-weight: 700;">Read more →</a>
+          </article>
+
+          <article class="card news-card">
+            <span class="tag">Community Event</span>
+            <h3>Weekend competition spotlight</h3>
+            <p>
+              Promote tournaments, tours, scavenger hunts, or build contests with cards that feel like a modern game portal.
+            </p>
+            <a href="#" style="color: var(--cyan); font-weight: 700;">Read more →</a>
+          </article>
+
+          <article class="card news-card">
+            <span class="tag">Announcement</span>
+            <h3>Server tweaks and quality-of-life changes</h3>
+            <p>
+              Share plugin adjustments, schedule notes, new features, and policy reminders in a format that stays clean and readable.
+            </p>
+            <a href="#" style="color: var(--cyan); font-weight: 700;">Read more →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="rules">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <div class="eyebrow">Play Fair</div>
+            <h2>Server Rules</h2>
+          </div>
+          <p>
+            These sample rules are here to demonstrate the layout. Replace them with your full official rules set.
+          </p>
+        </div>
+
+        <div class="info-grid">
+          <div class="card">
+            <h3>Community Standards</h3>
+            <ul class="rules-list">
+              <li>Be respectful to all players and staff.</li>
+              <li>No harassment, hate speech, or personal attacks.</li>
+              <li>Keep chat and Discord interactions welcoming.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Gameplay Rules</h3>
+            <ul class="rules-list">
+              <li>No cheating, x-ray, duping, or unfair mods.</li>
+              <li>No griefing, stealing, or unwanted destruction.</li>
+              <li>Ask before building too close to another player.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Server Etiquette</h3>
+            <ul class="rules-list">
+              <li>Keep lag-heavy builds optimized when possible.</li>
+              <li>Follow event instructions from staff.</li>
+              <li>Use common sense and help keep the server fun.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="join">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <div class="eyebrow">Join Pinnacle</div>
+            <h2>Join</h2>
+          </div>
+          <p>
+            The Join menu includes About Us and Apply Here as requested. This can stay as a dropdown or be split into separate pages later.
+          </p>
+        </div>
+
+        <div class="join-grid">
+          <article class="card" id="about-us">
+            <div class="tag">About Us</div>
+            <h3 style="margin-top: 14px;">What Pinnacle SMP is about</h3>
+            <p>
+              Pinnacle SMP is designed to feel like a strong community first and a server second: long-term progression,
+              memorable events, collaborative building, and a polished experience that makes players want to keep coming back.
+            </p>
+            <ul class="about-list">
+              <li>Community-focused survival gameplay</li>
+              <li>Clean presentation and curated server features</li>
+              <li>Room for builders, explorers, redstoners, and casual players</li>
+              <li>Events and seasonal highlights to keep things fresh</li>
+            </ul>
+          </article>
+
+          <article class="card" id="apply-here">
+            <div class="tag">Apply Here</div>
+            <h3 style="margin-top: 14px;">Application flow</h3>
+            <p>
+              Add your application form, Discord link, or embedded Google Form here. This sample block shows a clean structure for applicants.
+            </p>
+            <ol class="apply-steps">
+              <li>Read the server rules.</li>
+              <li>Learn about the community and server style.</li>
+              <li>Submit your application through the official form.</li>
+              <li>Wait for approval instructions from staff.</li>
+            </ol>
+            <div class="cta-row">
+              <a class="btn btn-primary" href="#">Open Application</a>
+              <a class="btn btn-secondary" href="#rules">Review Rules</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="gallery">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <div class="eyebrow">Visual Showcase</div>
+            <h2>Gallery</h2>
+          </div>
+          <p>
+            Swap these placeholders with screenshots from spawn, events, builds, and community moments.
+          </p>
+        </div>
+
+        <div class="gallery-grid">
+          <div class="gallery-item"><div class="gallery-label">Spawn District</div></div>
+          <div class="gallery-item"><div class="gallery-label">Season Event Night</div></div>
+          <div class="gallery-item"><div class="gallery-label">Community Mega Build</div></div>
+          <div class="gallery-item"><div class="gallery-label">Member Base Showcase</div></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <div class="brand" style="margin-bottom: 12px;">
+          <div class="brand-badge" aria-hidden="true"></div>
+          <span>Pinnacle SMP</span>
+        </div>
+        <p>
+          A modern Minecraft-inspired server site concept with a premium gaming feel. Built as a single HTML file so it is easy to customize and host.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Membership</h4>
+        <div class="footer-links">
+          <a href="#">Ban Appeal</a>
+          <a href="#about-us">About Us</a>
+          <a href="#apply-here">Apply Here</a>
+          <a href="#">Plugin Suggestions</a>
+          <a href="#rules">Server Rules</a>
+          <a href="#news">Server News</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-links">
+          <a href="#">Contact Us</a>
+          <a href="#">FAQs</a>
+          <a href="#">How to Play</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>External</h4>
+        <div class="footer-links">
+          <a href="#">Vote Links</a>
+          <a href="https://www.minecraft.net/" target="_blank" rel="noreferrer">Minecraft.net</a>
+          <a href="#">Server Donation</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      © 2026 Pinnacle SMP. All rights reserved.
+    </div>
+  </footer>
+</body>
+</html>
