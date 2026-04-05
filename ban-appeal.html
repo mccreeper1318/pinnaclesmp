@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ban Appeal | Pinnacle SMP</title>
+  <style>
+    :root {
+      --bg: #090b10;
+      --panel: rgba(17, 23, 36, 0.92);
+      --line: rgba(120, 150, 190, 0.18);
+      --text: #eef3ff;
+      --muted: #9ba8c7;
+      --green: #5fff9c;
+      --cyan: #57d5ff;
+      --radius: 20px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, #0b0f16 0%, #080a0f 100%);
+      min-height: 100vh;
+    }
+    .container {
+      width: min(calc(100% - 32px), 860px);
+      margin: 0 auto;
+      padding: 36px 0 52px;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 28px;
+    }
+    h1 { margin: 0 0 10px; font-size: clamp(2rem, 4vw, 2.8rem); }
+    p { color: var(--muted); line-height: 1.7; }
+    .note { font-size: 0.95rem; margin: 0 0 22px; }
+    form { display: grid; gap: 16px; }
+    label { font-weight: 600; display: grid; gap: 8px; }
+    input, textarea, select {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid rgba(122, 162, 255, 0.24);
+      background: rgba(10, 14, 22, 0.94);
+      color: var(--text);
+      padding: 12px 14px;
+      font: inherit;
+    }
+    textarea { min-height: 130px; resize: vertical; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+    .btn {
+      border: 0;
+      border-radius: 12px;
+      min-height: 44px;
+      padding: 0 16px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .btn-primary { background: linear-gradient(135deg, var(--green), var(--cyan)); color: #03150d; }
+    .btn-secondary { background: rgba(122, 162, 255, 0.14); color: var(--text); }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <div class="card">
+      <h1>Ban Appeal</h1>
+      <p>
+        Fill out this form to open a pre-filled GitHub issue for staff review. Submitting opens GitHub in a new tab where
+        you can confirm and create the issue.
+      </p>
+      <p class="note">
+        Maintainers: update <code>GITHUB_REPO</code> in this page if your repository path changes.
+      </p>
+
+      <form id="ban-appeal-form">
+        <label>Minecraft Username
+          <input name="mc_username" required />
+        </label>
+
+        <label>Discord Username (optional)
+          <input name="discord_username" placeholder="name or @handle" />
+        </label>
+
+        <label>Date of Ban (if known)
+          <input type="date" name="ban_date" />
+        </label>
+
+        <label>Ban Reason Given
+          <textarea name="ban_reason" required></textarea>
+        </label>
+
+        <label>Why should this ban be appealed?
+          <textarea name="appeal_reason" required></textarea>
+        </label>
+
+        <label>What will you do differently going forward?
+          <textarea name="changes_made" required></textarea>
+        </label>
+
+        <label>Additional Notes
+          <textarea name="additional_notes"></textarea>
+        </label>
+
+        <div class="actions">
+          <button class="btn btn-primary" type="submit">Create GitHub Issue</button>
+          <a class="btn btn-secondary" href="index.html">Back to Home</a>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <script>
+    const GITHUB_REPO = "OWNER/REPO";
+
+    const form = document.getElementById("ban-appeal-form");
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      if (GITHUB_REPO === "OWNER/REPO") {
+        alert("Please configure GITHUB_REPO in ban-appeal.html before using this form.");
+        return;
+      }
+
+      const data = new FormData(form);
+      const value = (name) => (data.get(name) || "Not provided").toString().trim() || "Not provided";
+      const title = `[Ban Appeal] ${value("mc_username")}`;
+      const body = [
+        "## Ban Appeal Form",
+        "",
+        `- **Minecraft Username:** ${value("mc_username")}`,
+        `- **Discord Username:** ${value("discord_username")}`,
+        `- **Date of Ban:** ${value("ban_date")}`,
+        `- **Ban Reason Given:** ${value("ban_reason")}`,
+        `- **Why should this ban be appealed?:** ${value("appeal_reason")}`,
+        `- **What will you do differently going forward?:** ${value("changes_made")}`,
+        `- **Additional Notes:** ${value("additional_notes")}`
+      ].join("\n");
+
+      const url = `https://github.com/${GITHUB_REPO}/issues/new?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}&labels=${encodeURIComponent("ban-appeal")}`;
+      window.open(url, "_blank", "noopener");
+    });
+  </script>
+</body>
+</html>
