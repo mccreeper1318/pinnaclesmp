@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plugin Suggestions | Pinnacle SMP</title>
+  <style>
+    :root {
+      --bg: #090b10;
+      --panel: rgba(17, 23, 36, 0.92);
+      --line: rgba(120, 150, 190, 0.18);
+      --text: #eef3ff;
+      --muted: #9ba8c7;
+      --green: #5fff9c;
+      --cyan: #57d5ff;
+      --radius: 20px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, #0b0f16 0%, #080a0f 100%);
+      min-height: 100vh;
+    }
+    .container { width: min(calc(100% - 32px), 860px); margin: 0 auto; padding: 36px 0 52px; }
+    .card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; }
+    h1 { margin: 0 0 10px; font-size: clamp(2rem, 4vw, 2.8rem); }
+    p { color: var(--muted); line-height: 1.7; }
+    .note { font-size: 0.95rem; margin: 0 0 22px; }
+    form { display: grid; gap: 16px; }
+    label { font-weight: 600; display: grid; gap: 8px; }
+    input, textarea {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid rgba(122, 162, 255, 0.24);
+      background: rgba(10, 14, 22, 0.94);
+      color: var(--text);
+      padding: 12px 14px;
+      font: inherit;
+    }
+    textarea { min-height: 130px; resize: vertical; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+    .btn {
+      border: 0;
+      border-radius: 12px;
+      min-height: 44px;
+      padding: 0 16px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .btn-primary { background: linear-gradient(135deg, var(--green), var(--cyan)); color: #03150d; }
+    .btn-secondary { background: rgba(122, 162, 255, 0.14); color: var(--text); }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <div class="card">
+      <h1>Plugin Suggestions</h1>
+      <p>
+        Share plugin ideas that could improve the server. This form opens a GitHub issue pre-filled with your answers.
+      </p>
+      <p class="note">
+        Maintainers: update <code>GITHUB_REPO</code> in this page if your repository path changes.
+      </p>
+
+      <form id="plugin-suggestion-form">
+        <label>Your Name / Username
+          <input name="submitter" placeholder="Optional" />
+        </label>
+
+        <label>Plugin Name
+          <input name="plugin_name" required />
+        </label>
+
+        <label>Plugin Link
+          <input name="plugin_link" type="url" placeholder="https://..." />
+        </label>
+
+        <label>What problem does this solve?
+          <textarea name="problem" required></textarea>
+        </label>
+
+        <label>How should this plugin be configured for Pinnacle SMP?
+          <textarea name="configuration" required></textarea>
+        </label>
+
+        <label>Main Benefits
+          <textarea name="benefits" required></textarea>
+        </label>
+
+        <label>Potential Downsides / Risks
+          <textarea name="risks"></textarea>
+        </label>
+
+        <div class="actions">
+          <button class="btn btn-primary" type="submit">Create GitHub Issue</button>
+          <a class="btn btn-secondary" href="index.html">Back to Home</a>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <script>
+    const GITHUB_REPO = "OWNER/REPO";
+
+    const form = document.getElementById("plugin-suggestion-form");
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      if (GITHUB_REPO === "OWNER/REPO") {
+        alert("Please configure GITHUB_REPO in plugin-suggestions.html before using this form.");
+        return;
+      }
+
+      const data = new FormData(form);
+      const value = (name) => (data.get(name) || "Not provided").toString().trim() || "Not provided";
+      const title = `[Plugin Suggestion] ${value("plugin_name")}`;
+      const body = [
+        "## Plugin Suggestion Form",
+        "",
+        `- **Submitter:** ${value("submitter")}`,
+        `- **Plugin Name:** ${value("plugin_name")}`,
+        `- **Plugin Link:** ${value("plugin_link")}`,
+        `- **What problem does this solve?:** ${value("problem")}`,
+        `- **How should this be configured?:** ${value("configuration")}`,
+        `- **Main benefits:** ${value("benefits")}`,
+        `- **Potential downsides / risks:** ${value("risks")}`
+      ].join("\n");
+
+      const url = `https://github.com/${GITHUB_REPO}/issues/new?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}&labels=${encodeURIComponent("plugin-suggestion")}`;
+      window.open(url, "_blank", "noopener");
+    });
+  </script>
+</body>
+</html>
