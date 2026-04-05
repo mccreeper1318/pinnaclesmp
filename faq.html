@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAQs | Pinnacle SMP</title>
+  <style>
+    :root {
+      --bg: #090b10;
+      --panel: rgba(17, 23, 36, 0.92);
+      --line: rgba(120, 150, 190, 0.18);
+      --text: #eef3ff;
+      --muted: #9ba8c7;
+      --green: #5fff9c;
+      --cyan: #57d5ff;
+      --radius: 20px;
+      --max: 980px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, #0b0f16 0%, #080a0f 100%);
+      min-height: 100vh;
+    }
+
+    .container {
+      width: min(calc(100% - 32px), var(--max));
+      margin: 0 auto;
+      padding: 36px 0 52px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 28px;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(2rem, 4vw, 2.8rem);
+    }
+
+    .intro {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    h2 {
+      margin: 26px 0 14px;
+      font-size: clamp(1.4rem, 3vw, 1.8rem);
+      color: var(--cyan);
+    }
+
+    details {
+      background: rgba(10, 14, 22, 0.85);
+      border: 1px solid rgba(122, 162, 255, 0.2);
+      border-radius: 14px;
+      padding: 14px 16px;
+      margin-bottom: 12px;
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+
+    p {
+      color: var(--muted);
+      line-height: 1.7;
+      margin: 12px 0 0;
+    }
+
+    a {
+      color: var(--cyan);
+      font-weight: 600;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 12px;
+      min-height: 44px;
+      padding: 0 16px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--green), var(--cyan));
+      color: #03150d;
+    }
+
+    .btn-secondary {
+      background: rgba(122, 162, 255, 0.14);
+      color: var(--text);
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <section class="card">
+      <h1>Frequently Asked Questions</h1>
+      <p class="intro">Everything you need to know about Pinnacle SMP, applying to join, and current member policies.</p>
+
+      <h2>General</h2>
+
+      <details>
+        <summary>What is Vanilla+?</summary>
+        <p>Our server is considered Vanilla+. We do run a Paper server and do have plugins, but we try to keep the core vanilla experience of the game. Basically, it’s not hard core modded or filled with plugins so much it doesn’t even feel like Minecraft anymore.</p>
+      </details>
+
+      <details>
+        <summary>What is a whitelist / whitelisted server?</summary>
+        <p>Our server is a whitelisted server. This means that only a certain list of people (the whitelist) are able to join. Pinnacle has an open process for any and everyone to apply to join, as long as they are 18+ years old.</p>
+      </details>
+
+      <details>
+        <summary>How old is the world &amp; when will you reset?</summary>
+        <p>The current world (Season 11) started in September 2025. We don’t have a schedule or cycle for world resets, and no current plans to do so. Server resets will only happen with a vote of all members of the server and at least 90% agreeing to it.</p>
+      </details>
+
+      <details>
+        <summary>Where is the server hosted?</summary>
+        <p>Our server is hosted in the eastern USA.</p>
+      </details>
+
+      <details>
+        <summary>Do you have a world map / live map / dynmap?</summary>
+        <p>We do! You can visit our <a href="https://map.pinnaclesmp.com" target="_blank" rel="noopener noreferrer">live world map here</a>.</p>
+      </details>
+
+      <h2>Joining Pinnacle SMP</h2>
+
+      <details>
+        <summary>How do I join the server?</summary>
+        <p>Apply for whitelist via our <a href="https://discord.gg/pinnaclesmp" target="_blank" rel="noopener noreferrer">Discord Server</a>. Be sure to read over the <a href="index.html#rules">rules for our server here</a> before applying.</p>
+      </details>
+
+      <details>
+        <summary>What should I expect when applying to join?</summary>
+        <p>There will be a few questions for you to answer. Please answer them as best you can. Once submitted give some time for an admin to respond. This usually takes less than 24hrs, but we all have things going on, so it could be a little longer.</p>
+        <p>There may be a short “interview” process that could occur via DM on Discord. This is to make sure you are a good match for the community, and that the community is a good match for you and what you are looking for in a Minecraft server.</p>
+      </details>
+
+      <details>
+        <summary>My application was denied! Can you tell me why?</summary>
+        <p>We filter through whitelist applications to make sure that everyone we accept into Pinnacle is a good fit for the community. It’s likely that we rejected your application because we believe you’ll be better off looking for another server or because we are not currently accepting applications for a short time to allow our newest members time to meld into the community.</p>
+        <p>If you would like to re-apply, you are more than welcome to do so by submitting a new application. This does not mean that we will accept your application the second time though.</p>
+      </details>
+
+      <details>
+        <summary>I’m already whitelisted on Pinnacle, but my friend’s application got rejected. How can I play with them?</summary>
+        <p>Send a DM to an admin or founding member for help.</p>
+      </details>
+
+      <details>
+        <summary>My application was accepted, how do I join the server?</summary>
+        <p>Look in the <strong>#server-info</strong> channel on Discord for the server-IP address.</p>
+      </details>
+
+      <h2>For Existing Members</h2>
+
+      <details>
+        <summary>When will the server update to Minecraft version XX.XX.XX?</summary>
+        <p>We typically update as soon as the server <code>.jar</code> becomes available on our hosting site as well as our plugins are updated. This can take a little time from when the core vanilla experience is released but, when an update is close there will be announcements made on the Discord about it and server shutdown messages in game about the time it will be performed.</p>
+      </details>
+
+      <details>
+        <summary>Am I allowed to use X mod myself?</summary>
+        <p>Only performance enhancing mods are allowed on the server. If you have questions about a particular mod ask an admin or founding member for clarity.</p>
+      </details>
+
+      <details>
+        <summary>I have an idea for an event!</summary>
+        <p>Reach out to an admin or founding member, we’d love to hear your idea!</p>
+      </details>
+
+      <details>
+        <summary>How does one become an admin?</summary>
+        <p>For now, you may reach out to a current admin or founding member if you’re interested. We’ll update you if we deem you a good fit.</p>
+      </details>
+
+      <details>
+        <summary>I was banned. Can I make a ban appeal?</summary>
+        <p>Yes, please visit <a href="ban-appeal.html">this page</a> to submit a ban appeal.</p>
+      </details>
+
+      <details>
+        <summary>What are the different types of members?</summary>
+        <p>Founding members are the 3 original members of Pinnacle. Those are McCreeper1318, Piff, and JohnnyKilroy. Legacy members are members who have been a part of the server for longer than 1 season. Full members are current members. New members are new members that have been on the server for less than 1 month. Once new members have been on the server for longer than 1 month and are in good standing they will become full members. These membership “ranks” do have an effect on your abilities on the discord server… somewhat.</p>
+      </details>
+
+      <div class="actions">
+        <a class="btn btn-primary" href="https://discord.gg/pinnaclesmp" target="_blank" rel="noopener noreferrer">Join Discord</a>
+        <a class="btn btn-secondary" href="index.html">Back to Home</a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
