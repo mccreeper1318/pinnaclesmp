@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pinnacle SMP • Server News</title>
+  <style>
+    :root {
+      --bg: #090b10;
+      --bg-soft: #101521;
+      --panel: rgba(17, 23, 36, 0.88);
+      --line: rgba(120, 150, 190, 0.18);
+      --text: #eef3ff;
+      --muted: #9ba8c7;
+      --green: #5fff9c;
+      --cyan: #57d5ff;
+      --blue: #7aa2ff;
+      --gold: #ffd66b;
+      --shadow: 0 18px 48px rgba(0, 0, 0, 0.45);
+      --radius: 22px;
+      --max: 1040px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(87, 213, 255, 0.14), transparent 28%),
+        radial-gradient(circle at top right, rgba(95, 255, 156, 0.12), transparent 24%),
+        linear-gradient(180deg, #0b0f16 0%, #080a0f 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 32px 32px;
+      mask-image: linear-gradient(180deg, rgba(255,255,255,0.55), transparent 80%);
+      opacity: 0.22;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: min(calc(100% - 32px), var(--max));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(16px);
+      background: rgba(7, 10, 15, 0.72);
+      border-bottom: 1px solid rgba(122, 162, 255, 0.12);
+    }
+
+    .nav-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      min-height: 82px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .brand-badge {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      background:
+        linear-gradient(135deg, rgba(95,255,156,0.28), rgba(87,213,255,0.18)),
+        #111a2a;
+      border: 1px solid rgba(95,255,156,0.35);
+      box-shadow: inset 0 0 24px rgba(95,255,156,0.08), 0 10px 24px rgba(0,0,0,0.35);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .brand-badge::before,
+    .brand-badge::after {
+      content: "";
+      position: absolute;
+      background: rgba(255,255,255,0.13);
+    }
+
+    .brand-badge::before {
+      inset: 8px;
+      border-radius: 8px;
+      box-shadow:
+        10px 0 0 rgba(255,255,255,0.12),
+        0 10px 0 rgba(255,255,255,0.12),
+        10px 10px 0 rgba(255,255,255,0.06);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0 16px;
+      border-radius: 12px;
+      border: 1px solid rgba(122,162,255,0.2);
+      background: rgba(122,162,255,0.11);
+      color: var(--text);
+      font-weight: 700;
+      transition: 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      border-color: rgba(95,255,156,0.42);
+    }
+
+    .hero {
+      padding: 48px 0 20px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(122, 162, 255, 0.12);
+      color: #cdd9ff;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    h1, h2, h3 { margin: 0 0 14px; line-height: 1.08; }
+    h1 { font-size: clamp(2rem, 5vw, 3.3rem); letter-spacing: -0.03em; }
+
+    .hero p,
+    .article-content p,
+    .article-content li {
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .news-list {
+      display: grid;
+      gap: 24px;
+      padding: 10px 0 44px;
+    }
+
+    .article {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      scroll-margin-top: 110px;
+    }
+
+    .article-header {
+      padding: 24px 24px 10px;
+    }
+
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .tag {
+      display: inline-flex;
+      width: fit-content;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(255, 214, 107, 0.1);
+      color: var(--gold);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .date {
+      color: #bfcbeb;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .article-image {
+      width: 100%;
+      aspect-ratio: 16 / 7;
+      object-fit: cover;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(145deg, rgba(95,255,156,0.16), rgba(87,213,255,0.1));
+    }
+
+    .article-content {
+      padding: 22px 24px 26px;
+    }
+
+    .article-content h3 {
+      margin-top: 22px;
+      margin-bottom: 10px;
+    }
+
+    .article-content ul {
+      margin: 0;
+      padding-left: 18px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .edit-note {
+      margin-top: 24px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 1px solid rgba(95,255,156,0.2);
+      background: rgba(95,255,156,0.06);
+      color: #d6ffe8;
+      font-size: 0.95rem;
+    }
+
+    .site-footer {
+      margin-top: 24px;
+      border-top: 1px solid rgba(122, 162, 255, 0.12);
+      background: rgba(5, 7, 11, 0.85);
+    }
+
+    .footer-content {
+      padding: 24px 0 28px;
+      color: #7f89a1;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 760px) {
+      .hero { padding-top: 30px; }
+      .article-header,
+      .article-content { padding-left: 18px; padding-right: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a href="index.html#home" class="brand">
+        <div class="brand-badge" aria-hidden="true"></div>
+        <span>Pinnacle SMP</span>
+      </a>
+      <a class="btn" href="index.html#news">← Back to Home News</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="eyebrow">Archive</div>
+        <h1>Pinnacle SMP Server News</h1>
+        <p>
+          All server news lives on this page. Each story has a title, date, feature image, and full content block.
+          To add new updates, copy one <code>&lt;article class="article"&gt;</code> block, set a unique id, and link to it from the home page.
+        </p>
+      <div class="edit-note" style="margin-top: 18px;">
+        <strong>Jump to article:</strong>
+        <a href="#news-mbh-winner-2026-04" style="color: var(--cyan); font-weight: 700;">MBH winner</a> •
+        <a href="#news-minecraft-26-1-update" style="color: var(--cyan); font-weight: 700;">Minecraft 26.1</a> •
+        <a href="#news-ranks-system-update" style="color: var(--cyan); font-weight: 700;">Ranks update</a>
+      </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container news-list">
+        <article class="article" id="news-mbh-winner-2026-04">
+          <header class="article-header">
+            <div class="article-meta">
+              <span class="tag">MBH Vote</span>
+              <time class="date" datetime="2026-04-01">April 1, 2026</time>
+            </div>
+            <h2>pinapple_pete MBH winner</h2>
+          </header>
+          <img
+            class="article-image"
+            src="assets/news/mbh-winner.svg"
+            alt="Feature image for the MBH winner story"
+          />
+          <div class="article-content">
+            <p>
+              pinapple_pete has won the MBH vote for April 2026! Congrats!
+              Pictures of his base will be coming soon.
+            </p>
+            <h3>What happens next</h3>
+            <ul>
+              <li>Staff will post a full base showcase in the gallery and Discord highlights.</li>
+              <li>Community spotlight role is assigned for this month.</li>
+              <li>Vote submissions for next month open in the final week of April.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="article" id="news-minecraft-26-1-update">
+          <header class="article-header">
+            <div class="article-meta">
+              <span class="tag">Minecraft News</span>
+              <time class="date" datetime="2026-03-31">March 31, 2026</time>
+            </div>
+            <h2>26.1 is here!</h2>
+          </header>
+          <img
+            class="article-image"
+            src="assets/news/minecraft-update.svg"
+            alt="Feature image for the Minecraft 26.1 update"
+          />
+          <div class="article-content">
+            <p>
+              Minecraft has updated to 26.1 "Tiny Takeover". The server will not update until Paper and our plugins
+              are ready. This can take anywhere from a few days to multiple weeks depending on compatibility updates.
+            </p>
+            <p>
+              For the full game changelog, visit the official update article:
+              <a href="https://www.minecraft.net/en-us/article/minecraft-java-edition-26-1" target="_blank" rel="noreferrer" style="color: var(--cyan); font-weight: 700;">Minecraft Java Edition 26.1</a>.
+            </p>
+            <h3>Server compatibility status</h3>
+            <ul>
+              <li>Core server software: waiting for stable Paper build.</li>
+              <li>Essential plugins: update testing in progress.</li>
+              <li>Public rollout: announced after full test pass.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="article" id="news-ranks-system-update">
+          <header class="article-header">
+            <div class="article-meta">
+              <span class="tag">Announcement</span>
+              <time class="date" datetime="2026-03-24">March 24, 2026</time>
+            </div>
+            <h2>Ranks System Update</h2>
+          </header>
+          <img
+            class="article-image"
+            src="assets/news/ranks-update.svg"
+            alt="Feature image for the ranks system update"
+          />
+          <div class="article-content">
+            <p>
+              We've updated how ranks work to better reflect activity, contribution, and community involvement
+              rather than only time played. Promotions are no longer automatic or purely time-based.
+            </p>
+            <h3>What changed</h3>
+            <ul>
+              <li>More weight on positive community impact and collaboration.</li>
+              <li>Staff review is now part of rank advancement.</li>
+              <li>Consistent behavior and participation matter more than AFK playtime.</li>
+            </ul>
+            <div class="edit-note">
+              <strong>Editing tip:</strong> Keep this article structure (title, date, image, content). To add a new story,
+              duplicate an article block, change the <code>id</code>, and point a home-page <em>Read more</em> link to
+              <code>news.html#your-new-id</code>.
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-content">© 2026 Pinnacle SMP. All rights reserved.</div>
+  </footer>
+</body>
+</html>
