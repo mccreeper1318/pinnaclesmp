@@ -308,6 +308,43 @@
     .info-grid { grid-template-columns: repeat(3, 1fr); }
     .join-grid { grid-template-columns: 1fr 1fr; }
 
+    .events-table-wrap {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      overflow-x: auto;
+    }
+
+    .events-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 560px;
+    }
+
+    .events-table th,
+    .events-table td {
+      padding: 14px 18px;
+      text-align: left;
+      border-bottom: 1px solid rgba(160, 194, 235, 0.2);
+    }
+
+    .events-table th {
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      color: #d6e2ff;
+      background: rgba(122, 162, 255, 0.1);
+    }
+
+    .events-table tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .events-table td {
+      color: var(--muted);
+    }
+
     .card {
       background: var(--panel);
       border: 1px solid var(--line);
@@ -477,6 +514,7 @@
       <nav aria-label="Main navigation">
         <ul>
           <li><a href="#home">Home</a></li>
+          <li><a href="#events">Events</a></li>
           <li><a href="#rules">Server Rules</a></li>
           <li><a href="#join">Join</a></li>
           <li><a href="#news">Server News</a></li>
@@ -575,6 +613,38 @@
             <a href="news.html#news-minecraft-26-1-update" style="color: var(--cyan); font-weight: 700;">Read more →</a>
           </article>
 
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="events">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <div class="eyebrow">Community Schedule</div>
+            <h2>Server Events</h2>
+          </div>
+        </div>
+
+        <div class="events-table-wrap">
+          <table class="events-table">
+            <thead>
+              <tr>
+                <th scope="col">Event Title</th>
+                <th scope="col">Location</th>
+                <th scope="col">Date</th>
+                <th scope="col">Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Server Tour #2</td>
+                <td>IG-1</td>
+                <td>TBD</td>
+                <td>TBD</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </section>
