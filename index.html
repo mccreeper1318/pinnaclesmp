@@ -58,8 +58,27 @@
         linear-gradient(180deg, rgba(12, 17, 28, 0.82) 0%, rgba(11, 16, 24, 0.88) 100%);
     }
 
-    a { color: inherit; text-decoration: none; }
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.25s ease;
+    }
     img { max-width: 100%; display: block; }
+
+    a:not(.btn) {
+      background-image: linear-gradient(currentColor, currentColor);
+      background-position: 0 100%;
+      background-repeat: no-repeat;
+      background-size: 0% 1px;
+      transition: color 0.25s ease, background-size 0.25s ease;
+    }
+
+    a:not(.btn):hover,
+    a:not(.btn):focus-visible {
+      color: var(--cyan);
+      background-size: 100% 1px;
+      outline: none;
+    }
 
     .container {
       width: min(calc(100% - 32px), var(--max));
@@ -218,7 +237,7 @@
       border-radius: 14px;
       border: 1px solid transparent;
       font-weight: 700;
-      transition: 0.2s ease;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
     }
 
     .btn-primary {
@@ -226,12 +245,33 @@
       color: #05110b;
     }
 
-    .btn-primary:hover { transform: translateY(-2px); }
-
     .btn-secondary {
       background: rgba(122,162,255,0.11);
       border-color: rgba(122,162,255,0.18);
       color: var(--text);
+    }
+
+    .hover-lift {
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, filter 0.25s ease;
+      will-change: transform;
+    }
+
+    .hover-lift:hover,
+    .hover-lift:focus-within {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 34px rgba(0, 0, 0, 0.42), 0 0 0 1px rgba(122, 162, 255, 0.18);
+      border-color: rgba(122, 162, 255, 0.45);
+    }
+
+    .btn.hover-lift:hover,
+    .btn.hover-lift:focus-visible {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 0 0 1px rgba(95, 255, 156, 0.38), 0 0 24px rgba(87, 213, 255, 0.34);
+      filter: brightness(1.04);
+    }
+
+    .btn.hover-lift:focus-visible {
+      outline: none;
     }
 
     .stats-card {
@@ -448,6 +488,31 @@
       font-size: 0.92rem;
     }
 
+    .fade-in.pre-reveal,
+    .slide-up.pre-reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+      transition-delay: calc(var(--stagger-index, 0) * 90ms);
+    }
+
+    .fade-in.is-visible,
+    .slide-up.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hover-lift,
+      .fade-in,
+      .slide-up,
+      a:not(.btn),
+      .btn {
+        transition: none !important;
+        transform: none !important;
+      }
+    }
+
     @media (max-width: 1100px) {
       .hero-grid,
       .join-grid,
@@ -526,7 +591,7 @@
   <main>
     <section class="hero" id="home">
       <div class="container hero-grid">
-        <div class="hero-card">
+        <div class="hero-card fade-in slide-up">
           <div class="eyebrow">Survival SMP • Community Driven</div>
           <h1>Build higher on Pinnacle SMP</h1>
           <p>
@@ -534,13 +599,13 @@
             Build, Explore, and Make Friends with us!
           </p>
           <div class="cta-row">
-            <a class="btn btn-primary" href="#apply-here">Apply to Join</a>
-            <a class="btn btn-secondary" href="#news">Read Server News</a>
-            <a class="btn btn-secondary" href="http://pinnaclesmp.mcserv.fun:1041" target="_blank" rel="noreferrer">Live Map</a>
+            <a class="btn btn-primary hover-lift" href="#apply-here">Apply to Join</a>
+            <a class="btn btn-secondary hover-lift" href="#news">Read Server News</a>
+            <a class="btn btn-secondary hover-lift" href="http://pinnaclesmp.mcserv.fun:1041" target="_blank" rel="noreferrer">Live Map</a>
           </div>
         </div>
 
-        <aside class="panel stats-card">
+        <aside class="panel stats-card fade-in slide-up">
           <div class="server-card">
             <div class="tag">1.21.11</div> <div class="tag">Survival</div> <div class="tag">Whitelisted</div>
             <h3 style="margin-top: 12px;">Ready for your next world?</h3>
@@ -584,7 +649,7 @@
         </div>
 
         <div class="news-grid">
-          <article class="card news-card">
+          <article class="card news-card hover-lift fade-in slide-up">
             <span class="tag">Announcement</span>
             <h3>Update Still In Progress</h3>
             <p>
@@ -593,7 +658,7 @@
             <a href="news.html#news-update-still-in-progress-2026-04-06" style="color: var(--cyan); font-weight: 700;">Read more →</a>
           </article>
 
-          <article class="card news-card">
+          <article class="card news-card hover-lift fade-in slide-up">
             <span class="tag">MBH Vote</span>
             <h3>pinapple_pete MBH winner</h3>
             <p>
@@ -603,7 +668,7 @@
             <a href="news.html#news-mbh-winner-2026-04" style="color: var(--cyan); font-weight: 700;">Read more →</a>
           </article>
 
-          <article class="card news-card">
+          <article class="card news-card hover-lift fade-in slide-up">
             <span class="tag">Minecraft News</span>
             <h3>26.1 is here!</h3>
             <p>
@@ -659,7 +724,7 @@
         </div>
 
         <div class="info-grid">
-          <div class="card">
+          <div class="card hover-lift fade-in slide-up">
             <h3>Community Standards</h3>
             <ul class="rules-list">
               <li>Must be 18+ to join.</li>
@@ -669,7 +734,7 @@
               <li>You must log in at least once every 30 days to be considered active.</li>
             </ul>
           </div>
-          <div class="card">
+          <div class="card hover-lift fade-in slide-up">
             <h3>Gameplay Rules</h3>
             <ul class="rules-list">
               <li>No cheating, x-ray, duping, or unfair mods.</li>
@@ -678,7 +743,7 @@
               <li>No alt-accounts.</li>
             </ul>
           </div>
-          <div class="card">
+          <div class="card hover-lift fade-in slide-up">
             <h3>Server Etiquette</h3>
             <ul class="rules-list">
               <li>Limit lag inducing activities / no chunk loaders.</li>
@@ -701,7 +766,7 @@
         </div>
 
         <div class="join-grid">
-          <article class="card" id="about-us">
+          <article class="card hover-lift fade-in slide-up" id="about-us">
             <div class="tag">About Us</div>
             <h3 style="margin-top: 14px;">What Pinnacle SMP is about</h3>
             <p>
@@ -715,11 +780,11 @@
               <li>Events and seasonal highlights to keep things fresh</li>
             </ul>
             <div class="cta-row">
-              <a class="btn btn-secondary" href="about-us.html">Learn more</a>
+              <a class="btn btn-secondary hover-lift" href="about-us.html">Learn more</a>
             </div>
           </article>
 
-          <article class="card" id="apply-here">
+          <article class="card hover-lift fade-in slide-up" id="apply-here">
             <div class="tag">Apply Here</div>
             <h3 style="margin-top: 14px;">Application flow</h3>
             <p>
@@ -733,8 +798,8 @@
               <li>Wait for approval instructions from staff.</li>
             </ol>
             <div class="cta-row">
-              <a class="btn btn-primary" href="https://discord.com/invite/GNyZznHYJA">Open Application</a>
-              <a class="btn btn-secondary" href="#rules">Review Rules</a>
+              <a class="btn btn-primary hover-lift" href="https://discord.com/invite/GNyZznHYJA">Open Application</a>
+              <a class="btn btn-secondary hover-lift" href="#rules">Review Rules</a>
             </div>
           </article>
         </div>
@@ -791,5 +856,36 @@
       © 2026 Pinnacle SMP. All rights reserved.
     </div>
   </footer>
+  <script>
+    (() => {
+      const animated = document.querySelectorAll(".fade-in, .slide-up");
+      if (!animated.length) return;
+      animated.forEach((element) => element.classList.add("pre-reveal"));
+
+      const groupedSelectors = [".news-grid", ".info-grid", ".join-grid", ".hero-grid"];
+      groupedSelectors.forEach((selector) => {
+        document.querySelectorAll(selector).forEach((group) => {
+          const items = group.querySelectorAll(".fade-in, .slide-up");
+          items.forEach((item, index) => {
+            item.style.setProperty("--stagger-index", index);
+          });
+        });
+      });
+
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.remove("pre-reveal");
+          entry.target.classList.add("is-visible");
+          obs.unobserve(entry.target);
+        });
+      }, {
+        threshold: 0.18,
+        rootMargin: "0px 0px -8% 0px"
+      });
+
+      animated.forEach((element) => observer.observe(element));
+    })();
+  </script>
 </body>
 </html>
