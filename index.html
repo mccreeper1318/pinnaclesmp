@@ -252,6 +252,18 @@
       color: var(--text);
     }
 
+    .btn-disabled {
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.14);
+      color: rgba(230,236,255,0.55);
+      cursor: not-allowed;
+      pointer-events: none;
+      opacity: 0.7;
+      filter: grayscale(0.35);
+      box-shadow: none;
+      transform: none;
+    }
+
     .hover-lift {
       transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, filter 0.25s ease;
       will-change: transform;
@@ -602,7 +614,7 @@
           <div class="cta-row">
             <a class="btn btn-primary hover-lift" href="#apply-here">Apply to Join</a>
             <a class="btn btn-secondary hover-lift" href="about-season-12.html">About Season 12</a>
-            <a class="btn btn-secondary hover-lift" href="http://pinnaclesmp.mcserv.fun:1041" target="_blank" rel="noreferrer">Live Map</a>
+            <a class="btn btn-secondary btn-disabled" href="http://pinnaclesmp.mcserv.fun:1041" target="_blank" rel="noreferrer" aria-disabled="true" tabindex="-1">Live Map</a>
           </div>
         </div>
 
