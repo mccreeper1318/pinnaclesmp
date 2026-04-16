@@ -229,6 +229,20 @@
       margin-top: 28px;
     }
 
+    .nav-buttons {
+      margin-top: 0;
+      gap: 10px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-buttons .btn {
+      min-height: 42px;
+      padding: 0 15px;
+      border-radius: 12px;
+      font-size: 0.95rem;
+    }
+
     .btn {
       display: inline-flex;
       align-items: center;
@@ -552,8 +566,14 @@
         gap: 6px;
       }
 
-      nav > ul > li > a {
-        padding: 10px 12px;
+      .nav-buttons {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .nav-buttons .btn {
+        min-height: 40px;
+        padding: 0 13px;
       }
 
       .hero,
@@ -590,7 +610,7 @@
       </a>
 
       <nav aria-label="Main navigation">
-        <div class="cta-row">
+        <div class="cta-row nav-buttons">
               <a class="btn btn-secondary hover-lift" href="#home">Home</a>
               <a class="btn btn-secondary hover-lift" href="#news">Server News</a>
               <a class="btn btn-secondary hover-lift" href="#events">Events</a>
