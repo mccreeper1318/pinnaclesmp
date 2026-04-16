@@ -84,6 +84,10 @@
       width: min(calc(100% - 32px), var(--max));
       margin: 0 auto;
     }
+    main .container {
+      width: 100%;
+      max-width: none;
+    }
     main {
       width: min(calc(100% - 32px), var(--max));
       margin: 28px auto 46px;
@@ -128,6 +132,22 @@
     }
 
     .brand span { font-size: 1rem; }
+
+    .menu-toggle {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 40px;
+      padding: 0 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(122, 162, 255, 0.26);
+      background: rgba(122, 162, 255, 0.14);
+      color: var(--text);
+      font-weight: 700;
+      font: inherit;
+      cursor: pointer;
+    }
 
     nav ul {
       margin: 0;
@@ -549,31 +569,83 @@
         grid-template-columns: 1fr 1fr;
       }
 
+      .status-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
       .footer-grid > :first-child {
         grid-column: 1 / -1;
       }
     }
 
     @media (max-width: 760px) {
+      .container,
+      main {
+        width: min(calc(100% - 20px), var(--max));
+      }
+
+      main {
+        margin-top: 16px;
+        padding: 6px 12px 20px;
+      }
+
       .nav-wrap {
         align-items: flex-start;
-        flex-direction: column;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
         padding: 14px 0;
       }
 
-      nav ul {
+      .brand {
+        width: auto;
+        gap: 10px;
+      }
+
+      .brand span {
+        font-size: 0.95rem;
+        letter-spacing: 0.06em;
+      }
+
+      .brand-logo {
+        width: 42px;
+        height: 42px;
+      }
+
+      .menu-toggle {
+        display: inline-flex;
+      }
+
+      nav {
+        width: 100%;
+      }
+
+      .site-header nav {
+        display: none;
+      }
+
+      .site-header.nav-open nav {
+        display: block;
+      }
+
+      nav ul,
+      .site-header.nav-open .nav-buttons {
         width: 100%;
         gap: 6px;
       }
 
       .nav-buttons {
-        width: 100%;
-        justify-content: flex-start;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        justify-content: stretch;
+        margin-top: 10px;
       }
 
       .nav-buttons .btn {
+        width: 100%;
         min-height: 40px;
         padding: 0 13px;
+        font-size: 0.9rem;
       }
 
       .hero,
@@ -599,6 +671,28 @@
       h1 { max-width: none; }
       .mobile-note { display: block; }
     }
+
+    @media (max-width: 480px) {
+      .nav-buttons {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-card,
+      .stats-card,
+      .card,
+      .server-card {
+        padding: 18px;
+      }
+
+      .events-table th,
+      .events-table td {
+        padding: 12px 14px;
+      }
+
+      .server-ip {
+        font-size: 1rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -608,9 +702,10 @@
         <img class="brand-logo" src="assets/branding/PinnacleSeason12Logo.svg" alt="Pinnacle SMP Season 12 logo" />
         <span>Pinnacle SMP</span>
       </a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav">Menu</button>
 
-      <nav aria-label="Main navigation">
-        <div class="cta-row nav-buttons">
+      <nav id="mobile-nav" aria-label="Main navigation">
+        <div class="cta-row nav-buttons" role="list">
               <a class="btn btn-secondary hover-lift" href="#home">Home</a>
               <a class="btn btn-secondary hover-lift" href="#news">Server News</a>
               <a class="btn btn-secondary hover-lift" href="#events">Events</a>
@@ -894,6 +989,41 @@
     </div>
   </footer>
   <script>
+    (() => {
+      const header = document.querySelector(".site-header");
+      const toggle = document.querySelector(".menu-toggle");
+      const nav = document.getElementById("mobile-nav");
+      if (!header || !toggle || !nav) return;
+
+      const closeMenu = () => {
+        header.classList.remove("nav-open");
+        toggle.setAttribute("aria-expanded", "false");
+      };
+
+      toggle.addEventListener("click", () => {
+        const isOpen = header.classList.toggle("nav-open");
+        toggle.setAttribute("aria-expanded", String(isOpen));
+      });
+
+      nav.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => closeMenu());
+      });
+
+      document.addEventListener("click", (event) => {
+        if (!header.classList.contains("nav-open")) return;
+        if (header.contains(event.target)) return;
+        closeMenu();
+      });
+
+      window.addEventListener("resize", () => {
+        if (window.innerWidth > 760) closeMenu();
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") closeMenu();
+      });
+    })();
+
     (() => {
       const animated = document.querySelectorAll(".fade-in, .slide-up");
       if (!animated.length) return;
