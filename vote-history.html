@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vote History | Pinnacle SMP</title>
+  <style>
+    :root {
+      --text: #eef3ff;
+      --muted: #c2cdea;
+      --line: rgba(156, 191, 236, 0.3);
+      --panel: rgba(24, 33, 52, 0.82);
+      --panel-strong: rgba(31, 42, 64, 0.9);
+      --cyan: #57d5ff;
+      --green: #5fff9c;
+      --gold: #ffd66b;
+      --pink: #ff8ec1;
+      --shadow: 0 18px 48px rgba(0, 0, 0, 0.45);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      position: relative;
+      overflow-x: hidden;
+      background: #0f1420;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: -18px;
+      z-index: -2;
+      pointer-events: none;
+      background: url("assets/branding/MCV_SPR26Drop_TT_DotNet_Wallpaper_2560x1440.svg") center / cover no-repeat fixed;
+      filter: blur(7px) brightness(0.48) saturate(1.1);
+      transform: scale(1.03);
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at top left, rgba(116, 232, 255, 0.2), transparent 33%),
+        radial-gradient(circle at top right, rgba(146, 255, 198, 0.2), transparent 30%),
+        linear-gradient(180deg, rgba(12, 17, 28, 0.82) 0%, rgba(11, 16, 24, 0.88) 100%);
+    }
+
+    .container {
+      width: min(calc(100% - 32px), 1220px);
+      margin: 0 auto;
+      padding: 34px clamp(18px, 3vw, 40px) 48px;
+      background: rgba(15, 22, 36, 0.62);
+      border: 1px solid rgba(162, 196, 255, 0.2);
+      border-radius: 26px;
+      backdrop-filter: blur(8px);
+    }
+
+    .back-link {
+      display: inline-flex;
+      margin-bottom: 20px;
+      color: var(--cyan);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      letter-spacing: -0.05em;
+    }
+
+    .subtitle {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 72ch;
+    }
+
+    .stat-grid {
+      margin: 24px 0 28px;
+      display: grid;
+      gap: 14px;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+
+    .stat {
+      background: var(--panel-strong);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .stat .kicker {
+      display: block;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.73rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .stat strong {
+      font-size: clamp(1.4rem, 4vw, 2rem);
+    }
+
+    .timeline {
+      position: relative;
+      display: grid;
+      gap: 18px;
+      padding-left: 24px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 6px;
+      top: 4px;
+      bottom: 4px;
+      width: 2px;
+      background: linear-gradient(180deg, var(--cyan), var(--green));
+      opacity: 0.6;
+    }
+
+    .vote {
+      position: relative;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .vote::before {
+      content: "";
+      position: absolute;
+      left: -24px;
+      top: 28px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--cyan));
+      box-shadow: 0 0 0 4px rgba(87, 213, 255, 0.16);
+    }
+
+    .date {
+      display: inline-block;
+      margin-bottom: 8px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: #08131e;
+      background: linear-gradient(135deg, var(--green), var(--gold));
+      border-radius: 999px;
+      padding: 6px 10px;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: clamp(1.1rem, 3vw, 1.45rem);
+      line-height: 1.35;
+    }
+
+    .results {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    .results li {
+      display: grid;
+      gap: 6px;
+    }
+
+    .label-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 0.95rem;
+    }
+
+    .label-row span:last-child {
+      color: var(--muted);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .bar {
+      position: relative;
+      height: 9px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .bar > i {
+      position: absolute;
+      inset: 0;
+      width: var(--w);
+      background: linear-gradient(90deg, var(--cyan), var(--green));
+    }
+
+    .bar.pink > i {
+      background: linear-gradient(90deg, var(--pink), var(--gold));
+    }
+
+    @media (max-width: 640px) {
+      .container { padding-inline: 16px; }
+      .timeline { padding-left: 18px; }
+      .vote::before { left: -18px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <a href="index.html#join" class="back-link">← Back to home</a>
+    <h1>Pinnacle SMP Vote History</h1>
+    <p class="subtitle">
+      A running timeline of community decisions that shaped Season 11 and beyond. Every poll captures how players weighed updates,
+      plugin ideas, server settings, and event scheduling.
+    </p>
+
+    <section class="stat-grid" aria-label="Vote history summary">
+      <article class="stat">
+        <span class="kicker">Total Polls</span>
+        <strong>13</strong>
+      </article>
+      <article class="stat">
+        <span class="kicker">Date Range</span>
+        <strong>Dec 2025 → Apr 2026</strong>
+      </article>
+      <article class="stat">
+        <span class="kicker">Most Votes in a Poll</span>
+        <strong>11</strong>
+      </article>
+      <article class="stat">
+        <span class="kicker">Topic Spread</span>
+        <strong>Updates, Rules, Events</strong>
+      </article>
+    </section>
+
+    <section class="timeline" aria-label="Voting timeline">
+      <article class="vote">
+        <span class="date">4/15/26</span>
+        <h2>Expand border by 500 blocks?</h2>
+        <ul class="results">
+          <li><div class="label-row"><span>Yes</span><span>4</span></div><div class="bar" style="--w:100%;"><i></i></div></li>
+          <li><div class="label-row"><span>No</span><span>1</span></div><div class="bar pink" style="--w:25%;"><i></i></div></li>
+        </ul>
+      </article>
+
+      <article class="vote">
+        <span class="date">4/10/26</span>
+        <h2>How should we start Season 12?</h2>
+        <ul class="results">
+          <li><div class="label-row"><span>On 1.21.11 paper and update when paper updates</span><span>0</span></div><div class="bar" style="--w:0%;"><i></i></div></li>
+          <li><div class="label-row"><span>Pure vanilla 26.1.2 and switch to paper when it updates</span><span>5</span></div><div class="bar" style="--w:100%;"><i></i></div></li>
+          <li><div class="label-row"><span>Pure vanilla 26.1.2 and stay on vanilla to update with game</span><span>3</span></div><div class="bar pink" style="--w:60%;"><i></i></div></li>
+        </ul>
+      </article>
+
+      <article class="vote">
+        <span class="date">4/10/26</span>
+        <h2>World border yes or no for start of Season 12?</h2>
+        <ul class="results">
+          <li><div class="label-row"><span>Yes</span><span>6</span></div><div class="bar" style="--w:100%;"><i></i></div></li>
+          <li><div class="label-row"><span>No</span><span>2</span></div><div class="bar pink" style="--w:33%;"><i></i></div></li>
+        </ul>
+      </article>
+
+      <article class="vote">
+        <span class="date">4/9/25</span>
+        <h2>Convert back to vanilla, update to 26.1.2, and start Season 12?</h2>
+        <ul class="results">
+          <li><div class="label-row"><span>Yes</span><span>3</span></div><div class="bar" style="--w:100%;"><i></i></div></li>
+          <li><div class="label-row"><span>No</span><span>0</span></div><div class="bar pink" style="--w:0%;"><i></i></div></li>
+        </ul>
+      </article>
+
+      <article class="vote">
+        <span class="date">3/27/26</span>
+        <h2>Will you join the Server Tour #2 on Monday?</h2>
+        <ul class="results">
+          <li><div class="label-row"><span>Yes</span><span>1</span></div><div class="bar" style="--w:33%;"><i></i></div></li>
+          <li><div class="label-row"><span>No</span><span>3</span></div><div class="bar pink" style="--w:100%;"><i></i></div></li>
+        </ul>
+      </article>
+
+      <article class="vote">
+        <span class="date">2/28/26</span>
+        <h2>Try a Discord death-count leaderboard plugin?</h2>
+        <ul class="results">
+          <li><div class="label-row"><span>Yes</span><span>2</span></div><div class="bar" style="--w:100%;"><i></i></div></li>
+          <li><div class="label-row"><span>No</span><span>0</span></div><div class="bar pink" style="--w:0%;"><i></i></div></li>
+        </ul>
+      </article>
+
+      <article class="vote">
+        <span class="date">2/17/26</span>
+        <h2>Best days for a "CYOA scavenger hunt" event?</h2>
+        <ul class="results">
+          <li><div class="label-row"><span>Start of the week</span><span>1</span></div><div class="bar" style="--w:100%;"><i></i></div></li>
+          <li><div class="label-row"><span>Middle of the week</span><span>0</span></div><div class="bar" style="--w:0%;"><i></i></div></li>
+          <li><div class="label-row"><span>End of the week</span><span>1</span></div><div class="bar" style="--w:100%;"><i></i></div></li>
+          <li><div class="label-row"><span>Weekend</span><span>0</span></div><div class="bar" style="--w:0%;"><i></i></div></li>
+        </ul>
+      </article>
+
+      <article class="vote">
+        <span class="date">1/27/26</span>
+        <h2>Player Head plugin for arena leaderboard?</h2>
+        <ul class="results">
+          <li><div class="label-row"><span>Yes</span><span>5</span></div><div class="bar" style="--w:100%;"><i></i></div></li>
+          <li><div class="label-row"><span>No</span><span>0</span></div><div class="bar pink" style="--w:0%;"><i></i></div></li>
+          <li><div class="label-row"><span>A different one that supports drops</span><span>1</span></div><div class="bar" style="--w:20%;"><i></i></div></li>
+        </ul>
+      </article>
+
+      <article class="vote">
+        <span class="date">1/16/26</span>
+        <h2>Rule Change: To allow alt-accounts</h2>
+        <ul class="results">
+          <li><div class="label-row"><span>Allow all alt-accounts</span><span>0</span></div><div class="bar" style="--w:0%;"><i></i></div></li>
+          <li><div class="label-row"><span>Allow only full members and above</span><span>2</span></div><div class="bar" style="--w:100%;"><i></i></div></li>
+          <li><div class="label-row"><span>Allow only legacy members and above</span><span>1</span></div><div class="bar" style="--w:50%;"><i></i></div></li>
+          <li><div class="label-row"><span>Keep not allowing alt-accounts</span><span>2</span></div><div class="bar pink" style="--w:100%;"><i></i></div></li>
+        </ul>
+      </article>
+
+      <article class="vote">
+        <span class="date">1/2/26</span>
+        <h2>Should auto AFK be turned off (manual /afk only)?</h2>
+        <ul class="results">
+          <li><div class="label-row"><span>Yes</span><span>6</span></div><div class="bar" style="--w:100%;"><i></i></div></li>
+          <li><div class="label-row"><span>No</span><span>2</span></div><div class="bar pink" style="--w:33%;"><i></i></div></li>
+        </ul>
+      </article>
+
+      <article class="vote">
+        <span class="date">12/31/25</span>
+        <h2>Should we add No-Enderman-Grief Plugin?</h2>
+        <ul class="results">
+          <li><div class="label-row"><span>Yes</span><span>6</span></div><div class="bar" style="--w:100%;"><i></i></div></li>
+          <li><div class="label-row"><span>No</span><span>5</span></div><div class="bar pink" style="--w:83%;"><i></i></div></li>
+        </ul>
+      </article>
+
+      <article class="vote">
+        <span class="date">12/25/25</span>
+        <h2>Add an AFK plugin (/afk shown in tab menu)?</h2>
+        <ul class="results">
+          <li><div class="label-row"><span>Yes</span><span>4</span></div><div class="bar" style="--w:100%;"><i></i></div></li>
+          <li><div class="label-row"><span>No</span><span>0</span></div><div class="bar pink" style="--w:0%;"><i></i></div></li>
+        </ul>
+      </article>
+
+      <article class="vote">
+        <span class="date">12/5/25</span>
+        <h2>When would the best restart times be for everyone? (EST, multi-select)</h2>
+        <ul class="results">
+          <li><div class="label-row"><span>12–1am</span><span>1</span></div><div class="bar" style="--w:14%;"><i></i></div></li>
+          <li><div class="label-row"><span>2–3am</span><span>2</span></div><div class="bar" style="--w:29%;"><i></i></div></li>
+          <li><div class="label-row"><span>4–5am</span><span>5</span></div><div class="bar" style="--w:71%;"><i></i></div></li>
+          <li><div class="label-row"><span>6–7am</span><span>7</span></div><div class="bar" style="--w:100%;"><i></i></div></li>
+          <li><div class="label-row"><span>8–9am</span><span>2</span></div><div class="bar" style="--w:29%;"><i></i></div></li>
+          <li><div class="label-row"><span>10–11am</span><span>1</span></div><div class="bar" style="--w:14%;"><i></i></div></li>
+          <li><div class="label-row"><span>12–1pm</span><span>0</span></div><div class="bar" style="--w:0%;"><i></i></div></li>
+          <li><div class="label-row"><span>2–3pm</span><span>1</span></div><div class="bar" style="--w:14%;"><i></i></div></li>
+          <li><div class="label-row"><span>4–5pm</span><span>1</span></div><div class="bar" style="--w:14%;"><i></i></div></li>
+          <li><div class="label-row"><span>6–7pm</span><span>1</span></div><div class="bar" style="--w:14%;"><i></i></div></li>
+        </ul>
+      </article>
+
+      <article class="vote">
+        <span class="date">12/4/25</span>
+        <h2>Should the server update to 1.21.11 as soon as it releases?</h2>
+        <ul class="results">
+          <li><div class="label-row"><span>Yes</span><span>6</span></div><div class="bar" style="--w:100%;"><i></i></div></li>
+          <li><div class="label-row"><span>No</span><span>0</span></div><div class="bar pink" style="--w:0%;"><i></i></div></li>
+        </ul>
+      </article>
+    </section>
+  </main>
+</body>
+</html>
