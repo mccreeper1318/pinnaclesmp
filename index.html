@@ -505,7 +505,7 @@
     .slide-up.pre-reveal {
       opacity: 0;
       transform: translateY(20px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
+      transition: opacity 0.95s ease, transform 0.95s ease;
       transition-delay: calc(var(--stagger-index, 0) * 90ms);
     }
 
@@ -654,14 +654,14 @@
 
     <section class="section" id="news">
       <div class="container">
-        <div class="section-heading">
+        <div class="section-heading fade-in slide-up">
           <div>
             <div class="eyebrow">Latest Updates</div>
             <h2>Server News</h2>
           </div>
         </div>
 
-        <div class="news-grid">
+        <div class="news-grid fade-in slide-up">
           <article class="card news-card hover-lift fade-in slide-up">
             <span class="tag">Announcement</span>
             <h3>Season 12 Has Begun</h3>
@@ -697,14 +697,14 @@
 
     <section class="section" id="events">
       <div class="container">
-        <div class="section-heading">
+        <div class="section-heading fade-in slide-up">
           <div>
             <div class="eyebrow">Community Schedule</div>
             <h2>Server Events</h2>
           </div>
         </div>
 
-        <div class="events-table-wrap">
+        <div class="events-table-wrap fade-in slide-up">
           <table class="events-table">
             <thead>
               <tr>
@@ -729,14 +729,14 @@
 
     <section class="section" id="rules">
       <div class="container">
-        <div class="section-heading">
+        <div class="section-heading fade-in slide-up">
           <div>
             <div class="eyebrow">Play Fair</div>
             <h2>Server Rules</h2>
           </div>
         </div>
 
-        <div class="info-grid">
+        <div class="info-grid fade-in slide-up">
           <div class="card hover-lift fade-in slide-up">
             <h3>Community Standards</h3>
             <ul class="rules-list">
@@ -771,14 +771,14 @@
 
     <section class="section" id="join">
       <div class="container">
-        <div class="section-heading">
+        <div class="section-heading fade-in slide-up">
           <div>
             <div class="eyebrow">Join Pinnacle</div>
             <h2>Join</h2>
           </div>
         </div>
 
-        <div class="join-grid">
+        <div class="join-grid fade-in slide-up">
           <article class="card hover-lift fade-in slide-up" id="about-us">
             <div class="tag">About Us</div>
             <h3 style="margin-top: 14px;">What Pinnacle SMP is about</h3>
@@ -893,8 +893,8 @@
           obs.unobserve(entry.target);
         });
       }, {
-        threshold: 0.18,
-        rootMargin: "0px 0px -8% 0px"
+        threshold: 0.12,
+        rootMargin: "0px 0px -4% 0px"
       });
 
       animated.forEach((element) => observer.observe(element));
