@@ -115,6 +115,13 @@
       min-height: 82px;
     }
 
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
     .brand {
       display: flex;
       align-items: center;
@@ -652,8 +659,14 @@
         padding: 14px 0;
       }
 
-      .brand {
+      .brand-group {
         width: auto;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .brand {
         gap: 10px;
       }
 
@@ -759,14 +772,16 @@
 <body>
   <header class="site-header">
     <div class="container nav-wrap">
-      <a href="#home" class="brand">
-        <img class="brand-logo" src="assets/branding/PinnacleSeason12Logo.svg" alt="Pinnacle SMP Season 12 logo" />
-        <span>Pinnacle SMP</span>
-      </a>
-      <span id="server-status-badge" class="brand-status" aria-live="polite">
-        <span class="brand-status-dot" aria-hidden="true"></span>
-        <span id="server-status-text">Checking…</span>
-      </span>
+      <div class="brand-group">
+        <a href="#home" class="brand">
+          <img class="brand-logo" src="assets/branding/PinnacleSeason12Logo.svg" alt="Pinnacle SMP Season 12 logo" />
+          <span>Pinnacle SMP</span>
+        </a>
+        <span id="server-status-badge" class="brand-status" aria-live="polite">
+          <span class="brand-status-dot" aria-hidden="true"></span>
+          <span id="server-status-text">Checking…</span>
+        </span>
+      </div>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav">Menu</button>
 
       <nav id="mobile-nav" aria-label="Main navigation">
