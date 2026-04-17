@@ -126,6 +126,36 @@
       margin-bottom: 4px;
     }
 
+    .member-list {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+      display: grid;
+      gap: 8px;
+    }
+
+    .member-button {
+      display: inline-flex;
+      align-items: center;
+      width: 100%;
+      border: 1px solid rgba(122, 162, 255, 0.34);
+      background: rgba(122, 162, 255, 0.1);
+      color: var(--text);
+      text-decoration: none;
+      border-radius: 10px;
+      padding: 8px 10px;
+      font-weight: 600;
+      transition: transform 0.15s ease, border-color 0.2s ease, background-color 0.2s ease;
+    }
+
+    .member-button:hover,
+    .member-button:focus-visible {
+      transform: translateY(-1px);
+      border-color: var(--cyan);
+      background: rgba(87, 213, 255, 0.2);
+      outline: none;
+    }
+
     .awards-panel {
       margin-top: 22px;
       border: 1px solid rgba(156, 191, 236, 0.25);
@@ -191,51 +221,51 @@
       <div class="member-grid">
         <section class="member-section founding">
           <h2>Founding Members</h2>
-          <ul>
-            <li>McCreeper318</li>
-            <li>Johnnykilroy</li>
-            <li>Piff</li>
-            <li>Jeff</li>
+          <ul class="member-list">
+            <li><a class="member-button" href="profiles/McCreeper1318.html">McCreeper1318</a></li>
+            <li><a class="member-button" href="profiles/JohnnyKilroy.html">JohnnyKilroy</a></li>
+            <li><a class="member-button" href="profiles/Piff.html">Piff</a></li>
+            <li><a class="member-button" href="profiles/Jeff.html">Jeff</a></li>
           </ul>
         </section>
 
         <section class="member-section legacy">
           <h2>Legacy Members</h2>
-          <ul>
-            <li>BeansUniverse</li>
-            <li>MoeBe10</li>
-            <li>rad1709 (IronArmored)</li>
-            <li>GodlyCris</li>
+          <ul class="member-list">
+            <li><a class="member-button" href="profiles/BeansUniverse.html">BeansUniverse</a></li>
+            <li><a class="member-button" href="profiles/MoeBe10.html">MoeBe10</a></li>
+            <li><a class="member-button" href="profiles/IronArmored.html">rad1709 (IronArmored)</a></li>
+            <li><a class="member-button" href="profiles/GodlyCris.html">GodlyCris</a></li>
           </ul>
         </section>
 
         <section class="member-section full">
           <h2>Full Members</h2>
-          <ul>
-            <li>atlaskytan</li>
-            <li>BadFiction</li>
-            <li>pinapple_pete</li>
-            <li>mermaidxellie</li>
-            <li>misfiired</li>
-            <li>notnownotnever</li>
-            <li>Poplar (Shiny)</li>
-            <li>Beslife</li>
-            <li>Nicolatte (Nic/Duck)</li>
-            <li>StirfrySurprise</li>
-            <li>kylethecaver</li>
-            <li>Kananers</li>
-            <li>BaconcuzBacon</li>
-            <li>Aryamii</li>
-            <li>towofu</li>
-            <li>BraneFX</li>
-            <li>Kelly_E</li>
+          <ul class="member-list">
+            <li><a class="member-button" href="profiles/Atlaskytan.html">Atlaskytan</a></li>
+            <li><a class="member-button" href="profiles/BadFiction.html">BadFiction</a></li>
+            <li><a class="member-button" href="profiles/pinapple_pete.html">pinapple_pete</a></li>
+            <li><a class="member-button" href="profiles/mermaidxellie.html">mermaidxellie</a></li>
+            <li><a class="member-button" href="profiles/misfiired.html">misfiired</a></li>
+            <li><a class="member-button" href="profiles/notnownotnever.html">notnownotnever</a></li>
+            <li><a class="member-button" href="profiles/Poplare.html">Poplare (Shiny)</a></li>
+            <li><a class="member-button" href="profiles/Beslife.html">Beslife</a></li>
+            <li><a class="member-button" href="profiles/nicholattee.html">nicholattee (Nic/Duck)</a></li>
+            <li><a class="member-button" href="profiles/StirfrySurprise.html">StirfrySurprise</a></li>
+            <li><a class="member-button" href="profiles/kylethecaver.html">kylethecaver</a></li>
+            <li><a class="member-button" href="profiles/Kananers.html">Kananers</a></li>
+            <li><a class="member-button" href="profiles/BACONcuzBACON.html">BACONcuzBACON</a></li>
+            <li><a class="member-button" href="profiles/Aryamii.html">Aryamii</a></li>
+            <li><a class="member-button" href="profiles/t0w0fu.html">t0w0fu</a></li>
+            <li><a class="member-button" href="profiles/BraneFX.html">BraneFX</a></li>
+            <li><a class="member-button" href="profiles/Kelly_E.html">Kelly_E</a></li>
           </ul>
         </section>
 
         <section class="member-section new">
           <h2>New Members</h2>
-          <ul>
-            <li>NateOnGuitar</li>
+          <ul class="member-list">
+            <li><a class="member-button" href="profiles/NateOnGuitar.html">NateOnGuitar</a></li>
           </ul>
         </section>
       </div>
