@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Whitelist Application | Pinnacle SMP</title>
+  <style>
+    :root {
+      --bg: #090b10;
+      --panel: rgba(24, 33, 52, 0.82);
+      --line: rgba(156, 191, 236, 0.28);
+      --text: #eef3ff;
+      --muted: #c2cdea;
+      --green: #5fff9c;
+      --cyan: #57d5ff;
+      --radius: 20px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+      background: #0f1420;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: -18px;
+      z-index: -2;
+      pointer-events: none;
+      background: url("assets/branding/MCV_SPR26Drop_TT_DotNet_Wallpaper_2560x1440.svg") center / cover no-repeat fixed;
+      filter: blur(7px) brightness(0.48) saturate(1.1);
+      transform: scale(1.03);
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at top left, rgba(116, 232, 255, 0.2), transparent 33%),
+        radial-gradient(circle at top right, rgba(146, 255, 198, 0.2), transparent 30%),
+        linear-gradient(180deg, rgba(12, 17, 28, 0.82) 0%, rgba(11, 16, 24, 0.88) 100%);
+    }
+    .container {
+      width: min(calc(100% - 32px), 860px);
+      margin: 0 auto;
+      padding: 36px 0 52px;
+      background: rgba(15, 22, 36, 0.62);
+      border: 1px solid rgba(162, 196, 255, 0.2);
+      border-radius: 26px;
+      backdrop-filter: blur(8px);
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 28px;
+    }
+    h1 { margin: 0 0 10px; font-size: clamp(2rem, 4vw, 2.8rem); }
+    p { color: var(--muted); line-height: 1.7; }
+    .note { font-size: 0.95rem; margin: 0 0 22px; }
+    form { display: grid; gap: 16px; }
+    label { font-weight: 600; display: grid; gap: 8px; }
+    input, textarea, select {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid rgba(122, 162, 255, 0.24);
+      background: rgba(10, 14, 22, 0.94);
+      color: var(--text);
+      padding: 12px 14px;
+      font: inherit;
+    }
+    textarea { min-height: 130px; resize: vertical; }
+    .checkbox-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-weight: 600;
+      color: var(--text);
+      padding: 4px 0;
+    }
+    .checkbox-row input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      margin-top: 2px;
+      padding: 0;
+      flex-shrink: 0;
+    }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+    .btn {
+      border: 0;
+      border-radius: 12px;
+      min-height: 44px;
+      padding: 0 16px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .btn-primary { background: linear-gradient(135deg, var(--green), var(--cyan)); color: #03150d; }
+    .btn-secondary { background: rgba(122, 162, 255, 0.14); color: var(--text); }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <div class="card">
+      <h1>Whitelist Application</h1>
+      <p>
+        Apply to join Pinnacle SMP by filling out this form. When you submit, a pre-filled GitHub issue opens in a new tab
+        so you can review your answers and post the application for staff review.
+      </p>
+      <p class="note">
+        Maintainers: update <code>GITHUB_REPO</code> in this page if your repository path changes.
+      </p>
+
+      <form id="whitelist-application-form">
+        <label>Minecraft Username
+          <input name="mc_username" required />
+        </label>
+
+        <label>Discord Username
+          <input name="discord_username" placeholder="name or @handle" required />
+        </label>
+
+        <label>Age Confirmation
+          <select name="age_confirmation" required>
+            <option value="" selected disabled>Select one</option>
+            <option value="18+ (confirmed)">I am 18 or older</option>
+            <option value="Under 18">I am under 18</option>
+          </select>
+        </label>
+
+        <label>Timezone
+          <input name="timezone" placeholder="e.g., EST / UTC-5" required />
+        </label>
+
+        <label>How long have you been playing Minecraft?
+          <input name="mc_experience" placeholder="e.g., 4 years" required />
+        </label>
+
+        <label>What kind of player are you? (builder, redstoner, explorer, etc.)
+          <textarea name="playstyle" required></textarea>
+        </label>
+
+        <label>Why do you want to join Pinnacle SMP?
+          <textarea name="why_join" required></textarea>
+        </label>
+
+        <label>What are some project ideas you want to build here?
+          <textarea name="project_ideas" required></textarea>
+        </label>
+
+        <label>How do you usually contribute to multiplayer communities?
+          <textarea name="community_contribution" required></textarea>
+        </label>
+
+        <label>Anything else you'd like staff to know?
+          <textarea name="additional_notes"></textarea>
+        </label>
+
+        <label class="checkbox-row">
+          <input type="checkbox" name="rules_agreement" required />
+          <span>I have read the server rules and agree to follow them.</span>
+        </label>
+
+        <div class="actions">
+          <button class="btn btn-primary" type="submit">Create GitHub Issue</button>
+          <a class="btn btn-secondary" href="index.html">Back to Home</a>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <script>
+    const GITHUB_REPO = "mccreeper1318/pinnaclesmp";
+
+    const form = document.getElementById("whitelist-application-form");
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      if (GITHUB_REPO === "OWNER/REPO") {
+        alert("Please configure GITHUB_REPO in whitelist-application.html before using this form.");
+        return;
+      }
+
+      const data = new FormData(form);
+      const value = (name) => (data.get(name) || "Not provided").toString().trim() || "Not provided";
+      const rulesAgreement = data.get("rules_agreement") ? "Yes" : "No";
+      const title = `[Whitelist Application] ${value("mc_username")}`;
+      const body = [
+        "## Whitelist Application",
+        "",
+        `- **Minecraft Username:** ${value("mc_username")}`,
+        `- **Discord Username:** ${value("discord_username")}`,
+        `- **Age Confirmation:** ${value("age_confirmation")}`,
+        `- **Timezone:** ${value("timezone")}`,
+        `- **Minecraft Experience:** ${value("mc_experience")}`,
+        `- **Player Style:** ${value("playstyle")}`,
+        `- **Why Join Pinnacle SMP?:** ${value("why_join")}`,
+        `- **Project Ideas:** ${value("project_ideas")}`,
+        `- **Community Contribution:** ${value("community_contribution")}`,
+        `- **Additional Notes:** ${value("additional_notes")}`,
+        `- **Agreed to Server Rules:** ${rulesAgreement}`
+      ].join("\n");
+
+      const url = `https://github.com/${GITHUB_REPO}/issues/new?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}&labels=${encodeURIComponent("whitelist-application")}`;
+      window.open(url, "_blank", "noopener");
+    });
+  </script>
+</body>
+</html>
