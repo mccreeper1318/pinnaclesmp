@@ -8,12 +8,12 @@
     :root {
       --bg: #537D96;
       --bg-soft: #44A194;
-      --panel: rgba(83, 125, 150, 0.88);
+      --panel: rgba(68, 161, 148, 0.88);
       --panel-2: rgba(236, 143, 141, 0.86);
-      --line: rgba(244, 240, 228, 0.55);
+      --line: rgba(68, 161, 148, 0.55);
       --text: #F4F0E4;
       --muted: #EC8F8D;
-      --green: #44A194;
+      --green: #EC8F8D;
       --cyan: #44A194;
       --blue: #44A194;
       --gold: #44A194;
@@ -54,8 +54,8 @@
       pointer-events: none;
       background:
         radial-gradient(circle at top left, rgba(236, 143, 141, 0.28), transparent 33%),
-        radial-gradient(circle at top right, rgba(244, 240, 228, 0.3), transparent 30%),
-        linear-gradient(180deg, rgba(244, 240, 228, 0.78) 0%, rgba(83, 125, 150, 0.9) 100%);
+        radial-gradient(circle at top right, rgba(68, 161, 148, 0.3), transparent 30%),
+        linear-gradient(180deg, rgba(68, 161, 148, 0.78) 0%, rgba(83, 125, 150, 0.9) 100%);
     }
 
     a {
@@ -92,8 +92,8 @@
       width: min(calc(100% - 32px), var(--max));
       margin: 28px auto 46px;
       padding: 8px 22px 28px;
-      background: rgba(244, 240, 228, 0.84);
-      border: 1px solid rgba(244, 240, 228, 0.48);
+      background: rgba(68, 161, 148, 0.84);
+      border: 1px solid rgba(68, 161, 148, 0.48);
       border-radius: 26px;
       backdrop-filter: blur(8px);
     }
@@ -103,8 +103,8 @@
       top: 0;
       z-index: 50;
       backdrop-filter: blur(16px);
-      background: rgba(244, 240, 228, 0.84);
-      border-bottom: 1px solid rgba(244, 240, 228, 0.4);
+      background: rgba(68, 161, 148, 0.84);
+      border-bottom: 1px solid rgba(68, 161, 148, 0.4);
     }
 
     .nav-wrap {
@@ -147,8 +147,8 @@
       margin-left: 8px;
       padding: 7px 12px;
       border-radius: 999px;
-      border: 1px solid rgba(244, 240, 228, 0.62);
-      background: rgba(244, 240, 228, 0.86);
+      border: 1px solid rgba(68, 161, 148, 0.62);
+      background: rgba(68, 161, 148, 0.86);
       color: var(--muted);
       font-size: 0.84rem;
       font-weight: 700;
@@ -169,7 +169,7 @@
 
     .brand-status.online {
       color: #F4F0E4;
-      border-color: rgba(244, 240, 228, 0.78);
+      border-color: rgba(68, 161, 148, 0.78);
     }
 
     .brand-status.online .brand-status-dot {
@@ -178,7 +178,7 @@
 
     .brand-status.offline {
       color: #F4F0E4;
-      border-color: rgba(244, 240, 228, 0.72);
+      border-color: rgba(68, 161, 148, 0.72);
     }
 
     .brand-status.offline .brand-status-dot {
@@ -187,12 +187,12 @@
 
     .brand-status.online:hover,
     .brand-status.online:focus-visible {
-      box-shadow: 0 0 0 2px rgba(244, 240, 228, 0.24), 0 0 22px rgba(244, 240, 228, 0.48);
+      box-shadow: 0 0 0 2px rgba(68, 161, 148, 0.24), 0 0 22px rgba(68, 161, 148, 0.48);
     }
 
     .brand-status.offline:hover,
     .brand-status.offline:focus-visible {
-      box-shadow: 0 0 0 2px rgba(244, 240, 228, 0.24), 0 0 22px rgba(244, 240, 228, 0.44);
+      box-shadow: 0 0 0 2px rgba(68, 161, 148, 0.24), 0 0 22px rgba(68, 161, 148, 0.44);
     }
 
     .menu-toggle {
@@ -203,8 +203,8 @@
       min-height: 40px;
       padding: 0 14px;
       border-radius: 12px;
-      border: 1px solid rgba(244, 240, 228, 0.52);
-      background: rgba(244, 240, 228, 0.4);
+      border: 1px solid rgba(68, 161, 148, 0.52);
+      background: rgba(68, 161, 148, 0.4);
       color: var(--text);
       font-weight: 700;
       font: inherit;
@@ -239,7 +239,7 @@
 
     nav > ul > li > a:hover,
     nav > ul > li > a:focus {
-      background: rgba(244, 240, 228, 0.4);
+      background: rgba(68, 161, 148, 0.4);
       color: white;
       outline: none;
     }
@@ -281,7 +281,7 @@
       gap: 8px;
       padding: 8px 12px;
       border-radius: 999px;
-      background: rgba(244, 240, 228, 0.4);
+      background: rgba(68, 161, 148, 0.4);
       color: #cdd9ff;
       font-size: 0.82rem;
       letter-spacing: 0.08em;
@@ -368,7 +368,7 @@
     .hover-lift:hover,
     .hover-lift:focus-within {
       transform: translateY(-6px);
-      box-shadow: 0 18px 34px rgba(0, 0, 0, 0.42), 0 0 0 1px rgba(244, 240, 228, 0.44);
+      box-shadow: 0 18px 34px rgba(0, 0, 0, 0.42), 0 0 0 1px rgba(68, 161, 148, 0.44);
       border-color: rgba(122, 162, 255, 0.45);
     }
 
@@ -394,7 +394,7 @@
 
     .server-card {
       background: var(--panel-2);
-      border: 1px solid rgba(244, 240, 228, 0.55);
+      border: 1px solid rgba(68, 161, 148, 0.55);
       border-radius: 18px;
       padding: 18px;
     }
@@ -408,7 +408,7 @@
       font-weight: 800;
       letter-spacing: 0.04em;
       color: #537D96;
-      background: #F4F0E4;
+      background: #44A194;
     }
 
     .status-grid {
@@ -557,7 +557,7 @@
 
     .site-footer {
       margin-top: 48px;
-      border-top: 1px solid rgba(244, 240, 228, 0.4);
+      border-top: 1px solid rgba(68, 161, 148, 0.4);
       background: rgba(5, 7, 11, 0.85);
     }
 
