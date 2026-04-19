@@ -6,13 +6,13 @@
   <title>Whitelist Application | Pinnacle SMP</title>
   <style>
     :root {
-      --bg: #180161;
-      --panel: rgba(79, 23, 135, 0.88);
-      --line: rgba(251, 119, 60, 0.5);
-      --text: #FDF2FF;
-      --muted: #F3B6DA;
-      --green: #EB3678;
-      --cyan: #FB773C;
+      --bg: #B0DB9C;
+      --panel: rgba(236, 250, 229, 0.9);
+      --line: rgba(176, 219, 156, 0.58);
+      --text: #2F4A2B;
+      --muted: #4B6B45;
+      --green: #6AAE5D;
+      --cyan: #5F9B55;
       --radius: 20px;
     }
     * { box-sizing: border-box; }
@@ -23,7 +23,7 @@
       min-height: 100vh;
       position: relative;
       overflow-x: hidden;
-      background: #180161;
+      background: #B0DB9C;
     }
 
     body::before {
@@ -44,16 +44,16 @@
       z-index: -1;
       pointer-events: none;
       background:
-        radial-gradient(circle at top left, rgba(235, 54, 120, 0.28), transparent 33%),
-        radial-gradient(circle at top right, rgba(251, 119, 60, 0.3), transparent 30%),
-        linear-gradient(180deg, rgba(79, 23, 135, 0.78) 0%, rgba(24, 1, 97, 0.9) 100%);
+        radial-gradient(circle at top left, rgba(202, 232, 189, 0.38), transparent 33%),
+        radial-gradient(circle at top right, rgba(176, 219, 156, 0.34), transparent 30%),
+        linear-gradient(180deg, rgba(202, 232, 189, 0.82) 0%, rgba(176, 219, 156, 0.88) 100%);
     }
     .container {
       width: min(calc(100% - 32px), 860px);
       margin: 0 auto;
       padding: 36px 0 52px;
-      background: rgba(79, 23, 135, 0.84);
-      border: 1px solid rgba(251, 119, 60, 0.48);
+      background: rgba(236, 250, 229, 0.85);
+      border: 1px solid rgba(176, 219, 156, 0.55);
       border-radius: 26px;
       backdrop-filter: blur(8px);
     }
@@ -107,7 +107,7 @@
       justify-content: center;
     }
     .btn-primary { background: linear-gradient(135deg, var(--green), var(--cyan)); color: #03150d; }
-    .btn-secondary { background: rgba(251, 119, 60, 0.4); color: var(--text); }
+    .btn-secondary { background: rgba(176, 219, 156, 0.45); color: var(--text); }
   </style>
 </head>
 <body>
