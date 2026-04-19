@@ -6,16 +6,16 @@
   <title>Pinnacle SMP • Server News</title>
   <style>
     :root {
-      --bg: #10172a;
-      --bg-soft: #101521;
-      --panel: rgba(40, 57, 88, 0.87);
-      --line: rgba(173, 214, 255, 0.42);
-      --text: #f4f8ff;
-      --muted: #d4def7;
-      --green: #7affb4;
-      --cyan: #72e0ff;
-      --blue: #8db5ff;
-      --gold: #ffe082;
+      --bg: #180161;
+      --bg-soft: #4F1787;
+      --panel: rgba(79, 23, 135, 0.88);
+      --line: rgba(251, 119, 60, 0.55);
+      --text: #FDF2FF;
+      --muted: #F3B6DA;
+      --green: #EB3678;
+      --cyan: #FB773C;
+      --blue: #FB773C;
+      --gold: #FB773C;
       --shadow: 0 18px 48px rgba(0, 0, 0, 0.45);
       --radius: 22px;
       --max: 1040px;
@@ -30,7 +30,7 @@
       min-height: 100vh;
       position: relative;
       overflow-x: hidden;
-      background: #16223a;
+      background: #180161;
     }
 
     body::before {
@@ -51,9 +51,9 @@
       z-index: -1;
       pointer-events: none;
       background:
-        radial-gradient(circle at top left, rgba(116, 232, 255, 0.2), transparent 33%),
-        radial-gradient(circle at top right, rgba(146, 255, 198, 0.2), transparent 30%),
-        linear-gradient(180deg, rgba(12, 17, 28, 0.82) 0%, rgba(11, 16, 24, 0.88) 100%);
+        radial-gradient(circle at top left, rgba(235, 54, 120, 0.28), transparent 33%),
+        radial-gradient(circle at top right, rgba(251, 119, 60, 0.3), transparent 30%),
+        linear-gradient(180deg, rgba(79, 23, 135, 0.78) 0%, rgba(24, 1, 97, 0.9) 100%);
     }
 
     a { color: inherit; text-decoration: none; }
@@ -70,8 +70,8 @@
       width: min(calc(100% - 32px), var(--max));
       margin: 28px auto 46px;
       padding: 8px 22px 28px;
-      background: rgba(24, 36, 58, 0.68);
-      border: 1px solid rgba(162, 196, 255, 0.2);
+      background: rgba(79, 23, 135, 0.84);
+      border: 1px solid rgba(251, 119, 60, 0.48);
       border-radius: 26px;
       backdrop-filter: blur(8px);
     }
@@ -81,8 +81,8 @@
       top: 0;
       z-index: 50;
       backdrop-filter: blur(16px);
-      background: rgba(7, 10, 15, 0.72);
-      border-bottom: 1px solid rgba(141, 181, 255, 0.2);
+      background: rgba(79, 23, 135, 0.84);
+      border-bottom: 1px solid rgba(251, 119, 60, 0.4);
     }
 
     .nav-wrap {
@@ -126,7 +126,7 @@
 
     .btn:hover {
       transform: translateY(-2px);
-      border-color: rgba(95,255,156,0.42);
+      border-color: rgba(176,219,156,0.62);
     }
 
     .hero {
@@ -139,7 +139,7 @@
       gap: 8px;
       padding: 8px 12px;
       border-radius: 999px;
-      background: rgba(141, 181, 255, 0.2);
+      background: rgba(251, 119, 60, 0.4);
       color: #cdd9ff;
       font-size: 0.82rem;
       letter-spacing: 0.08em;
@@ -189,7 +189,7 @@
       width: fit-content;
       padding: 7px 10px;
       border-radius: 999px;
-      background: rgba(255, 214, 107, 0.1);
+      background: rgba(235, 54, 120, 0.22);
       color: var(--gold);
       font-size: 0.78rem;
       letter-spacing: 0.08em;
@@ -208,7 +208,7 @@
       object-fit: cover;
       border-top: 1px solid var(--line);
       border-bottom: 1px solid var(--line);
-      background: linear-gradient(145deg, rgba(95,255,156,0.16), rgba(87,213,255,0.1));
+      background: linear-gradient(145deg, rgba(202,232,189,0.5), rgba(176,219,156,0.38));
     }
 
     .article-content {
@@ -231,15 +231,15 @@
       margin-top: 24px;
       padding: 14px 16px;
       border-radius: 14px;
-      border: 1px solid rgba(95,255,156,0.2);
-      background: rgba(95,255,156,0.06);
+      border: 1px solid rgba(202,232,189,0.52);
+      background: rgba(221,246,210,0.68);
       color: #d6ffe8;
       font-size: 0.95rem;
     }
 
     .site-footer {
       margin-top: 24px;
-      border-top: 1px solid rgba(141, 181, 255, 0.2);
+      border-top: 1px solid rgba(251, 119, 60, 0.4);
       background: rgba(5, 7, 11, 0.85);
     }
 
