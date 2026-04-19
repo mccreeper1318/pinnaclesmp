@@ -6,15 +6,15 @@
   <title>Tournament Standings | Pinnacle SMP</title>
   <style>
     :root {
-      --text: #FDF2FF;
-      --muted: #F3B6DA;
-      --panel: rgba(79, 23, 135, 0.88);
-      --line: rgba(251, 119, 60, 0.55);
-      --gold: #FB773C;
-      --silver: #4F1787;
-      --bronze: #180161;
-      --accent: #FB773C;
-      --green: #EB3678;
+      --text: #F4F0E4;
+      --muted: #EC8F8D;
+      --panel: rgba(83, 125, 150, 0.88);
+      --line: rgba(244, 240, 228, 0.55);
+      --gold: #44A194;
+      --silver: #44A194;
+      --bronze: #537D96;
+      --accent: #44A194;
+      --green: #44A194;
     }
 
     * { box-sizing: border-box; }
@@ -26,7 +26,7 @@
       min-height: 100vh;
       position: relative;
       overflow-x: hidden;
-      background: #180161;
+      background: #537D96;
     }
 
     body::before {
@@ -47,9 +47,9 @@
       z-index: -1;
       pointer-events: none;
       background:
-        radial-gradient(circle at top left, rgba(235, 54, 120, 0.28), transparent 33%),
-        radial-gradient(circle at top right, rgba(251, 119, 60, 0.3), transparent 30%),
-        linear-gradient(180deg, rgba(79, 23, 135, 0.78) 0%, rgba(11, 16, 24, 0.9) 100%);
+        radial-gradient(circle at top left, rgba(236, 143, 141, 0.28), transparent 33%),
+        radial-gradient(circle at top right, rgba(244, 240, 228, 0.3), transparent 30%),
+        linear-gradient(180deg, rgba(244, 240, 228, 0.78) 0%, rgba(11, 16, 24, 0.9) 100%);
     }
 
     .container {
@@ -96,7 +96,7 @@
     }
 
     .entry {
-      border: 1px solid rgba(251, 119, 60, 0.44);
+      border: 1px solid rgba(244, 240, 228, 0.44);
       border-radius: 14px;
       padding: 12px 14px;
       background: rgba(11, 16, 24, 0.68);
@@ -135,12 +135,12 @@
     .fill {
       height: 100%;
       border-radius: inherit;
-      background: linear-gradient(90deg, #FB773C 0%, #EB3678 100%);
+      background: linear-gradient(90deg, #F4F0E4 0%, #EC8F8D 100%);
     }
 
     .entry[data-rank="1"] {
-      border-color: rgba(251, 119, 60, 0.7);
-      box-shadow: 0 0 0 1px rgba(251, 119, 60, 0.4) inset;
+      border-color: rgba(244, 240, 228, 0.7);
+      box-shadow: 0 0 0 1px rgba(244, 240, 228, 0.4) inset;
     }
 
     .entry[data-rank="2"] {
