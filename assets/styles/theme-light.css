@@ -180,6 +180,10 @@ select {
   color: var(--theme-text) !important;
   border: 1px solid #b7c8b7 !important;
   border-radius: 10px !important;
+}
+
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]):not([type="color"]):not([type="image"]):not([type="button"]):not([type="submit"]):not([type="reset"]),
+select {
   min-height: 44px;
 }
 
