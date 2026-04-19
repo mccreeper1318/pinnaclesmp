@@ -772,7 +772,6 @@
       }
     }
   </style>
-  <link rel="stylesheet" href="assets/styles/theme-light.css" />
 </head>
 <body>
   <header class="site-header">
@@ -1093,50 +1092,6 @@
 
       nav.querySelectorAll("a").forEach((link) => {
         link.addEventListener("click", () => closeMenu());
-      });
-
-      const navLinks = Array.from(nav.querySelectorAll('a[href^="#"]'));
-      const navTargets = navLinks
-        .map((link) => {
-          const section = document.querySelector(link.getAttribute("href"));
-          return section ? { link, section } : null;
-        })
-        .filter(Boolean);
-
-      const setCurrentNav = (activeLink) => {
-        navLinks.forEach((link) => {
-          if (link === activeLink) {
-            link.setAttribute("aria-current", "page");
-          } else {
-            link.removeAttribute("aria-current");
-          }
-        });
-      };
-
-      if (navLinks.length) {
-        const currentHashLink = navLinks.find((link) => link.getAttribute("href") === window.location.hash);
-        setCurrentNav(currentHashLink ?? navLinks[0]);
-      }
-
-      if (navTargets.length) {
-        const sectionObserver = new IntersectionObserver((entries) => {
-          const visible = entries
-            .filter((entry) => entry.isIntersecting)
-            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-          if (!visible) return;
-          const match = navTargets.find(({ section }) => section === visible.target);
-          if (match) setCurrentNav(match.link);
-        }, {
-          threshold: [0.35, 0.55, 0.75],
-          rootMargin: "-20% 0px -45% 0px"
-        });
-
-        navTargets.forEach(({ section }) => sectionObserver.observe(section));
-      }
-
-      window.addEventListener("hashchange", () => {
-        const hashLink = navLinks.find((link) => link.getAttribute("href") === window.location.hash);
-        if (hashLink) setCurrentNav(hashLink);
       });
 
       document.addEventListener("click", (event) => {
