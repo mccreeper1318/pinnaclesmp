@@ -1,0 +1,222 @@
+:root {
+  --theme-bg: #edf1ea;
+  --theme-bg-soft: #e4ebdf;
+  --theme-surface: #f7f9f4;
+  --theme-surface-2: #f1f5ee;
+  --theme-panel: #ffffffd9;
+  --theme-border: #cdd8c7;
+  --theme-text: #253429;
+  --theme-muted: #4b6251;
+  --theme-accent: #4f7e56;
+  --theme-accent-strong: #3f6845;
+  --theme-shadow: 0 10px 30px rgba(48, 72, 53, 0.12);
+  --theme-radius: 16px;
+}
+
+body {
+  color: var(--theme-text) !important;
+  background: linear-gradient(180deg, var(--theme-bg) 0%, var(--theme-bg-soft) 100%) !important;
+}
+
+body::before {
+  filter: blur(4px) brightness(1.15) saturate(0.65) !important;
+  opacity: 0.18 !important;
+}
+
+body::after {
+  background:
+    radial-gradient(circle at top left, rgba(108, 153, 109, 0.14), transparent 38%),
+    radial-gradient(circle at top right, rgba(145, 120, 88, 0.08), transparent 35%),
+    linear-gradient(180deg, rgba(249, 251, 247, 0.96) 0%, rgba(230, 238, 227, 0.95) 100%) !important;
+}
+
+main,
+.container,
+.page {
+  color: var(--theme-text);
+}
+
+main,
+.page,
+.container:has(> .card),
+.container:has(> .panel) {
+  box-shadow: var(--theme-shadow);
+}
+
+.card,
+.panel,
+.hero,
+.article,
+.tile,
+.section,
+[class*="card"],
+[class*="panel"] {
+  border-color: var(--theme-border) !important;
+  border-radius: var(--theme-radius) !important;
+}
+
+.card,
+.panel,
+.hero,
+.article,
+[class*="card"],
+[class*="panel"] {
+  background: var(--theme-panel) !important;
+  box-shadow: 0 8px 24px rgba(48, 72, 53, 0.08);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #2c4731 !important;
+  letter-spacing: -0.02em;
+}
+
+p,
+li,
+label,
+.note,
+.tagline,
+.footnote,
+.meta-list .label,
+.footer-content,
+.footer-brand p,
+.footer-col a {
+  color: var(--theme-muted) !important;
+}
+
+a {
+  color: var(--theme-accent);
+}
+
+a:hover,
+a:focus-visible {
+  color: var(--theme-accent-strong) !important;
+}
+
+.site-header,
+header {
+  background: #f6faf3e3 !important;
+  border-bottom: 1px solid var(--theme-border) !important;
+  box-shadow: 0 2px 16px rgba(57, 77, 57, 0.08);
+}
+
+nav a,
+.site-header a,
+.brand,
+.back-link {
+  border-radius: 10px;
+}
+
+nav a:hover,
+.site-header a:hover,
+.brand:hover,
+.back-link:hover {
+  background-color: #e7efe2;
+}
+
+nav a[aria-current="page"],
+nav a.active,
+.site-header a.active,
+a[href="#"] {
+  background-color: #d9e7d7;
+  color: #2f5635 !important;
+  box-shadow: inset 0 0 0 1px #b8cdb8;
+}
+
+.btn,
+button,
+input[type="submit"],
+.member-button,
+a.btn {
+  border: 1px solid #90ac90 !important;
+  border-radius: 12px !important;
+  background: linear-gradient(180deg, #f0f7ec, #e0ecdc) !important;
+  color: #234227 !important;
+  box-shadow: 0 5px 12px rgba(69, 102, 70, 0.15);
+  transition: transform 0.14s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(180deg, #86ba85, #679e69) !important;
+  color: #f7fff6 !important;
+  border-color: #5f8e60 !important;
+}
+
+.btn:hover,
+button:hover,
+.member-button:hover,
+a.btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.02);
+  box-shadow: 0 8px 18px rgba(55, 89, 59, 0.2);
+}
+
+.btn:active,
+button:active,
+.member-button:active,
+a.btn:active {
+  transform: translateY(1px);
+}
+
+.btn:focus-visible,
+button:focus-visible,
+.member-button:focus-visible,
+a:focus-visible,
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid #7fa981 !important;
+  outline-offset: 2px;
+}
+
+input,
+textarea,
+select {
+  background: #fcfffb !important;
+  color: var(--theme-text) !important;
+  border: 1px solid #b7c8b7 !important;
+  border-radius: 10px !important;
+  min-height: 44px;
+}
+
+textarea {
+  min-height: 140px;
+}
+
+.site-footer,
+footer {
+  background: #eef4ea !important;
+  border-top: 1px solid var(--theme-border) !important;
+}
+
+.site-footer a,
+footer a {
+  color: #3f6544 !important;
+}
+
+@media (max-width: 900px) {
+  .container,
+  main,
+  .page {
+    width: min(calc(100% - 20px), 1100px) !important;
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+
+  .actions,
+  .cta-row,
+  .nav-buttons {
+    gap: 12px !important;
+  }
+
+  .btn,
+  button,
+  .member-button {
+    min-height: 46px;
+    padding-inline: 16px;
+  }
+}
