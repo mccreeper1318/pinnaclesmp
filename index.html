@@ -4,21 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pinnacle SMP</title>
+    <link rel="stylesheet" href="assets/light-theme.css" />
   <style>
-    :root {
-      --bg: #10172a;
-      --bg-soft: #101521;
-      --panel: rgba(40, 57, 88, 0.87);
-      --panel-2: rgba(48, 67, 102, 0.9);
-      --line: rgba(173, 214, 255, 0.42);
-      --text: #f4f8ff;
-      --muted: #d4def7;
+    :root {            --line: rgba(173, 214, 255, 0.42);
       --green: #7affb4;
       --cyan: #72e0ff;
       --blue: #8db5ff;
       --gold: #ffe082;
       --danger: #ff6c8f;
-      --shadow: 0 18px 48px rgba(0, 0, 0, 0.45);
+      --shadow: 0 18px 48px rgba(70, 97, 146, 0.24);
       --radius: 22px;
       --max: 1240px;
     }
@@ -32,7 +26,7 @@
       min-height: 100vh;
       position: relative;
       overflow-x: hidden;
-      background: #16223a;
+      background: var(--bg-soft);
     }
 
     body::before {
@@ -53,9 +47,9 @@
       z-index: -1;
       pointer-events: none;
       background:
-        radial-gradient(circle at top left, rgba(116, 232, 255, 0.2), transparent 33%),
-        radial-gradient(circle at top right, rgba(146, 255, 198, 0.2), transparent 30%),
-        linear-gradient(180deg, rgba(12, 17, 28, 0.82) 0%, rgba(11, 16, 24, 0.88) 100%);
+        radial-gradient(circle at top left, var(--overlay-top-left), transparent 33%),
+        radial-gradient(circle at top right, var(--overlay-top-right), transparent 30%),
+        linear-gradient(180deg, var(--overlay-base-start) 0%, var(--overlay-base-end) 100%);
     }
 
     a {
@@ -92,8 +86,8 @@
       width: min(calc(100% - 32px), var(--max));
       margin: 28px auto 46px;
       padding: 8px 22px 28px;
-      background: rgba(24, 36, 58, 0.68);
-      border: 1px solid rgba(162, 196, 255, 0.2);
+      background: var(--frosted-bg);
+      border: 1px solid var(--frosted-line);
       border-radius: 26px;
       backdrop-filter: blur(8px);
     }
@@ -103,8 +97,8 @@
       top: 0;
       z-index: 50;
       backdrop-filter: blur(16px);
-      background: rgba(7, 10, 15, 0.72);
-      border-bottom: 1px solid rgba(141, 181, 255, 0.2);
+      background: var(--nav-bg);
+      border-bottom: 1px solid var(--btn-secondary-bg);
     }
 
     .nav-wrap {
@@ -148,7 +142,7 @@
       padding: 7px 12px;
       border-radius: 999px;
       border: 1px solid rgba(141, 181, 255, 0.44);
-      background: rgba(20, 34, 52, 0.74);
+      background: var(--surface-veil);
       color: var(--muted);
       font-size: 0.84rem;
       font-weight: 700;
@@ -204,7 +198,7 @@
       padding: 0 14px;
       border-radius: 12px;
       border: 1px solid rgba(141, 181, 255, 0.34);
-      background: rgba(141, 181, 255, 0.2);
+      background: var(--btn-secondary-bg);
       color: var(--text);
       font-weight: 700;
       font: inherit;
@@ -239,7 +233,7 @@
 
     nav > ul > li > a:hover,
     nav > ul > li > a:focus {
-      background: rgba(141, 181, 255, 0.2);
+      background: var(--btn-secondary-bg);
       color: white;
       outline: none;
     }
@@ -270,8 +264,8 @@
     .hero-card {
       padding: 36px;
       background:
-        linear-gradient(145deg, rgba(9, 14, 23, 0.72), rgba(8, 12, 20, 0.78)),
-        linear-gradient(180deg, rgba(7, 10, 17, 0.42), rgba(7, 10, 17, 0.62)),
+        linear-gradient(145deg, rgba(255, 255, 255, 0.76), rgba(233, 241, 255, 0.88)),
+        linear-gradient(180deg, rgba(233, 241, 255, 0.5), rgba(233, 241, 255, 0.74)),
         url("assets/branding/MCV_SPR26Drop_TT_DotNet_Wallpaper_2560x1440.svg") center / cover no-repeat;
     }
 
@@ -281,8 +275,8 @@
       gap: 8px;
       padding: 8px 12px;
       border-radius: 999px;
-      background: rgba(141, 181, 255, 0.2);
-      color: #cdd9ff;
+      background: var(--btn-secondary-bg);
+      color: var(--muted);
       font-size: 0.82rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
@@ -339,7 +333,7 @@
 
     .btn-primary {
       background: linear-gradient(135deg, var(--green), var(--cyan));
-      color: #05110b;
+      color: var(--text);
     }
 
     .btn-secondary {
@@ -349,9 +343,9 @@
     }
 
     .btn-disabled {
-      background: rgba(255,255,255,0.06);
-      border-color: rgba(255,255,255,0.14);
-      color: rgba(230,236,255,0.55);
+      background: rgba(141, 181, 255, 0.14);
+      border-color: rgba(122, 162, 255, 0.26);
+      color: var(--muted);
       cursor: not-allowed;
       pointer-events: none;
       opacity: 0.7;
@@ -368,7 +362,7 @@
     .hover-lift:hover,
     .hover-lift:focus-within {
       transform: translateY(-6px);
-      box-shadow: 0 18px 34px rgba(0, 0, 0, 0.42), 0 0 0 1px rgba(122, 162, 255, 0.18);
+      box-shadow: 0 18px 34px rgba(70, 97, 146, 0.22), 0 0 0 1px rgba(122, 162, 255, 0.18);
       border-color: rgba(122, 162, 255, 0.45);
     }
 
@@ -389,7 +383,7 @@
       gap: 18px;
       background:
         radial-gradient(circle at top right, rgba(122,162,255,0.16), transparent 40%),
-        linear-gradient(180deg, rgba(18,24,37,0.96), rgba(11,15,24,0.96));
+        linear-gradient(180deg, rgba(252, 254, 255, 0.96), rgba(235, 243, 255, 0.96));
     }
 
     .server-card {
@@ -553,8 +547,8 @@
 
     .site-footer {
       margin-top: 48px;
-      border-top: 1px solid rgba(141, 181, 255, 0.2);
-      background: rgba(5, 7, 11, 0.85);
+      border-top: 1px solid var(--btn-secondary-bg);
+      background: var(--nav-bg);
     }
 
     .footer-grid {
@@ -575,7 +569,7 @@
       font-size: 0.95rem;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      color: #d8e2ff;
+      color: var(--text);
     }
 
     .footer-links {
