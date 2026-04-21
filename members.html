@@ -322,81 +322,47 @@
   <script>
     (() => {
       const statusService = window.PinnacleServerStatus;
-      const memberButtons = document.querySelectorAll(".member-button[data-username]");
+      const memberButtons = document.querySelectorAll('.member-button[data-username]');
       if (!statusService?.fetchServerStatus || !memberButtons.length) return;
 
-      const normalizeUsername = (value) => String(value ?? "")
+      const normalizeUsername = (value) => String(value ?? '')
         .toLowerCase()
-        .replace(/[^a-z0-9_]/g, "");
+        .replace(/[^a-z0-9_]/g, '');
 
       const getCandidateUsernames = (button) => {
-        const candidates = new Set();
-        const fromData = String(button.dataset.usernames || button.dataset.username || "")
-          .split(",")
-          .map((entry) => normalizeUsername(entry))
-          .filter(Boolean);
-
-        fromData.forEach((username) => candidates.add(username));
-
-        const nameText = button.querySelector(".member-name")?.textContent ?? "";
-        const baseText = nameText.replace(/\(.*?\)/g, " ");
-        baseText.split(/\s+/).forEach((entry) => {
-          const username = normalizeUsername(entry);
-          if (username) candidates.add(username);
-        });
-
-        const aliases = [...nameText.matchAll(/\(([^)]+)\)/g)]
-          .flatMap((match) => match[1].split(/[\/,]/));
-        aliases.forEach((entry) => {
-          const username = normalizeUsername(entry);
-          if (username) candidates.add(username);
-        });
+        const candidates = new Set(
+          String(button.dataset.usernames || button.dataset.username || '')
+            .split(',')
+            .map((entry) => normalizeUsername(entry))
+            .filter(Boolean)
+        );
 
         return [...candidates];
       };
 
       const setMemberState = (button, isOnline) => {
-        button.classList.toggle("online", isOnline);
-        const label = button.querySelector(".member-status-label");
+        button.classList.toggle('online', isOnline);
+        const label = button.querySelector('.member-status-label');
         if (label) {
-          label.textContent = isOnline ? "Online" : "Offline";
+          label.textContent = isOnline ? 'Online' : 'Offline';
         }
-      };
-
-      const applyMemberStatuses = (onlinePlayers) => {
-        const onlineSet = new Set(
-          (Array.isArray(onlinePlayers) ? onlinePlayers : [])
-            .map((player) => {
-              if (typeof player === "string") return normalizeUsername(player);
-              if (player && typeof player === "object") return normalizeUsername(player.name);
-              return "";
-            })
-            .filter(Boolean)
-        );
-
-        memberButtons.forEach((button) => {
-          const usernames = getCandidateUsernames(button);
-          setMemberState(button, usernames.some((username) => onlineSet.has(username)));
-        });
       };
 
       const refreshMemberStatuses = async () => {
-        try {
-          const data = await statusService.fetchServerStatus();
-<<<<<<< codex/fix-online/offline-status-logic-on-members-page
-          const onlinePlayers = data?.onlinePlayers || data?.players?.list || [];
-          applyMemberStatuses(onlinePlayers);
-=======
-          applyMemberStatuses(data?.onlinePlayers || []);
->>>>>>> main
-        } catch (error) {
-          console.error("Failed to refresh member statuses.", error);
-          applyMemberStatuses([]);
-        }
+        const data = await statusService.fetchServerStatus();
+        const onlinePlayers = new Set((data.onlinePlayers || [])
+          .map((player) => normalizeUsername(player))
+          .filter(Boolean));
+
+        memberButtons.forEach((button) => {
+          const usernames = getCandidateUsernames(button);
+          setMemberState(button, usernames.some((username) => onlinePlayers.has(username)));
+        });
       };
 
       refreshMemberStatuses();
     })();
   </script>
+
 </body>
 </html>
