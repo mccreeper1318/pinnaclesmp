@@ -364,7 +364,15 @@
       };
 
       const applyMemberStatuses = (onlinePlayers) => {
-        const onlineSet = new Set(onlinePlayers.map((player) => normalizeUsername(player)).filter(Boolean));
+        const onlineSet = new Set(
+          (Array.isArray(onlinePlayers) ? onlinePlayers : [])
+            .map((player) => {
+              if (typeof player === "string") return normalizeUsername(player);
+              if (player && typeof player === "object") return normalizeUsername(player.name);
+              return "";
+            })
+            .filter(Boolean)
+        );
 
         memberButtons.forEach((button) => {
           const usernames = getCandidateUsernames(button);
@@ -373,8 +381,14 @@
       };
 
       const refreshMemberStatuses = async () => {
-        const data = await statusService.fetchServerStatus();
-        applyMemberStatuses(data.onlinePlayers || []);
+        try {
+          const data = await statusService.fetchServerStatus();
+          const onlinePlayers = data?.onlinePlayers || data?.players?.list || [];
+          applyMemberStatuses(onlinePlayers);
+        } catch (error) {
+          console.error("Failed to refresh member statuses.", error);
+          applyMemberStatuses([]);
+        }
       };
 
       refreshMemberStatuses();
