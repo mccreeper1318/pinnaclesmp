@@ -5,6 +5,21 @@
 
   const label = badge.querySelector('.profile-status-label');
 
+  const normalizeUsername = (value) => String(value ?? '')
+    .toLowerCase()
+    .replace(/[^a-z0-9_]/g, '');
+
+  const getCandidateUsernames = () => {
+    const candidates = new Set(
+      String(badge.dataset.usernames || badge.dataset.username || '')
+        .split(',')
+        .map((entry) => normalizeUsername(entry))
+        .filter(Boolean)
+    );
+
+    return [...candidates];
+  };
+
   const setOnlineState = (isOnline) => {
     badge.classList.toggle('online', isOnline);
     badge.classList.toggle('offline', !isOnline);
@@ -14,15 +29,18 @@
   };
 
   const refreshProfileStatus = async () => {
-    const username = String(badge.dataset.username ?? '').toLowerCase();
-    if (!username) {
+    const usernames = getCandidateUsernames();
+    if (!usernames.length) {
       setOnlineState(false);
       return;
     }
 
     const data = await statusService.fetchServerStatus();
-    const onlinePlayers = new Set((data.online ? data.onlinePlayers : []).map((player) => String(player).toLowerCase()));
-    setOnlineState(onlinePlayers.has(username));
+    const onlinePlayers = new Set((data.online ? data.onlinePlayers : [])
+      .map((player) => normalizeUsername(player))
+      .filter(Boolean));
+
+    setOnlineState(usernames.some((username) => onlinePlayers.has(username)));
   };
 
   refreshProfileStatus();

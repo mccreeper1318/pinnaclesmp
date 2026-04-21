@@ -273,7 +273,7 @@
           <ul class="member-list">
             <li><a class="member-button" href="profiles/BeansUniverse.html" data-username="BeansUniverse"><span class="member-name">BeansUniverse</span><span class="member-status"><span class="status-dot" aria-hidden="true"></span><span class="member-status-label">Offline</span></span></a></li>
             <li><a class="member-button" href="profiles/MoeBe10.html" data-username="MoeBe10"><span class="member-name">MoeBe10</span><span class="member-status"><span class="status-dot" aria-hidden="true"></span><span class="member-status-label">Offline</span></span></a></li>
-            <li><a class="member-button" href="profiles/IronArmored.html" data-username="IronArmored"><span class="member-name">rad1709 (IronArmored)</span><span class="member-status"><span class="status-dot" aria-hidden="true"></span><span class="member-status-label">Offline</span></span></a></li>
+            <li><a class="member-button" href="profiles/IronArmored.html" data-username="IronArmored" data-usernames="IronArmored,rad1709"><span class="member-name">rad1709 (IronArmored)</span><span class="member-status"><span class="status-dot" aria-hidden="true"></span><span class="member-status-label">Offline</span></span></a></li>
             <li><a class="member-button" href="profiles/GodlyCris.html" data-username="GodlyCris"><span class="member-name">GodlyCris</span><span class="member-status"><span class="status-dot" aria-hidden="true"></span><span class="member-status-label">Offline</span></span></a></li>
           </ul>
         </section>
@@ -287,9 +287,9 @@
             <li><a class="member-button" href="profiles/mermaidxellie.html" data-username="mermaidxellie"><span class="member-name">mermaidxellie</span><span class="member-status"><span class="status-dot" aria-hidden="true"></span><span class="member-status-label">Offline</span></span></a></li>
             <li><a class="member-button" href="profiles/misfiired.html" data-username="misfiired"><span class="member-name">misfiired</span><span class="member-status"><span class="status-dot" aria-hidden="true"></span><span class="member-status-label">Offline</span></span></a></li>
             <li><a class="member-button" href="profiles/notnownotnever.html" data-username="notnownotnever"><span class="member-name">notnownotnever</span><span class="member-status"><span class="status-dot" aria-hidden="true"></span><span class="member-status-label">Offline</span></span></a></li>
-            <li><a class="member-button" href="profiles/Poplare.html" data-username="Poplare"><span class="member-name">Poplare (Shiny)</span><span class="member-status"><span class="status-dot" aria-hidden="true"></span><span class="member-status-label">Offline</span></span></a></li>
+            <li><a class="member-button" href="profiles/Poplare.html" data-username="Poplare" data-usernames="Poplare,Shiny"><span class="member-name">Poplare (Shiny)</span><span class="member-status"><span class="status-dot" aria-hidden="true"></span><span class="member-status-label">Offline</span></span></a></li>
             <li><a class="member-button" href="profiles/Beslife.html" data-username="Beslife"><span class="member-name">Beslife</span><span class="member-status"><span class="status-dot" aria-hidden="true"></span><span class="member-status-label">Offline</span></span></a></li>
-            <li><a class="member-button" href="profiles/nicholattee.html" data-username="nicholattee"><span class="member-name">nicholattee (Nic/Duck)</span><span class="member-status"><span class="status-dot" aria-hidden="true"></span><span class="member-status-label">Offline</span></span></a></li>
+            <li><a class="member-button" href="profiles/nicholattee.html" data-username="nicholattee" data-usernames="nicholattee,Nic,Duck"><span class="member-name">nicholattee (Nic/Duck)</span><span class="member-status"><span class="status-dot" aria-hidden="true"></span><span class="member-status-label">Offline</span></span></a></li>
             <li><a class="member-button" href="profiles/StirfrySurprise.html" data-username="StirfrySurprise"><span class="member-name">StirfrySurprise</span><span class="member-status"><span class="status-dot" aria-hidden="true"></span><span class="member-status-label">Offline</span></span></a></li>
             <li><a class="member-button" href="profiles/kylethecaver.html" data-username="kylethecaver"><span class="member-name">kylethecaver</span><span class="member-status"><span class="status-dot" aria-hidden="true"></span><span class="member-status-label">Offline</span></span></a></li>
             <li><a class="member-button" href="profiles/Kananers.html" data-username="Kananers"><span class="member-name">Kananers</span><span class="member-status"><span class="status-dot" aria-hidden="true"></span><span class="member-status-label">Offline</span></span></a></li>
@@ -325,6 +325,36 @@
       const memberButtons = document.querySelectorAll(".member-button[data-username]");
       if (!statusService?.fetchServerStatus || !memberButtons.length) return;
 
+      const normalizeUsername = (value) => String(value ?? "")
+        .toLowerCase()
+        .replace(/[^a-z0-9_]/g, "");
+
+      const getCandidateUsernames = (button) => {
+        const candidates = new Set();
+        const fromData = String(button.dataset.usernames || button.dataset.username || "")
+          .split(",")
+          .map((entry) => normalizeUsername(entry))
+          .filter(Boolean);
+
+        fromData.forEach((username) => candidates.add(username));
+
+        const nameText = button.querySelector(".member-name")?.textContent ?? "";
+        const baseText = nameText.replace(/\(.*?\)/g, " ");
+        baseText.split(/\s+/).forEach((entry) => {
+          const username = normalizeUsername(entry);
+          if (username) candidates.add(username);
+        });
+
+        const aliases = [...nameText.matchAll(/\(([^)]+)\)/g)]
+          .flatMap((match) => match[1].split(/[\/,]/));
+        aliases.forEach((entry) => {
+          const username = normalizeUsername(entry);
+          if (username) candidates.add(username);
+        });
+
+        return [...candidates];
+      };
+
       const setMemberState = (button, isOnline) => {
         button.classList.toggle("online", isOnline);
         const label = button.querySelector(".member-status-label");
@@ -334,11 +364,11 @@
       };
 
       const applyMemberStatuses = (onlinePlayers) => {
-        const onlineSet = new Set(onlinePlayers.map((player) => player.toLowerCase()));
+        const onlineSet = new Set(onlinePlayers.map((player) => normalizeUsername(player)).filter(Boolean));
 
         memberButtons.forEach((button) => {
-          const username = String(button.dataset.username ?? "").toLowerCase();
-          setMemberState(button, username !== "" && onlineSet.has(username));
+          const usernames = getCandidateUsernames(button);
+          setMemberState(button, usernames.some((username) => onlineSet.has(username)));
         });
       };
 
