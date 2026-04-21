@@ -78,6 +78,37 @@ body {
   margin: 8px 0 0;
   color: var(--muted);
 }
+
+.profile-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 108, 143, 0.42);
+  background: rgba(20, 24, 34, 0.35);
+  color: #ffd9df;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: #ff6c8f;
+  flex-shrink: 0;
+}
+.profile-status.online {
+  color: #237750;
+  border-color: rgba(95, 255, 156, 0.55);
+  background: rgba(239, 245, 242, 0.92);
+}
+.profile-status.online .status-dot {
+  background: #7affb4;
+}
 .grid {
   margin-top: 18px;
   display: grid;
