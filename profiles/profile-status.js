@@ -36,7 +36,7 @@
     }
 
     const data = await statusService.fetchServerStatus();
-    const onlinePlayers = new Set((data.online ? data.onlinePlayers : [])
+    const onlinePlayers = new Set((data.onlinePlayers || [])
       .map((player) => normalizeUsername(player))
       .filter(Boolean));
 

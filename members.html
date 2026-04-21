@@ -374,7 +374,7 @@
 
       const refreshMemberStatuses = async () => {
         const data = await statusService.fetchServerStatus();
-        applyMemberStatuses(data.online ? data.onlinePlayers : []);
+        applyMemberStatuses(data.onlinePlayers || []);
       };
 
       refreshMemberStatuses();
