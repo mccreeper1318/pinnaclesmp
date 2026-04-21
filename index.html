@@ -152,6 +152,14 @@
       white-space: nowrap;
     }
 
+    .brand-status,
+    .brand-status:hover,
+    .brand-status:focus-visible {
+      text-decoration: none;
+      background-image: none;
+    }
+
+    .status-dot,
     .brand-status-dot {
       width: 10px;
       height: 10px;
@@ -773,10 +781,10 @@
           <img class="brand-logo" src="assets/branding/PinnacleSeason12Logo.svg" alt="Pinnacle SMP Season 12 logo" />
           <span>Pinnacle SMP</span>
         </a>
-        <span id="server-status-badge" class="brand-status" aria-live="polite">
-          <span class="brand-status-dot" aria-hidden="true"></span>
+        <a id="server-status-badge" class="brand-status" href="members.html" aria-live="polite">
+          <span class="status-dot brand-status-dot" aria-hidden="true"></span>
           <span id="server-status-text">Checking…</span>
-        </span>
+        </a>
       </div>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav">Menu</button>
 
@@ -1065,6 +1073,7 @@
       © 2026 Pinnacle SMP. All rights reserved.
     </div>
   </footer>
+  <script src="assets/server-status.js"></script>
   <script>
     (() => {
       const header = document.querySelector(".site-header");
@@ -1104,8 +1113,8 @@
     (() => {
       const badge = document.getElementById("server-status-badge");
       const label = document.getElementById("server-status-text");
-      const statusApi = "https://api.mcsrvstat.us/3/pinnaclesmp.mcserv.fun";
-      if (!badge || !label) return;
+      const statusService = window.PinnacleServerStatus;
+      if (!badge || !label || !statusService?.fetchServerStatus) return;
 
       const setOffline = () => {
         badge.classList.remove("online");
@@ -1120,18 +1129,13 @@
       };
 
       const refreshServerStatus = async () => {
-        try {
-          const response = await fetch(statusApi, { cache: "no-store" });
-          if (!response.ok) throw new Error("Bad response");
-          const data = await response.json();
-          if (!data?.online) {
-            setOffline();
-            return;
-          }
-          setOnline(Number(data.players?.online ?? 0));
-        } catch (error) {
+        const data = await statusService.fetchServerStatus();
+        if (!data.online) {
           setOffline();
+          return;
         }
+
+        setOnline(data.playersOnline);
       };
 
       refreshServerStatus();
