@@ -2,12 +2,24 @@
   const STATUS_API = "https://api.mcsrvstat.us/3/pinnaclesmp.mcserv.fun";
 
   const normalizePlayerList = (listValue) => {
+    const getPlayerName = (player) => {
+      if (typeof player === "string") return player;
+      if (player && typeof player === "object" && typeof player.name === "string") {
+        return player.name;
+      }
+      return null;
+    };
+
     if (Array.isArray(listValue)) {
-      return listValue.filter((player) => typeof player === "string");
+      return listValue
+        .map(getPlayerName)
+        .filter((playerName) => typeof playerName === "string");
     }
 
     if (listValue && typeof listValue === "object") {
-      return Object.values(listValue).filter((player) => typeof player === "string");
+      return Object.values(listValue)
+        .map(getPlayerName)
+        .filter((playerName) => typeof playerName === "string");
     }
 
     return [];
