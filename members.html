@@ -383,8 +383,12 @@
       const refreshMemberStatuses = async () => {
         try {
           const data = await statusService.fetchServerStatus();
+<<<<<<< codex/fix-online/offline-status-logic-on-members-page
           const onlinePlayers = data?.onlinePlayers || data?.players?.list || [];
           applyMemberStatuses(onlinePlayers);
+=======
+          applyMemberStatuses(data?.onlinePlayers || []);
+>>>>>>> main
         } catch (error) {
           console.error("Failed to refresh member statuses.", error);
           applyMemberStatuses([]);
