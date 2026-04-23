@@ -9,6 +9,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: github-pages-content
+  cancel-in-progress: false
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
