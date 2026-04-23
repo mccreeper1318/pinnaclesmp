@@ -4,11 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About Season 12 | Pinnacle SMP</title>
-    <link rel="stylesheet" href="assets/light-theme.css" />
+  <link rel="stylesheet" href="assets/light-theme.css" />
   <style>
-    :root {      --line: rgba(168, 208, 255, 0.42);
+    :root {
+      --line: rgba(168, 208, 255, 0.42);
       --cyan: #72e0ff;
       --green: #7affb4;
+      --max: 1100px;
     }
 
     * { box-sizing: border-box; }
@@ -46,22 +48,132 @@
         linear-gradient(180deg, var(--overlay-base-start) 0%, var(--overlay-base-end) 100%);
     }
 
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(16px);
+      background: var(--nav-bg);
+      border-bottom: 1px solid var(--btn-secondary-bg);
+    }
+
+    .nav-wrap {
+      width: min(calc(100% - 32px), var(--max));
+      margin: 0 auto;
+      min-height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .brand-logo {
+      width: 46px;
+      height: 46px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .brand-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-left: 8px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(141, 181, 255, 0.44);
+      background: var(--surface-veil);
+      color: var(--muted);
+      font-size: 0.84rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      text-decoration: none;
+      transition: box-shadow 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+    }
+
+    .brand-status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: #8f9ebf;
+      transition: background-color 0.25s ease;
+      flex-shrink: 0;
+    }
+
+    .brand-status.online {
+      color: #237750;
+      border-color: rgba(95, 255, 156, 0.55);
+      background: rgba(239, 245, 242, 0.92);
+    }
+
+    .brand-status.online .brand-status-dot {
+      background: var(--green);
+    }
+
+    .brand-status.offline {
+      color: #ffd9df;
+      border-color: rgba(255, 108, 143, 0.55);
+    }
+
+    .brand-status.offline .brand-status-dot {
+      background: #ff6c8f;
+    }
+
+    .menu-toggle {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 40px;
+      padding: 0 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(141, 181, 255, 0.34);
+      background: var(--btn-secondary-bg);
+      color: var(--text);
+      font-weight: 700;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    nav {
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
     .container {
-      width: min(calc(100% - 32px), 1100px);
+      width: min(calc(100% - 32px), var(--max));
       margin: 28px auto 52px;
       padding: 30px;
       background: var(--frosted-bg);
       border: 1px solid var(--frosted-line);
       border-radius: 26px;
       backdrop-filter: blur(8px);
-    }
-
-    .back-link {
-      display: inline-flex;
-      margin-bottom: 20px;
-      color: var(--cyan);
-      font-weight: 700;
-      text-decoration: none;
     }
 
     .panel {
@@ -98,12 +210,113 @@
     }
 
     li + li { margin-top: 6px; }
+
+    @media (max-width: 760px) {
+      .nav-wrap {
+        align-items: flex-start;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 14px 0;
+        min-height: unset;
+      }
+
+      .brand-group {
+        width: auto;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .brand {
+        gap: 10px;
+      }
+
+      .brand span {
+        font-size: 0.95rem;
+        letter-spacing: 0.06em;
+      }
+
+      .brand-status {
+        margin-left: 0;
+        padding: 6px 10px;
+        font-size: 0.74rem;
+      }
+
+      .brand-logo {
+        width: 42px;
+        height: 42px;
+      }
+
+      .menu-toggle {
+        display: inline-flex;
+      }
+
+      nav {
+        width: 100%;
+        display: none;
+      }
+
+      .site-header.nav-open nav {
+        display: block;
+      }
+
+      .nav-buttons {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        justify-content: stretch;
+        margin-top: 10px;
+        gap: 6px;
+      }
+
+      .nav-buttons .btn {
+        width: 100%;
+        min-height: 40px;
+        padding: 0 13px;
+        font-size: 0.9rem;
+      }
+
+      .container {
+        width: min(calc(100% - 20px), var(--max));
+        margin-top: 16px;
+        padding: 20px;
+      }
+
+      .panel {
+        padding: 22px;
+      }
+    }
   </style>
 </head>
 <body>
-  <main class="container">
-    <a href="index.html" class="back-link">← Back to home</a>
+  <header class="site-header">
+    <div class="nav-wrap">
+      <div class="brand-group">
+        <a href="index.html#home" class="brand">
+          <img class="brand-logo" src="assets/branding/PinnacleSeason12Logo.svg" alt="Pinnacle SMP Season 12 logo" />
+          <span>Pinnacle SMP</span>
+        </a>
+        <a id="server-status-badge" class="brand-status" href="members.html" aria-live="polite">
+          <span class="brand-status-dot" aria-hidden="true"></span>
+          <span id="server-status-text">Checking…</span>
+        </a>
+      </div>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav">Menu</button>
 
+      <nav id="mobile-nav" aria-label="Main navigation">
+        <div class="nav-buttons" role="list">
+          <a class="btn btn-secondary" href="index.html#home">Home</a>
+          <a class="btn btn-secondary" href="index.html#news">Server News</a>
+          <a class="btn btn-secondary" href="index.html#events">Events</a>
+          <a class="btn btn-secondary" href="index.html#rules">Server Rules</a>
+          <a class="btn btn-secondary" href="index.html#join">Join</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
     <section class="panel">
       <h1>Pinnacle SMP — Season 12 Overview</h1>
 
@@ -171,5 +384,75 @@
       </p>
     </section>
   </main>
+
+  <script src="assets/server-status.js"></script>
+  <script>
+    (() => {
+      const header = document.querySelector('.site-header');
+      const toggle = document.querySelector('.menu-toggle');
+      const nav = document.getElementById('mobile-nav');
+      if (!header || !toggle || !nav) return;
+
+      const closeMenu = () => {
+        header.classList.remove('nav-open');
+        toggle.setAttribute('aria-expanded', 'false');
+      };
+
+      toggle.addEventListener('click', () => {
+        const isOpen = header.classList.toggle('nav-open');
+        toggle.setAttribute('aria-expanded', String(isOpen));
+      });
+
+      nav.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => closeMenu());
+      });
+
+      document.addEventListener('click', (event) => {
+        if (!header.classList.contains('nav-open')) return;
+        if (header.contains(event.target)) return;
+        closeMenu();
+      });
+
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 760) closeMenu();
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') closeMenu();
+      });
+    })();
+
+    (() => {
+      const badge = document.getElementById('server-status-badge');
+      const label = document.getElementById('server-status-text');
+      const statusService = window.PinnacleServerStatus;
+      if (!badge || !label || !statusService?.fetchServerStatus) return;
+
+      const setOffline = () => {
+        badge.classList.remove('online');
+        badge.classList.add('offline');
+        label.textContent = 'Offline';
+      };
+
+      const setOnline = (playersOnline) => {
+        badge.classList.remove('offline');
+        badge.classList.add('online');
+        label.textContent = `Online ${playersOnline}/20`;
+      };
+
+      const refreshServerStatus = async () => {
+        const data = await statusService.fetchServerStatus();
+        if (!data.online) {
+          setOffline();
+          return;
+        }
+
+        setOnline(data.playersOnline);
+      };
+
+      refreshServerStatus();
+      window.setInterval(refreshServerStatus, 30_000);
+    })();
+  </script>
 </body>
 </html>
