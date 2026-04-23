@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About Season 12 | Pinnacle SMP</title>
+  <title>About Us | Pinnacle SMP</title>
     <link rel="stylesheet" href="assets/light-theme.css" />
   <style>
     :root {      --line: rgba(168, 208, 255, 0.42);
@@ -12,7 +12,6 @@
     }
 
     * { box-sizing: border-box; }
-
     body {
       margin: 0;
       color: var(--text);
@@ -48,13 +47,70 @@
 
     .container {
       width: min(calc(100% - 32px), 1100px);
-      margin: 28px auto 52px;
-      padding: 30px;
-      background: var(--frosted-bg);
+      margin: 0 auto;
+      padding: 36px 0 54px;
+          background: var(--frosted-bg);
       border: 1px solid var(--frosted-line);
       border-radius: 26px;
       backdrop-filter: blur(8px);
     }
+
+    .back-link {
+      display: inline-flex;
+      margin-bottom: 22px;
+      color: var(--cyan);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 18px 48px rgba(70, 97, 146, 0.24);
+    }
+
+    .hero-logo {
+      width: min(100%, 560px);
+      margin: 0 auto 24px;
+      filter: drop-shadow(0 14px 22px rgba(87, 213, 255, 0.18));
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      letter-spacing: -0.03em;
+    }
+
+    h2 {
+      margin: 30px 0 10px;
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      color: var(--green);
+    }
+
+    p {
+      margin: 0;
+      line-height: 1.8;
+      color: var(--muted);
+      white-space: pre-line;
+    }
+
+    .cta {
+      margin-top: 26px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 18px;
+      border-radius: 14px;
+      border: 1px solid rgba(87, 213, 255, 0.3);
+      background: rgba(87, 213, 255, 0.12);
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 700;
+    }
+  
 
     .site-header {
       position: sticky;
@@ -141,41 +197,6 @@
       outline: none;
     }
 
-    .panel {
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      padding: 30px;
-      box-shadow: 0 18px 48px rgba(70, 97, 146, 0.24);
-    }
-
-    h1 {
-      margin: 0 0 16px;
-      font-size: clamp(2rem, 4.5vw, 3rem);
-      letter-spacing: -0.03em;
-    }
-
-    h2 {
-      margin: 28px 0 10px;
-      font-size: clamp(1.3rem, 2.8vw, 1.9rem);
-      color: var(--green);
-    }
-
-    p {
-      margin: 0;
-      line-height: 1.75;
-      color: var(--muted);
-    }
-
-    ul {
-      margin: 10px 0 0 22px;
-      color: var(--muted);
-      line-height: 1.75;
-      padding: 0;
-    }
-
-    li + li { margin-top: 6px; }
-    .site-nav li + li { margin-top: 0; }
     @media (max-width: 860px) {
       .nav-wrap {
         min-height: unset;
@@ -205,9 +226,11 @@
         width: 100%;
       }
     }
+
   </style>
 </head>
 <body>
+
   <header class="site-header">
     <div class="nav-wrap">
       <a href="index.html#home" class="brand">
@@ -229,72 +252,24 @@
 
   <main class="container">
     <section class="panel">
-      <h1>Pinnacle SMP — Season 12 Overview</h1>
-
-      <h2>Season Start</h2>
+      <center><img class="hero-logo" src="assets/branding/PinnacleSeason12Logo.svg" alt="Pinnacle SMP logo" /></center>
+      <h1>Who we are…</h1>
       <p>
-        Season 12 began in April 2026, marking a fresh world reset and a new chapter for the server. As with previous seasons, the focus is on long-term world building, player-driven projects, and organic progression.
+Pinnacle SMP is a Vanilla+ Minecraft server that got its start in 2012 when McCreeper1318 started hosting a public Minecraft server. Once a few people joined it was quickly switched to a whitelisted server because of griefing, but not before he met Piff and Jeff.
+
+Together, McCreeper1318, Piff, and Jeff started the first season of the Pinnacle SMP whitelisted server as a purely vanilla Minecraft server, in the style of Mindcrack. Soon after starting, JohnnyKilroy would join and start Season 2 after Piff left. Season 2 would open up the server to much more people and the start of the current iteration of the server.
+Many years and seasons later, in 2025, Pinnacle SMP has decided to go Vanilla+ and not just be a purely vanilla server for the first time in its history. Currently the server is on its 12th season since April 2026 and has over 20 members in various states of activity levels.
       </p>
 
-      <h2>World Setup</h2>
-      <ul>
-        <li>The world is currently running as a pure vanilla survival experience.</li>
-        <li>This allows for a clean, traditional Minecraft experience during early progression.</li>
-        <li>A transition to Paper (version 26.1.2) is planned once it becomes available. This upgrade will primarily support performance improvements and server stability while maintaining the vanilla feel.</li>
-      </ul>
-
-      <h2>World Border</h2>
-      <ul>
-        <li>The world border is set to 4000 blocks across.</li>
-        <li>
-          This creates a more condensed world, encouraging:
-          <ul>
-            <li>Player interaction.</li>
-            <li>Shared infrastructure.</li>
-            <li>A more connected community layout.</li>
-          </ul>
-        </li>
-      </ul>
-      <p style="margin-top: 10px;">
-        The border is not permanent. A server vote may take place later in the season to determine whether it should be expanded or removed.
-      </p>
-
-      <h2>Spawn Town Development</h2>
+      <h2>Where we are going…</h2>
       <p>
-        Spawn is currently in active development as players begin shaping the central hub of the world.
-      </p>
-      <ul>
-        <li>Early builds and infrastructure are starting to take form.</li>
-        <li>Roads, starter buildings, and communal areas are gradually being established.</li>
-        <li>Spawn is expected to evolve naturally as the season progresses.</li>
-      </ul>
-      <p style="margin-top: 10px;">
-        Rather than being pre-built, spawn town is community-driven, reflecting the style and creativity of active players.
+Currently Pinnacle is on its 12th season and has no current plans on starting season 13 anytime soon. We are planning to keep adding more members in waves throughout 2026 in order to allow time for new members to get to know old ones and to find their place in the server. If you are interested in joining us for our next chapter of a Vanilla+ Pinnacle SMP server, you can apply to join here. If you have any questions regarding anything to do with the server you may contact us here.
       </p>
 
-      <h2>Season Philosophy</h2>
-      <p>Season 12 is designed around:</p>
-      <ul>
-        <li>Close proximity gameplay in the early season.</li>
-        <li>Player-built progression rather than pre-defined systems.</li>
-        <li>Minimal interference early on, with technical improvements added later.</li>
-      </ul>
-      <p style="margin-top: 10px;">
-        The goal is to allow the world to develop organically first, before introducing backend enhancements.
-      </p>
-
-      <h2>Looking Ahead</h2>
-      <p>As the season continues:</p>
-      <ul>
-        <li>The world border may change based on community input.</li>
-        <li>The server will transition to Paper 26.1.2 for improved performance.</li>
-        <li>Spawn town and surrounding areas will continue to expand.</li>
-      </ul>
-      <p style="margin-top: 10px;">
-        Season 12 is intentionally structured to start simple and grow over time, both technically and creatively.
-      </p>
+      <a class="cta" href="index.html#apply-here">Apply to Join</a>
     </section>
   </main>
+
   <script>
     (() => {
       const header = document.querySelector('.site-header');

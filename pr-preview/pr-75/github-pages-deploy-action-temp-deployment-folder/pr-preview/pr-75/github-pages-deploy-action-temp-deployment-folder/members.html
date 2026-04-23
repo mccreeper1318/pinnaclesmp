@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Members | Pinnacle SMP</title>
+    <link rel="stylesheet" href="assets/light-theme.css" />
+  <style>
+    :root {      --line: rgba(168, 208, 255, 0.42);
+      --cyan: #72e0ff;
+      --green: #7affb4;
+      --gold: #ffe082;
+      --blue: #8db5ff;
+      --red: #ff6b6b;
+      --purple: #c48dff;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+      background: var(--bg-soft);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: -18px;
+      z-index: -2;
+      pointer-events: none;
+      background: url("assets/branding/MCV_SPR26Drop_TT_DotNet_Wallpaper_2560x1440.svg") center / cover no-repeat fixed;
+      filter: blur(7px) brightness(0.48) saturate(1.1);
+      transform: scale(1.03);
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at top left, var(--overlay-top-left), transparent 33%),
+        radial-gradient(circle at top right, var(--overlay-top-right), transparent 30%),
+        linear-gradient(180deg, var(--overlay-base-start) 0%, var(--overlay-base-end) 100%);
+    }
+
+    .container {
+      width: min(calc(100% - 32px), 1120px);
+      margin: 0 auto;
+      padding: 36px 0 54px;
+      background: var(--frosted-bg);
+      border: 1px solid var(--frosted-line);
+      border-radius: 26px;
+      backdrop-filter: blur(8px);
+    }
+
+    .back-link {
+      display: inline-flex;
+      margin-bottom: 22px;
+      color: var(--cyan);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 30px;
+      box-shadow: 0 18px 48px rgba(70, 97, 146, 0.24);
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      letter-spacing: -0.03em;
+    }
+
+    .intro {
+      margin: 0 0 22px;
+      line-height: 1.8;
+      color: var(--muted);
+    }
+
+    .member-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .member-section {
+      border: 1px solid rgba(156, 191, 236, 0.25);
+      border-radius: 16px;
+      padding: 18px;
+      background: var(--surface-veil);
+    }
+
+    .member-section h2 {
+      margin: 0 0 12px;
+      font-size: 1.3rem;
+      color: var(--red);
+    }
+
+    .member-section.legacy h2 { color: var(--purple); }
+    .member-section.full h2 { color: var(--blue); }
+    .member-section.new h2 { color: var(--green); }
+
+    .member-section.full ul {
+      column-count: 2;
+      column-gap: 22px;
+      padding-left: 0;
+      list-style-position: inside;
+      line-height: 1.5;
+    }
+
+    .member-section.full li {
+      break-inside: avoid;
+      margin-bottom: 4px;
+    }
+
+    .member-list {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+      display: grid;
+      gap: 8px;
+    }
+
+    .member-button {
+      display: inline-flex;
+      align-items: center;
+      width: 100%;
+      border: 1px solid rgba(122, 162, 255, 0.34);
+      background: rgba(141, 181, 255, 0.16);
+      color: var(--text);
+      text-decoration: none;
+      border-radius: 10px;
+      padding: 8px 10px;
+      font-weight: 600;
+      transition: transform 0.15s ease, border-color 0.2s ease, background-color 0.2s ease;
+    }
+
+    .member-name {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .member-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-left: 10px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 108, 143, 0.42);
+      background: rgba(20, 24, 34, 0.35);
+      color: #ffd9df;
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      flex-shrink: 0;
+      transition: border-color 0.25s ease, color 0.25s ease, background-color 0.25s ease;
+    }
+
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: #ff6c8f;
+      flex-shrink: 0;
+      transition: background-color 0.25s ease;
+    }
+
+    .member-button.online .member-status {
+      color: #237750;
+      border-color: rgba(95, 255, 156, 0.55);
+      background: rgba(239, 245, 242, 0.92);
+    }
+
+    .member-button.online .status-dot {
+      background: var(--green);
+    }
+
+    .member-button:hover,
+    .member-button:focus-visible {
+      transform: translateY(-1px);
+      border-color: var(--cyan);
+      background: var(--btn-secondary-hover);
+      outline: none;
+    }
+
+    .awards-panel {
+      margin-top: 22px;
+      border: 1px solid rgba(156, 191, 236, 0.25);
+      border-radius: 16px;
+      padding: 22px 18px;
+      background: var(--surface-veil);
+      text-align: center;
+    }
+
+    .awards-panel h2 {
+      margin: 0 0 18px;
+      color: #000;
+      font-size: 1.35rem;
+    }
+
+    .award-highlight {
+      width: min(100%, 520px);
+      margin: 0 auto;
+      border-radius: 14px;
+      border: 1px solid rgba(141, 181, 255, 0.44);
+      padding: 16px;
+      background: rgba(141, 181, 255, 0.16);
+    }
+
+    .award-highlight h3 {
+      margin: 0 0 8px;
+      color: var(--blue);
+      font-size: 1.1rem;
+    }
+
+    .award-highlight p {
+      margin: 0;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 18px;
+      line-height: 1.8;
+      color: var(--muted);
+    }
+
+    @media (max-width: 780px) {
+      .member-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .member-section.full ul {
+        column-count: 1;
+      }
+    }
+  
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(16px);
+      background: var(--nav-bg);
+      border-bottom: 1px solid var(--btn-secondary-bg);
+    }
+
+    .nav-wrap {
+      width: min(calc(100% - 32px), 1100px);
+      margin: 0 auto;
+      min-height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .brand-logo {
+      width: 44px;
+      height: 44px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .menu-toggle {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 0 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(141, 181, 255, 0.34);
+      background: var(--btn-secondary-bg);
+      color: var(--text);
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .site-nav ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .nav-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 0 14px;
+      border-radius: 11px;
+      border: 1px solid rgba(122, 162, 255, 0.22);
+      background: rgba(122, 162, 255, 0.11);
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 700;
+      transition: 0.2s ease;
+    }
+
+    .nav-link:hover,
+    .nav-link:focus-visible {
+      transform: translateY(-1px);
+      border-color: rgba(95, 255, 156, 0.42);
+      background: var(--btn-secondary-hover);
+      outline: none;
+    }
+
+    @media (max-width: 860px) {
+      .nav-wrap {
+        min-height: unset;
+        padding: 12px 0;
+        flex-wrap: wrap;
+      }
+
+      .menu-toggle {
+        display: inline-flex;
+      }
+
+      .site-nav {
+        width: 100%;
+        display: none;
+      }
+
+      .site-header.nav-open .site-nav {
+        display: block;
+      }
+
+      .site-nav ul {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .nav-link {
+        width: 100%;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="nav-wrap">
+      <a href="index.html#home" class="brand">
+        <img class="brand-logo" src="assets/branding/PinnacleSeason12Logo.svg" alt="Pinnacle SMP Season 12 logo" />
+        <span>Pinnacle SMP</span>
+      </a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav">Menu</button>
+      <nav class="site-nav" id="mobile-nav" aria-label="Main navigation">
+        <ul>
+          <li><a class="nav-link" href="index.html#home">Home</a></li>
+          <li><a class="nav-link" href="index.html#news">Server News</a></li>
+          <li><a class="nav-link" href="index.html#events">Events</a></li>
+          <li><a class="nav-link" href="index.html#rules">Server Rules</a></li>
+          <li><a class="nav-link" href="index.html#join">Join</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="panel">
+      <h1>Pinnacle SMP Members</h1>
+      <p class="intro">Meet the current roster of Pinnacle SMP members, grouped by membership status.</p>
+
+      <div class="member-grid">
+        <section class="member-section founding">
+          <h2>Founding Members</h2>
+          <ul class="member-list">
+            <li><a class="member-button" href="profiles/McCreeper1318.html" data-username="McCreeper1318"><span class="member-name">McCreeper1318</span><span class="member-status"><span class="status-dot" aria-hidden="true"></span><span class="member-status-label">Offline</span></span></a></li>
+            <li><a class="member-button" href="profiles/JohnnyKilroy.html" data-username="JohnnyKilroy"><span class="member-name">JohnnyKilroy</span><span class="member-status"><span class="status-dot" aria-hidden="true"></span><span class="member-status-label">Offline</span></span></a></li>
+            <li><a class="member-button" href="profiles/Piff.html" data-username="Piff"><span class="member-name">Piff</span><span class="member-status"><span class="status-dot" aria-hidden="true"></span><span class="member-status-label">Offline</span></span></a></li>
+            <li><a class="member-button" href="profiles/Jeff.html" data-username="Jeff"><span class="member-name">Jeff</span><span class="member-status"><span class="status-dot" aria-hidden="true"></span><span class="member-status-label">Offline</span></span></a></li>
+          </ul>
+        </section>
+
+        <section class="member-section legacy">
+          <h2>Legacy Members</h2>
+          <ul class="member-list">
+            <li><a class="member-button" href="profiles/BeansUniverse.html" data-username="BeansUniverse"><span class="member-name">BeansUniverse</span><span class="member-status"><span class="status-dot" aria-hidden="true"></span><span class="member-status-label">Offline</span></span></a></li>
+            <li><a class="member-button" href="profiles/MoeBe10.html" data-username="MoeBe10"><span class="member-name">MoeBe10</span><span class="member-status"><span class="status-dot" aria-hidden="true"></span><span class="member-status-label">Offline</span></span></a></li>
+            <li><a class="member-button" href="profiles/IronArmored.html" data-username="IronArmored" data-usernames="IronArmored,rad1709"><span class="member-name">rad1709 (IronArmored)</span><span class="member-status"><span class="status-dot" aria-hidden="true"></span><span class="member-status-label">Offline</span></span></a></li>
+            <li><a class="member-button" href="profiles/GodlyCris.html" data-username="GodlyCris"><span class="member-name">GodlyCris</span><span class="member-status"><span class="status-dot" aria-hidden="true"></span><span class="member-status-label">Offline</span></span></a></li>
+          </ul>
+        </section>
+
+        <section class="member-section full">
+          <h2>Full Members</h2>
+          <ul class="member-list">
+            <li><a class="member-button" href="profiles/Atlaskytan.html" data-username="Atlaskytan"><span class="member-name">Atlaskytan</span><span class="member-status"><span class="status-dot" aria-hidden="true"></span><span class="member-status-label">Offline</span></span></a></li>
+            <li><a class="member-button" href="profiles/BadFiction.html" data-username="BadFiction"><span class="member-name">BadFiction</span><span class="member-status"><span class="status-dot" aria-hidden="true"></span><span class="member-status-label">Offline</span></span></a></li>
+            <li><a class="member-button" href="profiles/pinapple_pete.html" data-username="pinapple_pete"><span class="member-name">pinapple_pete</span><span class="member-status"><span class="status-dot" aria-hidden="true"></span><span class="member-status-label">Offline</span></span></a></li>
+            <li><a class="member-button" href="profiles/mermaidxellie.html" data-username="mermaidxellie"><span class="member-name">mermaidxellie</span><span class="member-status"><span class="status-dot" aria-hidden="true"></span><span class="member-status-label">Offline</span></span></a></li>
+            <li><a class="member-button" href="profiles/misfiired.html" data-username="misfiired"><span class="member-name">misfiired</span><span class="member-status"><span class="status-dot" aria-hidden="true"></span><span class="member-status-label">Offline</span></span></a></li>
+            <li><a class="member-button" href="profiles/notnownotnever.html" data-username="notnownotnever"><span class="member-name">notnownotnever</span><span class="member-status"><span class="status-dot" aria-hidden="true"></span><span class="member-status-label">Offline</span></span></a></li>
+            <li><a class="member-button" href="profiles/Poplare.html" data-username="Poplare" data-usernames="Poplare,Shiny"><span class="member-name">Poplare (Shiny)</span><span class="member-status"><span class="status-dot" aria-hidden="true"></span><span class="member-status-label">Offline</span></span></a></li>
+            <li><a class="member-button" href="profiles/Beslife.html" data-username="Beslife"><span class="member-name">Beslife</span><span class="member-status"><span class="status-dot" aria-hidden="true"></span><span class="member-status-label">Offline</span></span></a></li>
+            <li><a class="member-button" href="profiles/nicholattee.html" data-username="nicholattee" data-usernames="nicholattee,Nic,Duck"><span class="member-name">nicholattee (Nic/Duck)</span><span class="member-status"><span class="status-dot" aria-hidden="true"></span><span class="member-status-label">Offline</span></span></a></li>
+            <li><a class="member-button" href="profiles/StirfrySurprise.html" data-username="StirfrySurprise"><span class="member-name">StirfrySurprise</span><span class="member-status"><span class="status-dot" aria-hidden="true"></span><span class="member-status-label">Offline</span></span></a></li>
+            <li><a class="member-button" href="profiles/kylethecaver.html" data-username="kylethecaver"><span class="member-name">kylethecaver</span><span class="member-status"><span class="status-dot" aria-hidden="true"></span><span class="member-status-label">Offline</span></span></a></li>
+            <li><a class="member-button" href="profiles/Kananers.html" data-username="Kananers"><span class="member-name">Kananers</span><span class="member-status"><span class="status-dot" aria-hidden="true"></span><span class="member-status-label">Offline</span></span></a></li>
+            <li><a class="member-button" href="profiles/BACONcuzBACON.html" data-username="BACONcuzBACON"><span class="member-name">BACONcuzBACON</span><span class="member-status"><span class="status-dot" aria-hidden="true"></span><span class="member-status-label">Offline</span></span></a></li>
+            <li><a class="member-button" href="profiles/Aryamii.html" data-username="Aryamii"><span class="member-name">Aryamii</span><span class="member-status"><span class="status-dot" aria-hidden="true"></span><span class="member-status-label">Offline</span></span></a></li>
+            <li><a class="member-button" href="profiles/t0w0fu.html" data-username="t0w0fu"><span class="member-name">t0w0fu</span><span class="member-status"><span class="status-dot" aria-hidden="true"></span><span class="member-status-label">Offline</span></span></a></li>
+            <li><a class="member-button" href="profiles/BraneFX.html" data-username="BraneFX"><span class="member-name">BraneFX</span><span class="member-status"><span class="status-dot" aria-hidden="true"></span><span class="member-status-label">Offline</span></span></a></li>
+            <li><a class="member-button" href="profiles/Kelly_E.html" data-username="Kelly_E"><span class="member-name">Kelly_E</span><span class="member-status"><span class="status-dot" aria-hidden="true"></span><span class="member-status-label">Offline</span></span></a></li>
+          </ul>
+        </section>
+
+        <section class="member-section new">
+          <h2>New Members</h2>
+          <ul class="member-list">
+            <li><a class="member-button" href="profiles/NateOnGuitar.html" data-username="NateOnGuitar"><span class="member-name">NateOnGuitar</span><span class="member-status"><span class="status-dot" aria-hidden="true"></span><span class="member-status-label">Offline</span></span></a></li>
+          </ul>
+        </section>
+      </div>
+
+      <section class="awards-panel">
+        <h2>Monthly Member Awards</h2>
+        <div class="award-highlight">
+          <h3>Member Base Highlight</h3>
+          <p>April 2026: pinapple_pete</p>
+        </div>
+      </section>
+    </section>
+  </main>
+  <script src="assets/server-status.js"></script>
+  <script>
+    (() => {
+      const statusService = window.PinnacleServerStatus;
+      const memberButtons = document.querySelectorAll('.member-button[data-username]');
+      if (!statusService?.fetchServerStatus || !memberButtons.length) return;
+
+      const normalizeUsername = (value) => String(value ?? '')
+        .toLowerCase()
+        .replace(/[^a-z0-9_]/g, '');
+
+      const getCandidateUsernames = (button) => {
+        const candidates = new Set(
+          String(button.dataset.usernames || button.dataset.username || '')
+            .split(',')
+            .map((entry) => normalizeUsername(entry))
+            .filter(Boolean)
+        );
+
+        return [...candidates];
+      };
+
+      const setMemberState = (button, isOnline) => {
+        button.classList.toggle('online', isOnline);
+        const label = button.querySelector('.member-status-label');
+        if (label) {
+          label.textContent = isOnline ? 'Online' : 'Offline';
+        }
+      };
+
+      const refreshMemberStatuses = async () => {
+        const data = await statusService.fetchServerStatus();
+        const onlinePlayers = new Set((data.onlinePlayers || [])
+          .map((player) => normalizeUsername(player))
+          .filter(Boolean));
+
+        memberButtons.forEach((button) => {
+          const usernames = getCandidateUsernames(button);
+          setMemberState(button, usernames.some((username) => onlinePlayers.has(username)));
+        });
+      };
+
+      refreshMemberStatuses();
+    })();
+  </script>
+
+
+  <script>
+    (() => {
+      const header = document.querySelector('.site-header');
+      const toggle = document.querySelector('.menu-toggle');
+      const nav = document.getElementById('mobile-nav');
+      if (!header || !toggle || !nav) return;
+
+      const closeMenu = () => {
+        header.classList.remove('nav-open');
+        toggle.setAttribute('aria-expanded', 'false');
+      };
+
+      toggle.addEventListener('click', () => {
+        const isOpen = header.classList.toggle('nav-open');
+        toggle.setAttribute('aria-expanded', String(isOpen));
+      });
+
+      nav.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 860) closeMenu();
+      });
+    })();
+  </script>
+
+</body>
+</html>

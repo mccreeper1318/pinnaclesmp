@@ -3,16 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About Season 12 | Pinnacle SMP</title>
+  <title>Contact Us | Pinnacle SMP</title>
     <link rel="stylesheet" href="assets/light-theme.css" />
   <style>
-    :root {      --line: rgba(168, 208, 255, 0.42);
-      --cyan: #72e0ff;
+    :root {      --line: rgba(168, 208, 255, 0.4);
       --green: #7affb4;
+      --cyan: #72e0ff;
+      --radius: 20px;
     }
-
     * { box-sizing: border-box; }
-
     body {
       margin: 0;
       color: var(--text);
@@ -45,16 +44,47 @@
         radial-gradient(circle at top right, var(--overlay-top-right), transparent 30%),
         linear-gradient(180deg, var(--overlay-base-start) 0%, var(--overlay-base-end) 100%);
     }
-
     .container {
-      width: min(calc(100% - 32px), 1100px);
-      margin: 28px auto 52px;
-      padding: 30px;
+      width: min(calc(100% - 32px), 860px);
+      margin: 0 auto;
+      padding: 36px 0 52px;
       background: var(--frosted-bg);
       border: 1px solid var(--frosted-line);
       border-radius: 26px;
       backdrop-filter: blur(8px);
     }
+    .card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; }
+    h1 { margin: 0 0 10px; font-size: clamp(2rem, 4vw, 2.8rem); }
+    p { color: var(--muted); line-height: 1.7; }
+    .note { font-size: 0.95rem; margin: 0 0 22px; }
+    form { display: grid; gap: 16px; }
+    label { font-weight: 600; display: grid; gap: 8px; }
+    input, textarea, select {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid rgba(122, 162, 255, 0.24);
+      background: var(--input-bg);
+      color: var(--text);
+      padding: 12px 14px;
+      font: inherit;
+    }
+    textarea { min-height: 130px; resize: vertical; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+    .btn {
+      border: 0;
+      border-radius: 12px;
+      min-height: 44px;
+      padding: 0 16px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .btn-primary { background: linear-gradient(135deg, var(--green), var(--cyan)); color: var(--text); }
+    .btn-secondary { background: var(--btn-secondary-bg); color: var(--text); }
+  
 
     .site-header {
       position: sticky;
@@ -141,41 +171,6 @@
       outline: none;
     }
 
-    .panel {
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      padding: 30px;
-      box-shadow: 0 18px 48px rgba(70, 97, 146, 0.24);
-    }
-
-    h1 {
-      margin: 0 0 16px;
-      font-size: clamp(2rem, 4.5vw, 3rem);
-      letter-spacing: -0.03em;
-    }
-
-    h2 {
-      margin: 28px 0 10px;
-      font-size: clamp(1.3rem, 2.8vw, 1.9rem);
-      color: var(--green);
-    }
-
-    p {
-      margin: 0;
-      line-height: 1.75;
-      color: var(--muted);
-    }
-
-    ul {
-      margin: 10px 0 0 22px;
-      color: var(--muted);
-      line-height: 1.75;
-      padding: 0;
-    }
-
-    li + li { margin-top: 6px; }
-    .site-nav li + li { margin-top: 0; }
     @media (max-width: 860px) {
       .nav-wrap {
         min-height: unset;
@@ -205,9 +200,11 @@
         width: 100%;
       }
     }
+
   </style>
 </head>
 <body>
+
   <header class="site-header">
     <div class="nav-wrap">
       <a href="index.html#home" class="brand">
@@ -228,73 +225,79 @@
   </header>
 
   <main class="container">
-    <section class="panel">
-      <h1>Pinnacle SMP — Season 12 Overview</h1>
-
-      <h2>Season Start</h2>
+    <div class="card">
+      <h1>Contact Us</h1>
       <p>
-        Season 12 began in April 2026, marking a fresh world reset and a new chapter for the server. As with previous seasons, the focus is on long-term world building, player-driven projects, and organic progression.
+        Use this contact form to open a GitHub issue with your message details for staff follow-up.
+      </p>
+      <p class="note">
+        Maintainers: update <code>GITHUB_REPO</code> in this page if your repository path changes.
       </p>
 
-      <h2>World Setup</h2>
-      <ul>
-        <li>The world is currently running as a pure vanilla survival experience.</li>
-        <li>This allows for a clean, traditional Minecraft experience during early progression.</li>
-        <li>A transition to Paper (version 26.1.2) is planned once it becomes available. This upgrade will primarily support performance improvements and server stability while maintaining the vanilla feel.</li>
-      </ul>
+      <form id="contact-form">
+        <label>Your Name
+          <input name="name" required />
+        </label>
 
-      <h2>World Border</h2>
-      <ul>
-        <li>The world border is set to 4000 blocks across.</li>
-        <li>
-          This creates a more condensed world, encouraging:
-          <ul>
-            <li>Player interaction.</li>
-            <li>Shared infrastructure.</li>
-            <li>A more connected community layout.</li>
-          </ul>
-        </li>
-      </ul>
-      <p style="margin-top: 10px;">
-        The border is not permanent. A server vote may take place later in the season to determine whether it should be expanded or removed.
-      </p>
+        <label>Preferred Contact (Discord, email, or both)
+          <input name="contact" required placeholder="Example: user#1234 or you@email.com" />
+        </label>
 
-      <h2>Spawn Town Development</h2>
-      <p>
-        Spawn is currently in active development as players begin shaping the central hub of the world.
-      </p>
-      <ul>
-        <li>Early builds and infrastructure are starting to take form.</li>
-        <li>Roads, starter buildings, and communal areas are gradually being established.</li>
-        <li>Spawn is expected to evolve naturally as the season progresses.</li>
-      </ul>
-      <p style="margin-top: 10px;">
-        Rather than being pre-built, spawn town is community-driven, reflecting the style and creativity of active players.
-      </p>
+        <label>Topic
+          <select name="topic" required>
+            <option value="General Question">General Question</option>
+            <option value="Staff Report">Staff Report</option>
+            <option value="Partnership Request">Partnership Request</option>
+            <option value="Technical Help">Technical Help</option>
+            <option value="Other">Other</option>
+          </select>
+        </label>
 
-      <h2>Season Philosophy</h2>
-      <p>Season 12 is designed around:</p>
-      <ul>
-        <li>Close proximity gameplay in the early season.</li>
-        <li>Player-built progression rather than pre-defined systems.</li>
-        <li>Minimal interference early on, with technical improvements added later.</li>
-      </ul>
-      <p style="margin-top: 10px;">
-        The goal is to allow the world to develop organically first, before introducing backend enhancements.
-      </p>
+        <label>Subject
+          <input name="subject" required />
+        </label>
 
-      <h2>Looking Ahead</h2>
-      <p>As the season continues:</p>
-      <ul>
-        <li>The world border may change based on community input.</li>
-        <li>The server will transition to Paper 26.1.2 for improved performance.</li>
-        <li>Spawn town and surrounding areas will continue to expand.</li>
-      </ul>
-      <p style="margin-top: 10px;">
-        Season 12 is intentionally structured to start simple and grow over time, both technically and creatively.
-      </p>
-    </section>
+        <label>Message
+          <textarea name="message" required></textarea>
+        </label>
+
+        <div class="actions">
+          <button class="btn btn-primary" type="submit">Submit to GitHub</button>
+        </div>
+      </form>
+    </div>
   </main>
+
+  <script>
+    const GITHUB_REPO = "mccreeper1318/pinnaclesmp";
+
+    const form = document.getElementById("contact-form");
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      if (GITHUB_REPO === "OWNER/REPO") {
+        alert("Please configure GITHUB_REPO in contact-us.html before using this form.");
+        return;
+      }
+
+      const data = new FormData(form);
+      const value = (name) => (data.get(name) || "Not provided").toString().trim() || "Not provided";
+      const title = `[Contact] ${value("subject")}`;
+      const body = [
+        "## Contact Form Submission",
+        "",
+        `- **Name:** ${value("name")}`,
+        `- **Preferred Contact:** ${value("contact")}`,
+        `- **Topic:** ${value("topic")}`,
+        `- **Subject:** ${value("subject")}`,
+        `- **Message:** ${value("message")}`
+      ].join("\n");
+
+      const url = `https://github.com/${GITHUB_REPO}/issues/new?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}&labels=${encodeURIComponent("contact")}`;
+      window.open(url, "_blank", "noopener");
+    });
+  </script>
+
   <script>
     (() => {
       const header = document.querySelector('.site-header');
