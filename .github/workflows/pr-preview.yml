@@ -8,6 +8,10 @@ permissions:
   contents: write
   pull-requests: write
 
+concurrency:
+  group: github-pages-content
+  cancel-in-progress: false
+
 jobs:
   preview:
     runs-on: ubuntu-latest
@@ -23,6 +27,6 @@ jobs:
           preview-branch: gh-pages
           umbrella-dir: pr-preview
           pages-base-url: www.pinnaclesmp.org
-          wait-for-pages-deployment: true
+          wait-for-pages-deployment: false
           comment: true
           qr-code: true
