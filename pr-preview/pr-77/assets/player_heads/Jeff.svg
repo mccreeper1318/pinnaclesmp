@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-label="Jeff placeholder player head">
+  <rect width="256" height="256" fill="#4b2c2e"/>
+  <rect x="34" y="34" width="188" height="188" fill="#a76f74"/>
+  <rect x="64" y="70" width="44" height="44" fill="#fff5ef" opacity="0.9"/>
+  <rect x="148" y="70" width="44" height="44" fill="#fff5ef" opacity="0.9"/>
+  <rect x="76" y="82" width="20" height="20" fill="#2b1a1b"/>
+  <rect x="160" y="82" width="20" height="20" fill="#2b1a1b"/>
+  <rect x="84" y="154" width="88" height="18" fill="#3e2527"/>
+  <rect x="70" y="132" width="116" height="10" fill="#ffe0cd" opacity="0.75"/>
+</svg>
