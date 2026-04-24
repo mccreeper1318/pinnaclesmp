@@ -426,6 +426,10 @@
       display: none;
     }
 
+    .server-ip-pill .copied-label {
+      display: none;
+    }
+
     .server-ip-pill:hover,
     .server-ip-pill:focus-visible {
       color: #0f5f37;
@@ -441,6 +445,16 @@
 
     .server-ip-pill:hover .hover-label,
     .server-ip-pill:focus-visible .hover-label {
+      display: inline;
+    }
+
+    .server-ip-pill.is-copied:hover .hover-label,
+    .server-ip-pill.is-copied:focus-visible .hover-label {
+      display: none;
+    }
+
+    .server-ip-pill.is-copied:hover .copied-label,
+    .server-ip-pill.is-copied:focus-visible .copied-label {
       display: inline;
     }
 
@@ -860,6 +874,7 @@
             <button class="server-ip-pill" type="button" data-server-ip="pinnaclesmp.mcserv.fun" aria-label="Copy server IP address pinnaclesmp.mcserv.fun to clipboard">
               <span class="default-label">pinnaclesmp.mcserv.fun</span>
               <span class="hover-label">Copy This IP</span>
+              <span class="copied-label">Copied!</span>
             </button>
           </div>
 
@@ -1195,6 +1210,7 @@
       ipPill.addEventListener("click", async () => {
         try {
           await navigator.clipboard.writeText(serverIp);
+          ipPill.classList.add("is-copied");
         } catch {
           const hiddenInput = document.createElement("input");
           hiddenInput.value = serverIp;
@@ -1205,8 +1221,16 @@
           hiddenInput.select();
           document.execCommand("copy");
           document.body.removeChild(hiddenInput);
+          ipPill.classList.add("is-copied");
         }
       });
+
+      const clearCopiedState = () => {
+        ipPill.classList.remove("is-copied");
+      };
+
+      ipPill.addEventListener("mouseleave", clearCopiedState);
+      ipPill.addEventListener("blur", clearCopiedState);
     })();
 
     (() => {
