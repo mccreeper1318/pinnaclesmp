@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pinnacle SMP</title>
+    <link rel="stylesheet" href="assets/light-theme.css" />
+  <style>
+    :root {            --line: rgba(173, 214, 255, 0.42);
+      --green: #7affb4;
+      --cyan: #72e0ff;
+      --blue: #8db5ff;
+      --gold: #ffe082;
+      --danger: #ff6c8f;
+      --shadow: 0 18px 48px rgba(70, 97, 146, 0.24);
+      --radius: 22px;
+      --max: 1240px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+      background: var(--bg-soft);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: -18px;
+      z-index: -2;
+      pointer-events: none;
+      background: url("assets/branding/MCV_SPR26Drop_TT_DotNet_Wallpaper_2560x1440.svg") center / cover no-repeat fixed;
+      filter: blur(3px) brightness(0.5) saturate(1.08);
+      transform: scale(1.03);
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at top left, var(--overlay-top-left), transparent 33%),
+        radial-gradient(circle at top right, var(--overlay-top-right), transparent 30%),
+        linear-gradient(180deg, var(--overlay-base-start) 0%, var(--overlay-base-end) 100%);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.25s ease;
+    }
+    img { max-width: 100%; display: block; }
+
+    a:not(.btn) {
+      background-image: linear-gradient(currentColor, currentColor);
+      background-position: 0 100%;
+      background-repeat: no-repeat;
+      background-size: 0% 1px;
+      transition: color 0.25s ease, background-size 0.25s ease;
+    }
+
+    a:not(.btn):hover,
+    a:not(.btn):focus-visible {
+      color: var(--cyan);
+      background-size: 100% 1px;
+      outline: none;
+    }
+
+    .container {
+      width: min(calc(100% - 32px), var(--max));
+      margin: 0 auto;
+    }
+    main .container {
+      width: 100%;
+      max-width: none;
+    }
+    main {
+      width: min(calc(100% - 32px), var(--max));
+      margin: 28px auto 46px;
+      padding: 8px 22px 28px;
+      background: var(--frosted-bg);
+      border: 1px solid var(--frosted-line);
+      border-radius: 26px;
+      backdrop-filter: blur(8px);
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(16px);
+      background: var(--nav-bg);
+      border-bottom: 1px solid var(--btn-secondary-bg);
+    }
+
+    .nav-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      min-height: 82px;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .brand-logo {
+      width: 46px;
+      height: 46px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .brand span { font-size: 1rem; }
+
+    .brand-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-left: 8px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(141, 181, 255, 0.44);
+      background: var(--surface-veil);
+      color: var(--muted);
+      font-size: 0.84rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      transition: box-shadow 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+      white-space: nowrap;
+    }
+
+    .brand-status,
+    .brand-status:hover,
+    .brand-status:focus-visible {
+      text-decoration: none;
+      background-image: none;
+    }
+
+    .status-dot,
+    .brand-status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: #8f9ebf;
+      transition: background-color 0.25s ease;
+      flex-shrink: 0;
+    }
+
+    .brand-status.online {
+      color: #237750;
+      border-color: rgba(95, 255, 156, 0.55);
+      background: rgba(239, 245, 242, 0.92);
+    }
+
+    .brand-status.online .brand-status-dot {
+      background: var(--green);
+    }
+
+    .brand-status.offline {
+      color: #ffd9df;
+      border-color: rgba(255, 108, 143, 0.55);
+    }
+
+    .brand-status.offline .brand-status-dot {
+      background: var(--danger);
+    }
+
+    .brand-status.online:hover,
+    .brand-status.online:focus-visible {
+      box-shadow: 0 0 0 2px rgba(95, 255, 156, 0.2), 0 0 22px rgba(95, 255, 156, 0.48);
+    }
+
+    .brand-status.offline:hover,
+    .brand-status.offline:focus-visible {
+      box-shadow: 0 0 0 2px rgba(255, 108, 143, 0.2), 0 0 22px rgba(255, 108, 143, 0.45);
+    }
+
+    .menu-toggle {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 40px;
+      padding: 0 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(141, 181, 255, 0.34);
+      background: var(--btn-secondary-bg);
+      color: var(--text);
+      font-weight: 700;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    nav ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    nav li {
+      position: relative;
+    }
+
+    nav > ul > li > a {
+      appearance: none;
+      border: 0;
+      background: transparent;
+      color: var(--text);
+      font: inherit;
+      padding: 12px 14px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    nav > ul > li > a:hover,
+    nav > ul > li > a:focus {
+      background: var(--btn-secondary-bg);
+      color: white;
+      outline: none;
+    }
+
+
+    .hero {
+      position: relative;
+      padding: 84px 0 48px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.9fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .hero-card,
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-card {
+      padding: 36px;
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.68), rgba(233, 241, 255, 0.78)),
+        linear-gradient(180deg, rgba(233, 241, 255, 0.45), rgba(233, 241, 255, 0.64)),
+        url("assets/branding/MCV_SPR26Drop_TT_DotNet_Wallpaper_2560x1440.svg") center / cover no-repeat;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: var(--btn-secondary-bg);
+      color: var(--muted);
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    h1, h2, h3, h4 { margin: 0 0 14px; line-height: 1.05; }
+    h1 {
+      font-size: clamp(2.7rem, 6vw, 5.2rem);
+      letter-spacing: -0.05em;
+      max-width: 10ch;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 62ch;
+      color: var(--muted);
+      font-size: 1.06rem;
+      line-height: 1.75;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .nav-buttons {
+      margin-top: 0;
+      gap: 10px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-buttons .btn {
+      min-height: 42px;
+      padding: 0 15px;
+      border-radius: 12px;
+      font-size: 0.95rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 18px;
+      border-radius: 14px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--green), var(--cyan));
+      color: var(--text);
+    }
+
+    .btn-secondary {
+      background: rgba(122,162,255,0.11);
+      border-color: rgba(122,162,255,0.18);
+      color: var(--text);
+    }
+
+    .btn-disabled {
+      background: rgba(141, 181, 255, 0.14);
+      border-color: rgba(122, 162, 255, 0.26);
+      color: var(--muted);
+      cursor: not-allowed;
+      pointer-events: none;
+      opacity: 0.7;
+      filter: grayscale(0.35);
+      box-shadow: none;
+      transform: none;
+    }
+
+    .hover-lift {
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, filter 0.25s ease;
+      will-change: transform;
+    }
+
+    .hover-lift:hover,
+    .hover-lift:focus-within {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 34px rgba(70, 97, 146, 0.22), 0 0 0 1px rgba(122, 162, 255, 0.18);
+      border-color: rgba(122, 162, 255, 0.45);
+    }
+
+    .btn.hover-lift:hover,
+    .btn.hover-lift:focus-visible {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 0 0 1px rgba(95, 255, 156, 0.38), 0 0 24px rgba(87, 213, 255, 0.34);
+      filter: brightness(1.04);
+    }
+
+    .btn.hover-lift:focus-visible {
+      outline: none;
+    }
+
+    .stats-card {
+      padding: 28px;
+      display: grid;
+      gap: 18px;
+      background:
+        radial-gradient(circle at top right, rgba(122,162,255,0.16), transparent 40%),
+        linear-gradient(180deg, rgba(252, 254, 255, 0.96), rgba(235, 243, 255, 0.96));
+    }
+
+    .server-card {
+      background: var(--panel-2);
+      border: 1px solid rgba(95,255,156,0.16);
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .server-ip-pill {
+      margin-top: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 250px;
+      padding: 11px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(95, 255, 156, 0.42);
+      background: linear-gradient(180deg, rgba(225, 255, 236, 0.96), rgba(209, 250, 224, 0.96));
+      color: #1f6f49;
+      font-size: 1.02rem;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      line-height: 1.2;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(61, 114, 84, 0.12);
+      transition: color 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+    }
+
+    .server-ip-pill .hover-label {
+      display: none;
+    }
+
+    .server-ip-pill .copied-label {
+      display: none;
+    }
+
+    .server-ip-pill:hover,
+    .server-ip-pill:focus-visible {
+      color: #0f5f37;
+      border-color: rgba(95, 255, 156, 0.85);
+      box-shadow: 0 0 0 1px rgba(95, 255, 156, 0.55), 0 0 22px rgba(95, 255, 156, 0.65);
+      transform: translateY(-1px);
+    }
+
+    .server-ip-pill:hover .default-label,
+    .server-ip-pill:focus-visible .default-label {
+      display: none;
+    }
+
+    .server-ip-pill:hover .hover-label,
+    .server-ip-pill:focus-visible .hover-label {
+      display: inline;
+    }
+
+    .server-ip-pill.is-copied:hover .hover-label,
+    .server-ip-pill.is-copied:focus-visible .hover-label {
+      display: none;
+    }
+
+    .server-ip-pill.is-copied:hover .copied-label,
+    .server-ip-pill.is-copied:focus-visible .copied-label {
+      display: inline;
+    }
+
+    .status-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .status-item {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      padding: 16px;
+    }
+
+    .status-item strong {
+      display: block;
+      font-size: 1.3rem;
+      margin-bottom: 6px;
+    }
+
+    .section {
+      padding: 34px 0;
+    }
+
+    .section-heading {
+      margin-bottom: 18px;
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .section-heading p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 64ch;
+      line-height: 1.7;
+    }
+
+    .news-grid,
+    .info-grid,
+    .join-grid {
+      display: grid;
+      gap: 20px;
+    }
+
+    .news-grid { grid-template-columns: repeat(3, 1fr); }
+    .info-grid { grid-template-columns: repeat(3, 1fr); }
+    .join-grid { grid-template-columns: 1fr 1fr; }
+
+    .events-table-wrap {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      overflow-x: auto;
+    }
+
+    .events-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 560px;
+    }
+
+    .events-table th,
+    .events-table td {
+      padding: 14px 18px;
+      text-align: left;
+      border-bottom: 1px solid rgba(160, 194, 235, 0.2);
+    }
+
+    .events-table th {
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      color: #2b456f;
+      background: rgba(141, 181, 255, 0.16);
+    }
+
+    .events-table tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .events-table td {
+      color: var(--muted);
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .news-card {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      min-height: 100%;
+    }
+
+    .tag {
+      display: inline-flex;
+      width: fit-content;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(95, 255, 156, 0.14);
+      color: #1f6f49;
+      border: 1px solid rgba(95, 255, 156, 0.3);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .card p, .card li {
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .rules-list {
+      display: grid;
+      gap: 14px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .rules-list li {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.05);
+      padding: 14px 16px;
+      border-radius: 16px;
+    }
+
+    .about-list {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .apply-steps {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .site-footer {
+      margin-top: 48px;
+      border-top: 1px solid var(--btn-secondary-bg);
+      background: var(--nav-bg);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr 1fr;
+      gap: 28px;
+      padding: 42px 0;
+    }
+
+    .footer-brand p,
+    .footer-col a {
+      color: var(--muted);
+      line-height: 1.9;
+    }
+
+    .footer-col h4 {
+      margin-bottom: 10px;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text);
+    }
+
+    .footer-links {
+      display: grid;
+      gap: 6px;
+    }
+
+    .footer-col a:hover { color: var(--green); }
+
+    .footer-bottom {
+      padding: 0 0 28px;
+      color: #7f89a1;
+      font-size: 0.95rem;
+    }
+
+    .mobile-note {
+      display: none;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .fade-in.pre-reveal,
+    .slide-up.pre-reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.95s ease, transform 0.95s ease;
+      transition-delay: calc(var(--stagger-index, 0) * 90ms);
+    }
+
+    .fade-in.is-visible,
+    .slide-up.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hover-lift,
+      .fade-in,
+      .slide-up,
+      a:not(.btn),
+      .btn {
+        transition: none !important;
+        transform: none !important;
+      }
+    }
+
+    @media (max-width: 1100px) {
+      .hero-grid,
+      .join-grid,
+      .footer-grid,
+      .news-grid,
+      .info-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .status-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-grid > :first-child {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .container,
+      main {
+        width: min(calc(100% - 20px), var(--max));
+      }
+
+      main {
+        margin-top: 16px;
+        padding: 6px 12px 20px;
+      }
+
+      .nav-wrap {
+        align-items: flex-start;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 14px 0;
+      }
+
+      .brand-group {
+        width: auto;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .brand {
+        gap: 10px;
+      }
+
+      .brand span {
+        font-size: 0.95rem;
+        letter-spacing: 0.06em;
+      }
+
+      .brand-status {
+        margin-left: 0;
+        padding: 6px 10px;
+        font-size: 0.74rem;
+      }
+
+      .brand-logo {
+        width: 42px;
+        height: 42px;
+      }
+
+      .menu-toggle {
+        display: inline-flex;
+      }
+
+      nav {
+        width: 100%;
+      }
+
+      .site-header nav {
+        display: none;
+      }
+
+      .site-header.nav-open nav {
+        display: block;
+      }
+
+      nav ul,
+      .site-header.nav-open .nav-buttons {
+        width: 100%;
+        gap: 6px;
+      }
+
+      .nav-buttons {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        justify-content: stretch;
+        margin-top: 10px;
+      }
+
+      .nav-buttons .btn {
+        width: 100%;
+        min-height: 40px;
+        padding: 0 13px;
+        font-size: 0.9rem;
+      }
+
+      .hero,
+      .section {
+        padding-top: 28px;
+      }
+
+      .hero-grid,
+      .news-grid,
+      .info-grid,
+      .join-grid,
+      .footer-grid,
+      .status-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-card,
+      .stats-card,
+      .card {
+        padding: 22px;
+      }
+
+      h1 { max-width: none; }
+      .mobile-note { display: block; }
+    }
+
+    @media (max-width: 480px) {
+      .nav-buttons {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-card,
+      .stats-card,
+      .card,
+      .server-card {
+        padding: 18px;
+      }
+
+      .events-table th,
+      .events-table td {
+        padding: 12px 14px;
+      }
+
+      .server-ip-pill {
+        font-size: 1rem;
+        min-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <div class="brand-group">
+        <a href="#home" class="brand">
+          <img class="brand-logo" src="assets/branding/PinnacleSeason12Logo.svg" alt="Pinnacle SMP Season 12 logo" />
+          <span>Pinnacle SMP</span>
+        </a>
+        <a id="server-status-badge" class="brand-status" href="members.html" aria-live="polite">
+          <span class="status-dot brand-status-dot" aria-hidden="true"></span>
+          <span id="server-status-text">Checking…</span>
+        </a>
+      </div>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav">Menu</button>
+
+      <nav id="mobile-nav" aria-label="Main navigation">
+        <div class="cta-row nav-buttons" role="list">
+              <a class="btn btn-secondary hover-lift" href="#home">Home</a>
+              <a class="btn btn-secondary hover-lift" href="#news">Server News</a>
+              <a class="btn btn-secondary hover-lift" href="#events">Events</a>
+              <a class="btn btn-secondary hover-lift" href="#rules">Server Rules</a>
+              <a class="btn btn-secondary hover-lift" href="#join">Join</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div class="hero-card fade-in slide-up">
+          <div class="eyebrow">Survival SMP • Community Driven</div>
+          <h1>Build higher on Pinnacle SMP</h1>
+          <p>
+            Welcome to Pinnacle SMP. We are a small, growing, and old Minecraft community.
+            Build, Explore, and Make Friends with us!
+          </p>
+          <div class="cta-row">
+            <a class="btn btn-primary hover-lift" href="#apply-here">Apply to Join</a>
+            <a class="btn btn-secondary hover-lift" href="about-season-12.html">About Season 12</a>
+            <a class="btn btn-secondary btn-disabled" href="http://pinnaclesmp.mcserv.fun:1041" target="_blank" rel="noreferrer" aria-disabled="true" tabindex="-1">Live Map</a>
+          </div>
+        </div>
+
+        <aside class="panel stats-card fade-in slide-up">
+          <div class="server-card">
+            <div class="tag">26.1.2</div> <div class="tag">Survival</div> <div class="tag">Whitelisted</div>
+            <h3 style="margin-top: 12px;">Ready for your next world?</h3>
+            <p class="mobile-note"></p>
+            <button class="server-ip-pill" type="button" data-server-ip="pinnaclesmp.mcserv.fun" aria-label="Copy server IP address pinnaclesmp.mcserv.fun to clipboard">
+              <span class="default-label">pinnaclesmp.mcserv.fun</span>
+              <span class="hover-label">Copy This IP</span>
+              <span class="copied-label">Copied!</span>
+            </button>
+          </div>
+
+          <div class="status-grid">
+            <div class="status-item">
+              <strong>24/7</strong>
+              <span>Server uptime</span>
+            </div>
+            <div class="status-item">
+              <strong>Events</strong>
+              <span>Community focused</span>
+            </div>
+            <div class="status-item">
+              <strong>Vanilla+</strong>
+              <span>Vanilla first</span>
+            </div>
+          </div>
+
+          <div class="card" style="padding:18px; background: rgba(255,255,255,0.03); border-radius:18px;">
+            <h3>Why players stay</h3>
+            <p>
+              Long-term worlds, community trust, vanilla first, and an atmosphere that feels welcoming,
+              with a community that is always happy to help!
+            </p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="news">
+      <div class="container">
+        <div class="section-heading fade-in slide-up">
+          <div>
+            <div class="eyebrow">Latest Updates</div>
+            <h2>Server News</h2>
+          </div>
+        </div>
+
+        <div class="news-grid fade-in slide-up">
+          <article class="card news-card hover-lift fade-in slide-up">
+            <span class="tag">Announcement</span>
+            <h3>New Legacy Members</h3>
+            <p>
+              For consistently playing on the server since the beginning of Season 11, making many contributions during Season 11 and now in Season 12...
+            </p>
+            <a href="news.html#news-new-legacy-members-2026-04-24" style="color: var(--cyan); font-weight: 700;">Read more →</a>
+          </article>
+
+          <article class="card news-card hover-lift fade-in slide-up">
+            <span class="tag">Announcement</span>
+            <h3>Season 12 Has Begun</h3>
+            <p>
+              Season 12 is live with a brand-new world and a 3,000-block border from spawn to keep early progress fair, active, and collaborative.
+            </p>
+            <a href="news.html#news-season-12-has-begun-2026-04-14" style="color: var(--cyan); font-weight: 700;">Read more →</a>
+          </article>
+
+          <article class="card news-card hover-lift fade-in slide-up">
+            <span class="tag">Announcement</span>
+            <h3>Update Still In Progress</h3>
+            <p>
+              "Alpha builds for Paper 26.1.1 are now available. There is still no ETA for a stable build." - Paper Developers...
+            </p>
+            <a href="news.html#news-update-still-in-progress-2026-04-06" style="color: var(--cyan); font-weight: 700;">Read more →</a>
+          </article>
+
+
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="events">
+      <div class="container">
+        <div class="section-heading fade-in slide-up">
+          <div>
+            <div class="eyebrow">Community Schedule</div>
+            <h2>Server Events</h2>
+          </div>
+        </div>
+
+        <div class="events-table-wrap fade-in slide-up">
+          <table class="events-table">
+            <thead>
+              <tr>
+                <th scope="col">Event Title</th>
+                <th scope="col">Location</th>
+                <th scope="col">Date</th>
+                <th scope="col">Time</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td>Tournament #4 - The Great Boat Race</td>
+                <td>IG-1</td>
+                <td>Start: Apr 27</td>
+                <td>8:00pm</td>
+              </tr>
+              <tr>
+                <td>Server Tour #2</td>
+                <td>IG-1</td>
+                <td>TBD</td>
+                <td>TBD</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="rules">
+      <div class="container">
+        <div class="section-heading fade-in slide-up">
+          <div>
+            <div class="eyebrow">Play Fair</div>
+            <h2>Server Rules</h2>
+          </div>
+        </div>
+
+        <div class="info-grid fade-in slide-up">
+          <div class="card hover-lift fade-in slide-up">
+            <h3>Community Standards</h3>
+            <ul class="rules-list">
+              <li>Must be 18+ to join.</li>
+              <li>No cracked or hacked clients are allowed.</li>
+              <li>No spamming, begging, or advertising.</li>
+              <li>Be resepectful, no harassment.</li>
+              <li>You must log in at least once every 30 days to be considered active.</li>
+            </ul>
+          </div>
+          <div class="card hover-lift fade-in slide-up">
+            <h3>Gameplay Rules</h3>
+            <ul class="rules-list">
+              <li>No cheating, x-ray, duping, or unfair mods.</li>
+              <li>No griefing, stealing, or unwanted destruction.</li>
+              <li>No random PVP</li>
+              <li>No alt-accounts.</li>
+            </ul>
+          </div>
+          <div class="card hover-lift fade-in slide-up">
+            <h3>Server Etiquette</h3>
+            <ul class="rules-list">
+              <li>Limit lag inducing activities / no chunk loaders.</li>
+              <li>Keep public chat in English</li>
+              <li>No gambling, no scamming, no illegal content/activity</li>
+              <li>No mini-moderating / do not try to bypass punishments.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="join">
+      <div class="container">
+        <div class="section-heading fade-in slide-up">
+          <div>
+            <div class="eyebrow">Join Pinnacle</div>
+            <h2>Join</h2>
+          </div>
+        </div>
+
+        <div class="join-grid fade-in slide-up">
+          <article class="card hover-lift fade-in slide-up" id="about-us">
+            <div class="tag">About Us</div>
+            <h3 style="margin-top: 14px;">What Pinnacle SMP is about</h3>
+            <p>
+              Pinnacle SMP is designed to feel like a strong community first and a server second: long-term progression,
+              memorable events, collaborative building, and a polished experience that makes players want to keep coming back.
+            </p>
+            <ul class="about-list">
+              <li>Community-focused survival gameplay</li>
+              <li>Vanilla first server experience</li>
+              <li>Room for builders, explorers, redstoners, and casual players</li>
+              <li>Events and seasonal highlights to keep things fresh</li>
+            </ul>
+            <div class="cta-row">
+              <a class="btn btn-secondary hover-lift" href="about-us.html">Learn more</a>
+              <a class="btn btn-secondary hover-lift" href="vote-history.html">Vote History</a>
+              <a class="btn btn-secondary hover-lift" href="members.html">View Members</a>
+            </div>
+          </article>
+
+          <article class="card hover-lift fade-in slide-up" id="apply-here">
+            <div class="tag">Apply Here</div>
+            <h3 style="margin-top: 14px;">Application flow</h3>
+            <p>
+              Please allow up to 24hrs for your application to be processesed. You may recieve an interview message before
+              being accepted.
+            </p>
+            <ol class="apply-steps">
+              <li>Read the server rules.</li>
+              <li>Learn about the community and server style.</li>
+              <li>Submit your application through the official form.</li>
+              <li>Wait for approval instructions from staff.</li>
+            </ol>
+            <div class="cta-row">
+              <a class="btn btn-primary hover-lift" href="https://discord.gg/97hdX25n7F">Open Application</a>
+              <a class="btn btn-secondary hover-lift" href="#rules">Review Rules</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <div class="brand" style="margin-bottom: 12px;">
+          <img class="brand-logo" src="assets/branding/PinnacleSeason12Logo.svg" alt="Pinnacle SMP Season 12 logo" />
+          <span>Pinnacle SMP</span>
+        </div>
+        <p>
+          The Pinnacle SMP server is in no way affiliated with Mojang Studios or Microsoft,
+          nor should it be considered endorsed by either company.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Membership</h4>
+        <div class="footer-links">
+          <a href="about-us.html">About Us</a>
+          <a href="members.html">Members</a>
+          <a href="vote-history.html">Vote History</a>
+          <a href="tournament-standings.html">Tournament Standings</a>
+          <a href="#rules">Server Rules</a>
+          <a href="#news">Server News</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-links">
+          <a href="https://forms.gle/iLaR76yLUEnRFyt58">Contact Us</a>
+          <a href="faq.html">FAQs</a>
+          <a href="https://forms.gle/2Wp7HmhhMbxEsafM7">Ban Appeal</a>
+          <a href="plugin-suggestions.html">Plugin Suggestions</a>
+          <a href="https://discord.gg/97hdX25n7F">Whitelist Application</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>External</h4>
+        <div class="footer-links">
+          <a href="vote-links.html">Vote Links</a>
+          <a href="https://www.minecraft.net/en-us/minecraft-tips-for-beginners#getting_started" target="_blank" rel="noreferrer">How to Play</a>
+          <a href="https://www.minecraft.net/" target="_blank" rel="noreferrer">Minecraft.net</a>
+          <a href="https://www.bisecthosting.com/donate/299b5130" target="_blank" rel="noreferrer">Server Donation</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      © 2026 Pinnacle SMP. All rights reserved.
+    </div>
+  </footer>
+  <script src="assets/server-status.js"></script>
+  <script>
+    (() => {
+      const header = document.querySelector(".site-header");
+      const toggle = document.querySelector(".menu-toggle");
+      const nav = document.getElementById("mobile-nav");
+      if (!header || !toggle || !nav) return;
+
+      const closeMenu = () => {
+        header.classList.remove("nav-open");
+        toggle.setAttribute("aria-expanded", "false");
+      };
+
+      toggle.addEventListener("click", () => {
+        const isOpen = header.classList.toggle("nav-open");
+        toggle.setAttribute("aria-expanded", String(isOpen));
+      });
+
+      nav.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => closeMenu());
+      });
+
+      document.addEventListener("click", (event) => {
+        if (!header.classList.contains("nav-open")) return;
+        if (header.contains(event.target)) return;
+        closeMenu();
+      });
+
+      window.addEventListener("resize", () => {
+        if (window.innerWidth > 760) closeMenu();
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") closeMenu();
+      });
+    })();
+
+    (() => {
+      const badge = document.getElementById("server-status-badge");
+      const label = document.getElementById("server-status-text");
+      const statusService = window.PinnacleServerStatus;
+      if (!badge || !label || !statusService?.fetchServerStatus) return;
+
+      const setOffline = () => {
+        badge.classList.remove("online");
+        badge.classList.add("offline");
+        label.textContent = "Offline";
+      };
+
+      const setOnline = (playersOnline) => {
+        badge.classList.remove("offline");
+        badge.classList.add("online");
+        label.textContent = `Online ${playersOnline}/20`;
+      };
+
+      const refreshServerStatus = async () => {
+        const data = await statusService.fetchServerStatus();
+        if (!data.online) {
+          setOffline();
+          return;
+        }
+
+        setOnline(data.playersOnline);
+      };
+
+      refreshServerStatus();
+      window.setInterval(refreshServerStatus, 30_000);
+    })();
+
+    (() => {
+      const ipPill = document.querySelector(".server-ip-pill");
+      if (!ipPill) return;
+      const serverIp = ipPill.getAttribute("data-server-ip");
+      if (!serverIp) return;
+
+      ipPill.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(serverIp);
+          ipPill.classList.add("is-copied");
+        } catch {
+          const hiddenInput = document.createElement("input");
+          hiddenInput.value = serverIp;
+          hiddenInput.setAttribute("aria-hidden", "true");
+          hiddenInput.style.position = "absolute";
+          hiddenInput.style.left = "-9999px";
+          document.body.appendChild(hiddenInput);
+          hiddenInput.select();
+          const canExecCopy = typeof document.execCommand === "function";
+          const copySucceeded = canExecCopy ? document.execCommand("copy") : false;
+          document.body.removeChild(hiddenInput);
+          if (copySucceeded) ipPill.classList.add("is-copied");
+        }
+      });
+
+      const clearCopiedState = () => {
+        ipPill.classList.remove("is-copied");
+      };
+
+      ipPill.addEventListener("mouseleave", clearCopiedState);
+      ipPill.addEventListener("blur", clearCopiedState);
+    })();
+
+    (() => {
+      const animated = document.querySelectorAll(".fade-in, .slide-up");
+      if (!animated.length) return;
+      animated.forEach((element) => element.classList.add("pre-reveal"));
+
+      const groupedSelectors = [".news-grid", ".info-grid", ".join-grid", ".hero-grid"];
+      groupedSelectors.forEach((selector) => {
+        document.querySelectorAll(selector).forEach((group) => {
+          const items = group.querySelectorAll(".fade-in, .slide-up");
+          items.forEach((item, index) => {
+            item.style.setProperty("--stagger-index", index);
+          });
+        });
+      });
+
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.remove("pre-reveal");
+          entry.target.classList.add("is-visible");
+          obs.unobserve(entry.target);
+        });
+      }, {
+        threshold: 0.12,
+        rootMargin: "0px 0px -4% 0px"
+      });
+
+      animated.forEach((element) => observer.observe(element));
+    })();
+  </script>
+</body>
+</html>
