@@ -862,7 +862,7 @@
           <div class="cta-row">
             <a class="btn btn-primary hover-lift" href="#apply-here">Apply to Join</a>
             <a class="btn btn-secondary hover-lift" href="about-season-12.html">About Season 12</a>
-            <a class="btn btn-secondary btn-disabled" href="http://pinnaclesmp.mcserv.fun:1041" target="_blank" rel="noreferrer" aria-disabled="true" tabindex="-1">Live Map</a>
+            <a class="btn btn-secondary btn-disabled" href="http://pinnaclesmp.mcserv.fun:1041" target="_blank" rel="noopener noreferrer" aria-disabled="true" tabindex="-1">Live Map</a>
           </div>
         </div>
 
@@ -1070,7 +1070,7 @@
               <li>Wait for approval instructions from staff.</li>
             </ol>
             <div class="cta-row">
-              <a class="btn btn-primary hover-lift" href="https://discord.gg/97hdX25n7F">Open Application</a>
+              <a class="btn btn-primary hover-lift" href="https://discord.gg/97hdX25n7F" target="_blank" rel="noopener noreferrer">Open Application</a>
               <a class="btn btn-secondary hover-lift" href="#rules">Review Rules</a>
             </div>
           </article>
@@ -1108,11 +1108,11 @@
       <div class="footer-col">
         <h4>Contact</h4>
         <div class="footer-links">
-          <a href="https://forms.gle/iLaR76yLUEnRFyt58">Contact Us</a>
+          <a href="https://forms.gle/iLaR76yLUEnRFyt58" target="_blank" rel="noopener noreferrer">Contact Us</a>
           <a href="faq.html">FAQs</a>
-          <a href="https://forms.gle/2Wp7HmhhMbxEsafM7">Ban Appeal</a>
-          <a href="https://forms.gle/gB6qyvpkKUXfC9jr9">Plugin Suggestions</a>
-          <a href="https://discord.gg/97hdX25n7F">Whitelist Application</a>
+          <a href="https://forms.gle/2Wp7HmhhMbxEsafM7" target="_blank" rel="noopener noreferrer">Ban Appeal</a>
+          <a href="https://forms.gle/gB6qyvpkKUXfC9jr9" target="_blank" rel="noopener noreferrer">Plugin Suggestions</a>
+          <a href="https://discord.gg/97hdX25n7F" target="_blank" rel="noopener noreferrer">Whitelist Application</a>
         </div>
       </div>
 
@@ -1120,9 +1120,9 @@
         <h4>External</h4>
         <div class="footer-links">
           <a href="vote-links.html">Vote Links</a>
-          <a href="https://www.minecraft.net/en-us/minecraft-tips-for-beginners#getting_started" target="_blank" rel="noreferrer">How to Play</a>
-          <a href="https://www.minecraft.net/" target="_blank" rel="noreferrer">Minecraft.net</a>
-          <a href="https://www.bisecthosting.com/donate/299b5130" target="_blank" rel="noreferrer">Server Donation</a>
+          <a href="https://www.minecraft.net/en-us/minecraft-tips-for-beginners#getting_started" target="_blank" rel="noopener noreferrer">How to Play</a>
+          <a href="https://www.minecraft.net/" target="_blank" rel="noopener noreferrer">Minecraft.net</a>
+          <a href="https://www.bisecthosting.com/donate/299b5130" target="_blank" rel="noopener noreferrer">Server Donation</a>
         </div>
       </div>
     </div>
@@ -1261,6 +1261,24 @@
       });
 
       animated.forEach((element) => observer.observe(element));
+    })();
+
+    (() => {
+      const externalSubmissionLinkSelector = [
+        'a[href="https://discord.gg/97hdX25n7F"]',
+        'a[href="https://forms.gle/iLaR76yLUEnRFyt58"]',
+        'a[href="https://forms.gle/2Wp7HmhhMbxEsafM7"]',
+        'a[href="https://forms.gle/gB6qyvpkKUXfC9jr9"]'
+      ].join(', ');
+
+      document.querySelectorAll(externalSubmissionLinkSelector).forEach((link) => {
+        link.setAttribute('target', '_blank');
+        link.setAttribute('rel', 'noopener noreferrer');
+        link.addEventListener('click', (event) => {
+          event.preventDefault();
+          window.open(link.href, '_blank', 'noopener,noreferrer');
+        });
+      });
     })();
   </script>
 </body>
