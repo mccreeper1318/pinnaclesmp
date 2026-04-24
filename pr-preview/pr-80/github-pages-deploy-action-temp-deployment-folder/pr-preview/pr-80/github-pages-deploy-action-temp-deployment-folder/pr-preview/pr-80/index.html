@@ -1219,10 +1219,9 @@
           hiddenInput.style.left = "-9999px";
           document.body.appendChild(hiddenInput);
           hiddenInput.select();
-          const canExecCopy = typeof document.execCommand === "function";
-          const copySucceeded = canExecCopy ? document.execCommand("copy") : false;
+          document.execCommand("copy");
           document.body.removeChild(hiddenInput);
-          if (copySucceeded) ipPill.classList.add("is-copied");
+          ipPill.classList.add("is-copied");
         }
       });
 
