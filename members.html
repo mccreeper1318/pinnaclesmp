@@ -139,6 +139,14 @@
       --rank-bg: #dfffe8;
     }
 
+    .member-card.banned {
+      --rank-color: #6b7280;
+      --rank-bg: #e5e7eb;
+      cursor: not-allowed;
+      pointer-events: none;
+      filter: saturate(0.55);
+    }
+
     .member-head {
       width: 106px;
       height: 106px;
@@ -454,10 +462,10 @@
         <a class="member-button member-card full" href="profiles/Aryamii.html" data-username="Aryamii"><img class="member-head" src="assets/player_heads/Aryamii.png" alt="Aryamii player head" /><p class="member-name">Aryamii</p><span class="member-status"><span class="status-dot" aria-hidden="true"></span><span class="member-status-label">Offline</span></span><span class="member-rank">Full Member</span></a>
         <a class="member-button member-card full" href="profiles/t0w0fu.html" data-username="t0w0fu"><img class="member-head" src="assets/player_heads/t0w0fu.png" alt="t0w0fu player head" /><p class="member-name">t0w0fu</p><span class="member-status"><span class="status-dot" aria-hidden="true"></span><span class="member-status-label">Offline</span></span><span class="member-rank">Full Member</span></a>
         <a class="member-button member-card full" href="profiles/BraneFX.html" data-username="BraneFX"><img class="member-head" src="assets/player_heads/BraneFX.png" alt="BraneFX player head" /><p class="member-name">BraneFX</p><span class="member-status"><span class="status-dot" aria-hidden="true"></span><span class="member-status-label">Offline</span></span><span class="member-rank">Full Member</span></a>
-        <a class="member-button member-card full" href="profiles/Kelly_E.html" data-username="Kelly_E"><img class="member-head" src="assets/player_heads/Kelly_E.png" alt="Kelly_E player head" /><p class="member-name">Kelly_E</p><span class="member-status"><span class="status-dot" aria-hidden="true"></span><span class="member-status-label">Offline</span></span><span class="member-rank">Full Member</span></a>
 
         <a class="member-button member-card new" href="profiles/NateOnGuitar.html" data-username="NateOnGuitar"><div class="member-head-placeholder">Player head image pending</div><p class="member-name">NateOnGuitar</p><span class="member-status"><span class="status-dot" aria-hidden="true"></span><span class="member-status-label">Offline</span></span><span class="member-rank">New Member</span></a>
         <a class="member-button member-card new" href="profiles/Someperso.html" data-username="Someperso"><img class="member-head" src="assets/player_heads/Someperso.png" alt="Someperso player head" /><p class="member-name">Someperso</p><span class="member-status"><span class="status-dot" aria-hidden="true"></span><span class="member-status-label">Offline</span></span><span class="member-rank">New Member</span></a>
+        <div class="member-button member-card banned" data-username="Kelly_E" aria-disabled="true"><img class="member-head" src="assets/player_heads/Kelly_E.png" alt="Kelly_E player head" /><p class="member-name">Kelly_E</p><span class="member-status"><span class="status-dot" aria-hidden="true"></span><span class="member-status-label">Offline</span></span><span class="member-rank">Banned</span></div>
       </div>
 
       <section class="awards-panel">
