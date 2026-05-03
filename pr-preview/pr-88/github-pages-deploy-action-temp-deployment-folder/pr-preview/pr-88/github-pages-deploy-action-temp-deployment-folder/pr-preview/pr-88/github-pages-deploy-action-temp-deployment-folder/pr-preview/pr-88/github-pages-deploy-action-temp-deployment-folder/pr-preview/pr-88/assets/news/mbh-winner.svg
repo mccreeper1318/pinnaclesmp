@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 560" role="img" aria-labelledby="title desc">
+  <title id="title">MBH Winner Feature</title>
+  <desc id="desc">Placeholder feature image for MBH winner article.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a2740"/>
+      <stop offset="100%" stop-color="#102437"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="560" fill="url(#bg)"/>
+  <g fill="#5fff9c" opacity="0.18">
+    <circle cx="170" cy="120" r="140"/>
+    <circle cx="1170" cy="470" r="200"/>
+  </g>
+  <text x="80" y="280" fill="#eef3ff" font-size="64" font-family="Inter,Segoe UI,sans-serif" font-weight="700">MBH Winner Showcase</text>
+</svg>

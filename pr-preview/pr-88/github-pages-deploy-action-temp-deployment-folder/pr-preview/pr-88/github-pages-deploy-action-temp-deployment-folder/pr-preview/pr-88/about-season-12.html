@@ -133,8 +133,8 @@
       transition: 0.2s ease;
     }
 
-    .nav-link:hover,
-    .nav-link:focus-visible {
+    .nav-buttons .btn:hover,
+    .nav-buttons .btn:focus-visible {
       transform: translateY(-1px);
       border-color: rgba(95, 255, 156, 0.42);
       background: var(--btn-secondary-hover);
@@ -175,7 +175,7 @@
     }
 
     li + li { margin-top: 6px; }
-    .site-nav li + li { margin-top: 0; }
+    #mobile-nav .nav-buttons > * + * { margin-top: 0; }
     @media (max-width: 860px) {
       .nav-wrap {
         min-height: unset;
