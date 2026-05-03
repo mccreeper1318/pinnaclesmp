@@ -207,7 +207,7 @@
       cursor: pointer;
     }
 
-    .site-nav ul {
+    #mobile-nav .nav-buttons {
       margin: 0;
       padding: 0;
       list-style: none;
@@ -217,7 +217,7 @@
       flex-wrap: wrap;
     }
 
-    .nav-link {
+    .nav-buttons .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -251,21 +251,21 @@
         display: inline-flex;
       }
 
-      .site-nav {
+      #mobile-nav {
         width: 100%;
         display: none;
       }
 
-      .site-header.nav-open .site-nav {
+      .site-header.nav-open #mobile-nav {
         display: block;
       }
 
-      .site-nav ul {
+      #mobile-nav .nav-buttons {
         flex-direction: column;
         align-items: stretch;
       }
 
-      .nav-link {
+      .nav-buttons .btn {
         width: 100%;
       }
     }
@@ -281,15 +281,15 @@
         <span>Pinnacle SMP</span>
       </a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav">Menu</button>
-      <nav class="site-nav" id="mobile-nav" aria-label="Main navigation">
-        <ul>
-          <li><a class="nav-link" href="index.html#home">Home</a></li>
-          <li><a class="nav-link" href="index.html#news">Server News</a></li>
-          <li><a class="nav-link" href="index.html#events">Events</a></li>
-          <li><a class="nav-link" href="index.html#rules">Server Rules</a></li>
-          <li><a class="nav-link" href="gallery.html">Gallery</a></li>
-          <li><a class="nav-link" href="index.html#join">Join</a></li>
-        </ul>
+      <nav id="mobile-nav" aria-label="Main navigation">
+        <div class="cta-row nav-buttons" role="list">
+          <a class="btn btn-secondary hover-lift" href="index.html#home">Home</a>
+          <a class="btn btn-secondary hover-lift" href="index.html#news">Server News</a>
+          <a class="btn btn-secondary hover-lift" href="index.html#events">Events</a>
+          <a class="btn btn-secondary hover-lift" href="index.html#rules">Server Rules</a>
+          <a class="btn btn-secondary hover-lift" href="gallery.html">Gallery</a>
+          <a class="btn btn-secondary hover-lift" href="index.html#join">Join</a>
+        </div>
       </nav>
     </div>
   </header>
