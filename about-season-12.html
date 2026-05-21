@@ -8,8 +8,7 @@
   <style>
     :root {      --line: rgba(168, 208, 255, 0.42);
       --cyan: var(--primary-link);
-      --green: var(--alternate-link);
-    }
+          }
 
     * { box-sizing: border-box; }
 
@@ -39,10 +38,7 @@
       inset: 0;
       z-index: -1;
       pointer-events: none;
-      background:
-        radial-gradient(circle at top left, var(--overlay-top-left), transparent 33%),
-        radial-gradient(circle at top right, var(--overlay-top-right), transparent 30%),
-        linear-gradient(180deg, var(--overlay-base-start) 0%, var(--overlay-base-end) 100%);
+      background: var(--surface-2);
     }
 
     .container {
@@ -52,14 +48,12 @@
       background: var(--frosted-bg);
       border: 1px solid var(--frosted-line);
       border-radius: 26px;
-      backdrop-filter: blur(8px);
     }
 
     .site-header {
       position: sticky;
       top: 0;
       z-index: 50;
-      backdrop-filter: blur(16px);
       background: var(--nav-bg);
       border-bottom: 1px solid var(--btn-secondary-bg);
     }
@@ -135,7 +129,7 @@
     .nav-buttons .btn:hover,
     .nav-buttons .btn:focus-visible {
       transform: translateY(-1px);
-      border-color: rgba(95, 255, 156, 0.42);
+      border-color: rgba(203, 166, 247, 0.42);
       background: var(--btn-secondary-hover);
       outline: none;
     }
@@ -157,7 +151,7 @@
     h2 {
       margin: 28px 0 10px;
       font-size: clamp(1.3rem, 2.8vw, 1.9rem);
-      color: var(--green);
+      color: var(--alternate-link);
     }
 
     p {
