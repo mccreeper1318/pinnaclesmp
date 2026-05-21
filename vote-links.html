@@ -8,7 +8,7 @@
   <style>
     :root {
       --line: rgba(168, 208, 255, 0.42);      --cyan: #72e0ff;
-      --green: #7affb4;
+      --green: #b4befe;
       --gold: #ffe082;
       --violet: #b6a2ff;
     }
@@ -31,7 +31,7 @@
       inset: -18px;
       z-index: -2;
       pointer-events: none;
-      background: url("assets/branding/MCV_SPR26Drop_TT_DotNet_Wallpaper_2560x1440.svg") center / cover no-repeat;
+      background: none;
       transform: scale(1.03);
     }
 
@@ -51,10 +51,10 @@
       width: min(calc(100% - 32px), 1200px);
       margin: 0 auto;
       padding: 34px clamp(18px, 3vw, 40px) 48px;
-      background: var(--frosted-bg);
+      background: var(--surface);
       border: 1px solid var(--frosted-line);
       border-radius: 26px;
-      backdrop-filter: blur(8px);
+      backdrop-filter: none;
     }
 
     .back-link {
@@ -81,7 +81,7 @@
     .vote-galaxy {
       position: relative;
       display: grid;
-      gap: 18px;
+      gap: 20px;
       grid-template-columns: repeat(12, 1fr);
       isolation: isolate;
     }
@@ -118,16 +118,17 @@
     .vote-card:nth-child(4) { grid-column: span 4; }
 
     .constellation-label {
-      display: inline-flex;
+      display: inline-block;
       width: fit-content;
       border-radius: 999px;
-      padding: 6px 10px;
-      font-size: 0.78rem;
-      letter-spacing: 0.08em;
+      padding: 6px 12px;
+      font-size: 0.85rem;
+      letter-spacing: 0.07em;
       text-transform: uppercase;
-      color: var(--text);
       font-weight: 700;
-      background: linear-gradient(135deg, var(--green), var(--gold));
+      color: #cdd6f4;
+      background: #45475a;
+      border: 1px solid #b4befe;
     }
 
     h2 {
