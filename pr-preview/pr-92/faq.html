@@ -24,23 +24,9 @@
       background: var(--bg-soft);
     }
 
-    body::before {
-      content: "";
-      position: fixed;
-      inset: -18px;
-      z-index: -2;
-      pointer-events: none;
-      background: var(--surface-2);
-    }
+    body::before { content: ""; position: fixed; inset: 0; z-index: -2; pointer-events: none; background: #585b70; }
 
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      pointer-events: none;
-      background: var(--surface-2);
-    }
+    body::after { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none; background: #585b70; }
 
     .container {
       width: min(calc(100% - 32px), var(--max));
@@ -65,7 +51,7 @@
 
     .intro {
       margin: 0;
-      color: var(--muted);
+      color: var(--text);
       line-height: 1.7;
     }
 
@@ -90,7 +76,7 @@
     }
 
     p {
-      color: var(--muted);
+      color: var(--text);
       line-height: 1.7;
       margin: 12px 0 0;
     }
@@ -121,7 +107,7 @@
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, var(--alternate-link), var(--cyan));
+      background: var(--panel);
       color: var(--text);
     }
 
@@ -200,7 +186,7 @@
       padding: 0 14px;
       border-radius: 11px;
       border: 1px solid rgba(122, 162, 255, 0.22);
-      background: rgba(122, 162, 255, 0.11);
+      background: var(--panel);
       color: var(--text);
       text-decoration: none;
       font-weight: 700;
