@@ -7,12 +7,12 @@
     <link rel="stylesheet" href="assets/light-theme.css" />
   <style>
     :root {      --line: rgba(168, 208, 255, 0.42);
-      --cyan: #72e0ff;
-      --green: #7affb4;
-      --gold: #ffe082;
-      --blue: #8db5ff;
+      --cyan: var(--primary-link);
+      --green: var(--alternate-link);
+      --gold: var(--alternate-link);
+      --blue: var(--primary-link);
       --red: #ff6b6b;
-      --purple: #c48dff;
+      --purple: var(--alternate-link);
     }
 
     * { box-sizing: border-box; }
@@ -32,7 +32,7 @@
       inset: -18px;
       z-index: -2;
       pointer-events: none;
-      background: url("assets/branding/MCV_SPR26Drop_TT_DotNet_Wallpaper_2560x1440.svg") center / cover no-repeat;
+      background: var(--surface-2);
       transform: scale(1.03);
     }
 
@@ -107,7 +107,7 @@
         color-mix(in srgb, var(--rank-bg) 72%, white 28%) 100%
       );
       box-shadow: 0 0 18px color-mix(in srgb, var(--rank-color) 45%, transparent 55%);
-      color: #1a2336;
+      color: var(--text);
       text-decoration: none;
       border-radius: 14px;
       padding: 14px 10px 12px;
@@ -139,7 +139,7 @@
     }
 
     .member-card.banned {
-      --rank-color: #6b7280;
+      --rank-color: var(--text);
       --rank-bg: #e5e7eb;
       cursor: not-allowed;
       pointer-events: none;
@@ -165,7 +165,7 @@
       line-height: 1.3;
       font-size: 0.7rem;
       font-weight: 700;
-      color: #b07b00;
+      color: var(--alternate-link);
       border-radius: 10px;
       border: 2px dashed rgba(255, 214, 107, 0.86);
       background: rgba(255, 255, 255, 0.7);
@@ -176,7 +176,7 @@
       margin: 0;
       font-size: 1.12rem;
       line-height: 1.2;
-      color: #121d31;
+      color: var(--text);
     }
 
     .member-status {
@@ -188,7 +188,7 @@
       border-radius: 999px;
       border: 1px solid rgba(163, 32, 59, 0.45);
       background: rgba(255, 242, 245, 0.93);
-      color: #871f35;
+      color: var(--alternate-link);
       font-size: 0.74rem;
       font-weight: 700;
       letter-spacing: 0.03em;
@@ -200,13 +200,13 @@
       width: 10px;
       height: 10px;
       border-radius: 999px;
-      background: #ff6c8f;
+      background: var(--alternate-link);
       flex-shrink: 0;
       transition: background-color 0.25s ease;
     }
 
     .member-card.online .member-status {
-      color: #237750;
+      color: var(--alternate-link);
       border-color: rgba(95, 255, 156, 0.55);
       background: rgba(239, 245, 242, 0.92);
     }
@@ -249,7 +249,7 @@
 
     .awards-panel h2 {
       margin: 0 0 18px;
-      color: #000;
+      color: var(--text);
       font-size: 1.35rem;
     }
 

@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="assets/light-theme.css" />
   <style>
     :root {      --line: rgba(168, 208, 255, 0.4);
-      --green: #7affb4;
-      --cyan: #72e0ff;
+      --green: var(--alternate-link);
+      --cyan: var(--primary-link);
       --radius: 20px;
       --max: 980px;
     }
@@ -31,7 +31,7 @@
       inset: -18px;
       z-index: -2;
       pointer-events: none;
-      background: url("assets/branding/MCV_SPR26Drop_TT_DotNet_Wallpaper_2560x1440.svg") center / cover no-repeat;
+      background: var(--surface-2);
       transform: scale(1.03);
     }
 

@@ -7,11 +7,11 @@
     <link rel="stylesheet" href="assets/light-theme.css" />
   <style>
     :root {            --line: rgba(173, 214, 255, 0.42);
-      --green: #7affb4;
-      --cyan: #72e0ff;
-      --blue: #8db5ff;
-      --gold: #ffe082;
-      --danger: #ff6c8f;
+      --green: var(--alternate-link);
+      --cyan: var(--primary-link);
+      --blue: var(--primary-link);
+      --gold: var(--alternate-link);
+      --danger: var(--alternate-link);
       --shadow: 0 18px 48px rgba(70, 97, 146, 0.24);
       --radius: 22px;
       --max: 1240px;
@@ -35,7 +35,7 @@
       inset: -18px;
       z-index: -2;
       pointer-events: none;
-      background: url("assets/branding/MCV_SPR26Drop_TT_DotNet_Wallpaper_2560x1440.svg") center / cover no-repeat;
+      background: var(--surface-2);
       transform: scale(1.03);
     }
 
@@ -163,13 +163,13 @@
       width: 10px;
       height: 10px;
       border-radius: 999px;
-      background: #8f9ebf;
+      background: var(--primary-link);
       transition: background-color 0.25s ease;
       flex-shrink: 0;
     }
 
     .brand-status.online {
-      color: #237750;
+      color: var(--alternate-link);
       border-color: rgba(95, 255, 156, 0.55);
       background: rgba(239, 245, 242, 0.92);
     }
@@ -179,7 +179,7 @@
     }
 
     .brand-status.offline {
-      color: #ffd9df;
+      color: var(--text);
       border-color: rgba(255, 108, 143, 0.55);
     }
 
@@ -242,7 +242,7 @@
     nav > ul > li > a:hover,
     nav > ul > li > a:focus {
       background: var(--btn-secondary-bg);
-      color: white;
+      color: var(--text);
       outline: none;
     }
 
@@ -274,7 +274,7 @@
       background:
         linear-gradient(145deg, rgba(255, 255, 255, 0.68), rgba(233, 241, 255, 0.78)),
         linear-gradient(180deg, rgba(233, 241, 255, 0.45), rgba(233, 241, 255, 0.64)),
-        url("assets/branding/MCV_SPR26Drop_TT_DotNet_Wallpaper_2560x1440.svg") center / cover no-repeat;
+        var(--surface-2);
     }
 
     .eyebrow {
@@ -411,7 +411,7 @@
       border-radius: 999px;
       border: 1px solid rgba(95, 255, 156, 0.42);
       background: linear-gradient(180deg, rgba(225, 255, 236, 0.96), rgba(209, 250, 224, 0.96));
-      color: #1f6f49;
+      color: var(--alternate-link);
       font-size: 1.02rem;
       font-weight: 800;
       letter-spacing: 0.03em;
@@ -431,7 +431,7 @@
 
     .server-ip-pill:hover,
     .server-ip-pill:focus-visible {
-      color: #0f5f37;
+      color: var(--alternate-link);
       border-color: rgba(95, 255, 156, 0.85);
       box-shadow: 0 0 0 1px rgba(95, 255, 156, 0.55), 0 0 22px rgba(95, 255, 156, 0.65);
       transform: translateY(-1px);
@@ -532,7 +532,7 @@
       letter-spacing: 0.05em;
       text-transform: uppercase;
       font-size: 0.8rem;
-      color: #2b456f;
+      color: var(--text);
       background: rgba(141, 181, 255, 0.16);
     }
 
@@ -565,7 +565,7 @@
       padding: 7px 10px;
       border-radius: 999px;
       background: rgba(95, 255, 156, 0.14);
-      color: #1f6f49;
+      color: var(--alternate-link);
       border: 1px solid rgba(95, 255, 156, 0.3);
       font-size: 0.78rem;
       letter-spacing: 0.08em;
@@ -638,7 +638,7 @@
 
     .footer-bottom {
       padding: 0 0 28px;
-      color: #7f89a1;
+      color: var(--muted);
       font-size: 0.95rem;
     }
 

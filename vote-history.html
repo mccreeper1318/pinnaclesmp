@@ -7,9 +7,9 @@
     <link rel="stylesheet" href="assets/light-theme.css" />
   <style>
     :root {
-      --line: rgba(168, 208, 255, 0.42);            --cyan: #72e0ff;
-      --green: #7affb4;
-      --gold: #ffe082;
+      --line: rgba(168, 208, 255, 0.42);            --cyan: var(--primary-link);
+      --green: var(--alternate-link);
+      --gold: var(--alternate-link);
       --pink: #ff8ec1;
       --shadow: 0 18px 48px rgba(70, 97, 146, 0.24);
     }
@@ -32,7 +32,7 @@
       inset: -18px;
       z-index: -2;
       pointer-events: none;
-      background: url("assets/branding/MCV_SPR26Drop_TT_DotNet_Wallpaper_2560x1440.svg") center / cover no-repeat;
+      background: var(--surface-2);
       transform: scale(1.03);
     }
 

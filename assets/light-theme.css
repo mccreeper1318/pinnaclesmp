@@ -1,31 +1,35 @@
 :root {
-  --bg: #eef3ff;
-  --bg-soft: #e4ecff;
-  --surface: #f7faff;
-  --panel: rgba(255, 255, 255, 0.86);
-  --panel-strong: rgba(245, 250, 255, 0.95);
-  --panel-2: rgba(240, 247, 255, 0.92);
-  --line: rgba(92, 125, 183, 0.28);
-  --text: #162744;
-  --muted: #506388;
-  --shadow: 0 18px 48px rgba(70, 97, 146, 0.24);
-  --overlay-top-left: rgba(114, 224, 255, 0.18);
-  --overlay-top-right: rgba(146, 255, 198, 0.16);
-  --overlay-base-start: rgba(255, 255, 255, 0.76);
-  --overlay-base-end: rgba(238, 244, 255, 0.9);
-  --frosted-bg: rgba(255, 255, 255, 0.72);
-  --frosted-line: rgba(124, 153, 205, 0.3);
-  --input-bg: rgba(255, 255, 255, 0.94);
-  --input-line: rgba(122, 162, 255, 0.3);
-  --nav-bg: rgba(255, 255, 255, 0.82);
-  --nav-line: rgba(141, 181, 255, 0.26);
-  --btn-secondary-bg: rgba(141, 181, 255, 0.2);
-  --btn-secondary-hover: rgba(87, 213, 255, 0.2);
-  --glass-dark-weak: rgba(130, 154, 196, 0.16);
-  --glass-dark-mid: rgba(130, 154, 196, 0.24);
-  --surface-veil: rgba(255, 255, 255, 0.7);
-  --text-inverse: #ffffff;
+  --surface-2: #585b70;
+  --text: #cdd6f4;
+  --primary-link: #b4befe;
+  --alternate-link: #cba6f7;
+  --bg: var(--surface-2);
+  --bg-soft: var(--surface-2);
+  --surface: var(--surface-2);
+  --panel: rgba(88, 91, 112, 0.86);
+  --panel-strong: rgba(88, 91, 112, 0.95);
+  --panel-2: rgba(88, 91, 112, 0.92);
+  --line: rgba(180, 190, 254, 0.42);
+  --muted: color-mix(in srgb, var(--text) 78%, var(--surface-2) 22%);
+  --shadow: 0 18px 48px rgba(17, 17, 27, 0.36);
+  --overlay-top-left: rgba(180, 190, 254, 0.2);
+  --overlay-top-right: rgba(203, 166, 247, 0.18);
+  --overlay-base-start: rgba(88, 91, 112, 0.78);
+  --overlay-base-end: rgba(88, 91, 112, 0.9);
+  --frosted-bg: rgba(88, 91, 112, 0.72);
+  --frosted-line: rgba(180, 190, 254, 0.32);
+  --input-bg: rgba(88, 91, 112, 0.94);
+  --input-line: rgba(180, 190, 254, 0.34);
+  --nav-bg: rgba(88, 91, 112, 0.82);
+  --nav-line: rgba(180, 190, 254, 0.3);
+  --btn-secondary-bg: rgba(203, 166, 247, 0.2);
+  --btn-secondary-hover: rgba(203, 166, 247, 0.32);
+  --glass-dark-weak: rgba(17, 17, 27, 0.22);
+  --glass-dark-mid: rgba(17, 17, 27, 0.3);
+  --surface-veil: rgba(88, 91, 112, 0.7);
+  --text-inverse: #cdd6f4;
 }
+
 
 .gallery-list {
   display: grid;
@@ -63,7 +67,7 @@
   left: 18px;
   bottom: 16px;
   z-index: 1;
-  color: #fff;
+  color: var(--text);
   font-size: 1.25rem;
   font-weight: 800;
 }

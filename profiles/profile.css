@@ -8,7 +8,7 @@
   --muted: #5a6f95;
   --accent: #2f76c7;
   --accent-2: #3ea16f;
-  --warn: #b07b00;
+  --warn: var(--alternate-link);
 }
 * { box-sizing: border-box; }
 body {
@@ -88,7 +88,7 @@ body {
   border-radius: 999px;
   border: 1px solid rgba(255, 108, 143, 0.42);
   background: rgba(20, 24, 34, 0.35);
-  color: #ffd9df;
+  color: var(--text);
   font-size: 0.74rem;
   font-weight: 700;
   letter-spacing: 0.03em;
@@ -98,16 +98,16 @@ body {
   width: 10px;
   height: 10px;
   border-radius: 999px;
-  background: #ff6c8f;
+  background: var(--alternate-link);
   flex-shrink: 0;
 }
 .profile-status.online {
-  color: #237750;
+  color: var(--alternate-link);
   border-color: rgba(95, 255, 156, 0.55);
   background: rgba(239, 245, 242, 0.92);
 }
 .profile-status.online .status-dot {
-  background: #7affb4;
+  background: var(--alternate-link);
 }
 .grid {
   margin-top: 18px;
