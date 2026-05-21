@@ -1,14 +1,14 @@
 @import url("../assets/light-theme.css");
 
 :root {
-  --bg1: #edf3ff;
-  --bg2: #dbe7ff;
-  --panel: rgba(255, 255, 255, 0.9);
-  --line: rgba(120, 154, 211, 0.42);
-  --muted: #5a6f95;
-  --accent: #2f76c7;
-  --accent-2: #3ea16f;
-  --warn: #b07b00;
+  --bg1: #1e1e2e;
+  --bg2: #181825;
+  --panel: #313244;
+  --line: #585b70;
+  --muted: #bac2de;
+  --accent: #b4befe;
+  --accent-2: #a6adc8;
+  --warn: #f9e2af;
 }
 * { box-sizing: border-box; }
 body {
@@ -27,8 +27,8 @@ body {
   padding: 26px;
   border: 1px solid rgba(167, 193, 255, 0.25);
   border-radius: 24px;
-  background: var(--frosted-bg);
-  backdrop-filter: blur(6px);
+  background: var(--surface);
+  backdrop-filter: none;
 }
 .back-link {
   display: inline-flex;
@@ -54,7 +54,7 @@ body {
   image-rendering: pixelated;
   border-radius: 10px;
   border: 2px solid rgba(98, 212, 255, 0.7);
-  background: rgba(255, 255, 255, 0.5);
+  background: #45475a;
 }
 .head-placeholder {
   width: 120px;
@@ -67,7 +67,7 @@ body {
   border-radius: 10px;
   border: 2px dashed rgba(255, 214, 107, 0.8);
   color: var(--warn);
-  background: rgba(255, 255, 255, 0.65);
+  background: #313244;
   padding: 10px;
 }
 .name {
@@ -102,12 +102,12 @@ body {
   flex-shrink: 0;
 }
 .profile-status.online {
-  color: #237750;
-  border-color: rgba(95, 255, 156, 0.55);
-  background: rgba(239, 245, 242, 0.92);
+  color: #a6e3a1;
+  border-color: rgba(180, 190, 254, 0.55);
+  background: #313244;
 }
 .profile-status.online .status-dot {
-  background: #7affb4;
+  background: #b4befe;
 }
 .grid {
   margin-top: 18px;
