@@ -6,9 +6,9 @@
   --bg: var(--surface-2);
   --bg-soft: var(--surface-2);
   --surface: var(--surface-2);
-  --panel: rgba(88, 91, 112, 0.86);
-  --panel-strong: rgba(88, 91, 112, 0.95);
-  --panel-2: rgba(88, 91, 112, 0.92);
+  --panel: #585b70;
+  --panel-strong: #585b70;
+  --panel-2: #585b70;
   --line: rgba(180, 190, 254, 0.42);
   --muted: color-mix(in srgb, var(--text) 78%, var(--surface-2) 22%);
   --shadow: 0 18px 48px rgba(17, 17, 27, 0.36);
@@ -16,17 +16,17 @@
   --overlay-top-right: rgba(203, 166, 247, 0.18);
   --overlay-base-start: rgba(88, 91, 112, 0.78);
   --overlay-base-end: rgba(88, 91, 112, 0.9);
-  --frosted-bg: rgba(88, 91, 112, 0.72);
+  --frosted-bg: #585b70;
   --frosted-line: rgba(180, 190, 254, 0.32);
-  --input-bg: rgba(88, 91, 112, 0.94);
+  --input-bg: #585b70;
   --input-line: rgba(180, 190, 254, 0.34);
-  --nav-bg: rgba(88, 91, 112, 0.82);
+  --nav-bg: #585b70;
   --nav-line: rgba(180, 190, 254, 0.3);
   --btn-secondary-bg: rgba(203, 166, 247, 0.2);
   --btn-secondary-hover: rgba(203, 166, 247, 0.32);
   --glass-dark-weak: rgba(17, 17, 27, 0.22);
   --glass-dark-mid: rgba(17, 17, 27, 0.3);
-  --surface-veil: rgba(88, 91, 112, 0.7);
+  --surface-veil: #585b70;
   --text-inverse: #cdd6f4;
 }
 

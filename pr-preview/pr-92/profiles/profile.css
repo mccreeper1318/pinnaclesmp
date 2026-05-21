@@ -17,15 +17,11 @@ body {
   color: var(--text);
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   background: var(--surface-2);
-}
-.page {
-  width: min(calc(100% - 28px), 1050px);
   margin: 22px auto 34px;
   padding: 26px;
   border: 1px solid rgba(167, 193, 255, 0.25);
   border-radius: 24px;
   background: var(--frosted-bg);
-}
 .back-link {
   display: inline-flex;
   align-items: center;
