@@ -9,7 +9,6 @@
     :root {      --line: rgba(168, 208, 255, 0.42);
       --cyan: var(--primary-link);
           }
-
     * { box-sizing: border-box; }
 
     body {
@@ -23,28 +22,8 @@
     }
 
     body::before { content: ""; position: fixed; inset: 0; z-index: -2; pointer-events: none; background: #585b70; }
-
     body::after { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none; background: #585b70; }
 
-    .container {
-      width: min(calc(100% - 32px), 1100px);
-      margin: 28px auto 52px;
-      padding: 30px;
-      background: var(--frosted-bg);
-      border: 1px solid var(--frosted-line);
-      border-radius: 26px;
-    }
-
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      background: var(--nav-bg);
-      border-bottom: 1px solid var(--btn-secondary-bg);
-    }
-
-    .nav-wrap {
-      width: min(calc(100% - 32px), 1100px);
       margin: 0 auto;
       min-height: 82px;
       display: flex;
