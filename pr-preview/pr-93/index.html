@@ -388,14 +388,13 @@
       padding: 28px;
       display: grid;
       gap: 18px;
-      background:
-        radial-gradient(circle at top right, rgba(122,162,255,0.16), transparent 40%),
-        linear-gradient(180deg, rgba(252, 254, 255, 0.96), rgba(235, 243, 255, 0.96));
+      background: linear-gradient(160deg, var(--panel) 0%, var(--panel-strong) 100%);
+      border: 1px solid var(--line);
     }
 
     .server-card {
-      background: var(--panel-2);
-      border: 1px solid rgba(95,255,156,0.16);
+      background: rgba(30, 30, 46, 0.58);
+      border: 1px solid rgba(180, 190, 254, 0.28);
       border-radius: 18px;
       padding: 18px;
     }
@@ -463,8 +462,8 @@
     }
 
     .status-item {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(30, 30, 46, 0.45);
+      border: 1px solid rgba(180, 190, 254, 0.22);
       border-radius: 16px;
       padding: 16px;
     }
@@ -473,6 +472,11 @@
       display: block;
       font-size: 1.3rem;
       margin-bottom: 6px;
+      color: var(--text);
+    }
+
+    .status-item span {
+      color: var(--muted);
     }
 
     .section {
@@ -892,7 +896,7 @@
             </div>
           </div>
 
-          <div class="card" style="padding:18px; background: rgba(255,255,255,0.03); border-radius:18px;">
+          <div class="card" style="padding:18px; background: rgba(30,30,46,0.45); border: 1px solid rgba(180,190,254,0.22); border-radius:18px;">
             <h3>Why players stay</h3>
             <p>
               Long-term worlds, community trust, vanilla first, and an atmosphere that feels welcoming,
