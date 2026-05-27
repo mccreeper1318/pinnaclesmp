@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 560" role="img" aria-labelledby="title desc">
-  <title id="title">Community Vote Feature</title>
-  <desc id="desc">Feature image for the Community Votes to Wait for 26.2 article.</desc>
+  <title id="title">Minecraft Update Feature</title>
+  <desc id="desc">Placeholder feature image for Minecraft 26.1 article.</desc>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#16263c"/>
@@ -12,5 +12,5 @@
     <rect x="80" y="70" width="260" height="140" rx="20"/>
     <rect x="940" y="330" width="260" height="140" rx="20"/>
   </g>
-  <text x="80" y="280" fill="#eef3ff" font-size="64" font-family="Inter,Segoe UI,sans-serif" font-weight="700">Community Vote</text>
+  <text x="80" y="280" fill="#eef3ff" font-size="64" font-family="Inter,Segoe UI,sans-serif" font-weight="700">Minecraft 26.1 Update</text>
 </svg>
