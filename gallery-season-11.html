@@ -15,18 +15,88 @@ body{margin:0;color:var(--text);font-family:Inter,ui-sans-serif,system-ui;backgr
 .panel{background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:28px;box-shadow:var(--shadow)}
 @media(max-width:860px){.nav-wrap{min-height:unset;padding:12px 0;flex-wrap:wrap}.menu-toggle{display:inline-flex}#mobile-nav{display:none;width:100%}.site-header.nav-open #mobile-nav{display:block}#mobile-nav .nav-buttons{width:100%;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin-top:10px}.nav-buttons .btn{width:100%;min-height:40px;padding:0 13px;font-size:.9rem}}
 </style></head><body>
-<header class="site-header"><div class="nav-wrap"><a href="index.html#home" class="brand"><img class="brand-logo" src="https://res.cloudinary.com/ds4p9jsuf/image/upload/v1780430105/94ED434F-0A09-4D1B-9E18-B5B4B9248641_fbtaz7.png" alt="Pinnacle SMP Season 12 logo" /><span>Pinnacle SMP</span></a><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav">Menu</button><nav id="mobile-nav" aria-label="Main navigation">
+<header class="site-header">
+    <div class="container nav-wrap">
+      <div class="brand-group">
+        <a href="index.html#home" class="brand">
+          <img class="brand-logo" src="https://res.cloudinary.com/ds4p9jsuf/image/upload/v1780430105/94ED434F-0A09-4D1B-9E18-B5B4B9248641_fbtaz7.png" alt="Pinnacle SMP Season 12 logo" />
+          <span>Pinnacle SMP</span>
+        </a>
+        <a id="server-status-badge" class="brand-status" href="members.html" aria-live="polite">
+          <span class="status-dot brand-status-dot" aria-hidden="true"></span>
+          <span id="server-status-text">Checking…</span>
+        </a>
+      </div>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav">Menu</button>
+
+      <nav id="mobile-nav" aria-label="Main navigation">
         <div class="cta-row nav-buttons" role="list">
-          <a class="btn btn-secondary hover-lift" href="index.html#home">Home</a>
-          <a class="btn btn-secondary hover-lift" href="index.html#news">Server News</a>
-          <a class="btn btn-secondary hover-lift" href="index.html#events">Events</a>
-          <a class="btn btn-secondary hover-lift" href="index.html#rules">Server Rules</a>
-          <a class="btn btn-secondary hover-lift" href="gallery.html">Gallery</a>
-          <a class="btn btn-secondary hover-lift" href="index.html#join">Join</a>
+              <a class="btn btn-secondary hover-lift" href="index.html#home">Home</a>
+              <a class="btn btn-secondary hover-lift" href="index.html#news">Server News</a>
+              <a class="btn btn-secondary hover-lift" href="index.html#events">Events</a>
+              <a class="btn btn-secondary hover-lift" href="rules.html">Server Rules</a>
+              <a class="btn btn-secondary hover-lift" href="gallery.html">Gallery</a>
+              <a class="btn btn-secondary hover-lift" href="index.html#join">Join</a>
         </div>
-      </nav></div></header>
+      </nav>
+    </div>
+  </header>
 <main class="container"><section class="panel"><h1>Season 11 Gallery</h1><p>A visual archive of community moments from Pinnacle SMP Season 11.</p><p id="gallery-status">Loading screenshots…</p><div id="season-gallery-grid" class="season-gallery-grid" aria-live="polite"></div></section></main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <div class="brand" style="margin-bottom: 12px;">
+          <img class="brand-logo" src="https://res.cloudinary.com/ds4p9jsuf/image/upload/v1780430105/94ED434F-0A09-4D1B-9E18-B5B4B9248641_fbtaz7.png" alt="Pinnacle SMP Season 12 logo" />
+          <span>Pinnacle SMP</span>
+        </div>
+        <p>
+          The Pinnacle SMP server is in no way affiliated with Mojang Studios or Microsoft,
+          nor should it be considered endorsed by either company.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Membership</h4>
+        <div class="footer-links">
+          <a href="about-us.html">About Us</a>
+          <a href="members.html">Members</a>
+          <a href="vote-history.html">Vote History</a>
+          <a href="tournament-standings.html">Tournament Standings</a>
+          <a href="rules.html">Server Rules</a>
+          <a href="index.html#news">Server News</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-links">
+          <a href="https://forms.gle/iLaR76yLUEnRFyt58" target="_blank" rel="noopener noreferrer">Contact Us</a>
+          <a href="faq.html">FAQs</a>
+          <a href="https://forms.gle/2Wp7HmhhMbxEsafM7" target="_blank" rel="noopener noreferrer">Ban Appeal</a>
+          <a href="https://forms.gle/gB6qyvpkKUXfC9jr9" target="_blank" rel="noopener noreferrer">Plugin Suggestions</a>
+          <a href="https://discord.gg/97hdX25n7F" target="_blank" rel="noopener noreferrer">Whitelist Application</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>External</h4>
+        <div class="footer-links">
+          <a href="vote-links.html">Vote Links</a>
+          <a href="https://www.minecraft.net/en-us/minecraft-tips-for-beginners#getting_started" target="_blank" rel="noopener noreferrer">How to Play</a>
+          <a href="https://www.minecraft.net/" target="_blank" rel="noopener noreferrer">Minecraft.net</a>
+          <a href="https://www.bisecthosting.com/donate/299b5130" target="_blank" rel="noopener noreferrer">Server Donation</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      © 2026 Pinnacle SMP. All rights reserved.
+    </div>
+  </footer>
 <script>(()=>{const h=document.querySelector('.site-header');const t=document.querySelector('.menu-toggle');const n=document.getElementById('mobile-nav');if(h&&t&&n){const c=()=>{h.classList.remove('nav-open');t.setAttribute('aria-expanded','false')};t.addEventListener('click',()=>{const o=h.classList.toggle('nav-open');t.setAttribute('aria-expanded',String(o))});n.querySelectorAll('a').forEach((l)=>l.addEventListener('click',c));window.addEventListener('resize',()=>{if(window.innerWidth>860)c()});}
 const cloudName='ds4p9jsuf';const tag='Season 11';const encodedTag=encodeURIComponent(tag);const listUrl=`https://res.cloudinary.com/${cloudName}/image/list/${encodedTag}.json`;const status=document.getElementById('gallery-status');const grid=document.getElementById('season-gallery-grid');
 fetch(listUrl).then(r=>{if(!r.ok) throw new Error('Cloudinary gallery list failed to load.'); return r.json();}).then(data=>{const resources=Array.isArray(data.resources)?data.resources:[];if(resources.length===0){status.textContent='No screenshots have been added to this gallery yet.';return;}status.textContent='';resources.forEach((image)=>{const publicId=image.public_id;const format=image.format;if(!publicId||!format)return;const thumb=`https://res.cloudinary.com/${cloudName}/image/upload/w_500,h_350,c_fill,q_auto,f_auto/${publicId}.${format}`;const full=`https://res.cloudinary.com/${cloudName}/image/upload/w_1800,q_auto,f_auto/${publicId}.${format}`;const alt=publicId.replace(/[\/_-]+/g,' ').trim();const a=document.createElement('a');a.className='season-gallery-item';a.href=full;a.target='_blank';a.rel='noopener noreferrer';const img=document.createElement('img');img.src=thumb;img.alt=alt||'Season 11 screenshot';img.loading='lazy';a.appendChild(img);grid.appendChild(a);});if(!grid.children.length){status.textContent='No screenshots have been added to this gallery yet.';}}).catch((error)=>{status.textContent='Sorry, we could not load the Season 11 gallery right now. Please try again later.';console.error(error);});})();</script>
+  <script src="assets/server-status.js"></script>
+  <script src="assets/server-status-badge.js"></script>
 </body></html>
