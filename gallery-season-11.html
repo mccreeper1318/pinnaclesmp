@@ -15,6 +15,7 @@ body{margin:0;color:var(--text);font-family:Inter,ui-sans-serif,system-ui;backgr
 .panel{background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:28px;box-shadow:var(--shadow)}
 @media(max-width:860px){.nav-wrap{min-height:unset;padding:12px 0;flex-wrap:wrap}.menu-toggle{display:inline-flex}#mobile-nav{display:none;width:100%}.site-header.nav-open #mobile-nav{display:block}#mobile-nav .nav-buttons{width:100%;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin-top:10px}.nav-buttons .btn{width:100%;min-height:40px;padding:0 13px;font-size:.9rem}}
 </style></head><body>
+  <canvas id="particle-bg" aria-hidden="true"></canvas>
 <header class="site-header">
     <div class="container nav-wrap">
       <div class="brand-group">
@@ -99,4 +100,5 @@ const cloudName='ds4p9jsuf';const tag='Season 11';const encodedTag=encodeURIComp
 fetch(listUrl).then(r=>{if(!r.ok) throw new Error('Cloudinary gallery list failed to load.'); return r.json();}).then(data=>{const resources=Array.isArray(data.resources)?data.resources:[];if(resources.length===0){status.textContent='No screenshots have been added to this gallery yet.';return;}status.textContent='';resources.forEach((image)=>{const publicId=image.public_id;const format=image.format;if(!publicId||!format)return;const thumb=`https://res.cloudinary.com/${cloudName}/image/upload/w_500,h_350,c_fill,q_auto,f_auto/${publicId}.${format}`;const full=`https://res.cloudinary.com/${cloudName}/image/upload/w_1800,q_auto,f_auto/${publicId}.${format}`;const alt=publicId.replace(/[\/_-]+/g,' ').trim();const a=document.createElement('a');a.className='season-gallery-item';a.href=full;a.target='_blank';a.rel='noopener noreferrer';const img=document.createElement('img');img.src=thumb;img.alt=alt||'Season 11 screenshot';img.loading='lazy';a.appendChild(img);grid.appendChild(a);});if(!grid.children.length){status.textContent='No screenshots have been added to this gallery yet.';}}).catch((error)=>{status.textContent='Sorry, we could not load the Season 11 gallery right now. Please try again later.';console.error(error);});})();</script>
   <script src="assets/server-status.js"></script>
   <script src="assets/server-status-badge.js"></script>
+  <script src="assets/particles.js"></script>
 </body></html>

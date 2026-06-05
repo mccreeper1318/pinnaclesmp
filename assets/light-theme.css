@@ -25,6 +25,13 @@
   --glass-dark-mid: rgba(108, 112, 134, 0.35);
   --surface-veil: #313244;
   --text-inverse: #11111b;
+
+  --primary: #b4befe;
+  --accent: #b4befe;
+  --accent-primary: #b4befe;
+  --accent-secondary: #cba6f7;
+  --link: #89b4fa;
+  --link-hover: #89dceb;
 }
 
 .gallery-list {
@@ -381,4 +388,38 @@
 
 @media (max-width: 480px) {
   .site-header .nav-buttons { grid-template-columns: 1fr !important; }
+}
+
+
+#particle-bg {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  display: block;
+}
+
+.site-header,
+header,
+main,
+.site-footer,
+footer,
+.page-wrapper,
+.site-main,
+.content,
+.hero,
+.layout,
+.page,
+.section,
+.container {
+  position: relative;
+  z-index: 2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #particle-bg {
+    opacity: 0.32;
+  }
 }
