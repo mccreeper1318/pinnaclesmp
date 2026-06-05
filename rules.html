@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pinnacle SMP</title>
+  <title>Server Rules | Pinnacle SMP</title>
     <link rel="stylesheet" href="assets/light-theme.css" />
   <style>
     :root {            --line: rgba(173, 214, 255, 0.42);
@@ -822,6 +822,231 @@
         min-width: 100%;
       }
     }
+
+    .rules-page-hero {
+      padding: 64px 0 28px;
+    }
+
+    .rules-page-card {
+      padding: 34px;
+      background: linear-gradient(160deg, var(--panel) 0%, var(--panel-strong) 100%);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .rules-page-card h1 {
+      max-width: none;
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+    }
+
+    .rules-page-card p,
+    .rules-discretion-note p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.75;
+      max-width: 76ch;
+    }
+
+    .rules-shell {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, 420px);
+      gap: 22px;
+      align-items: start;
+      padding-bottom: 24px;
+    }
+
+    .rules-card-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .rule-card-button {
+      width: 100%;
+      min-height: 150px;
+      appearance: none;
+      border: 1px solid rgba(180, 190, 254, 0.22);
+      border-radius: 20px;
+      padding: 18px;
+      text-align: left;
+      color: var(--text);
+      background: linear-gradient(160deg, rgba(49, 50, 68, 0.96), rgba(69, 71, 90, 0.86));
+      box-shadow: 0 12px 28px rgba(17, 17, 27, 0.25);
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+      font: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .rule-card-button:hover,
+    .rule-card-button:focus-visible {
+      transform: translateY(-4px);
+      border-color: rgba(180, 190, 254, 0.58);
+      box-shadow: 0 18px 34px rgba(17, 17, 27, 0.34), 0 0 0 1px rgba(180, 190, 254, 0.18);
+      outline: none;
+    }
+
+    .rule-card-button[aria-pressed="true"] {
+      border-color: rgba(203, 166, 247, 0.88);
+      background: linear-gradient(160deg, rgba(69, 71, 90, 0.98), rgba(49, 50, 68, 0.96));
+      box-shadow: 0 0 0 2px rgba(203, 166, 247, 0.34), 0 18px 38px rgba(17, 17, 27, 0.38);
+    }
+
+    .rule-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .rule-card-icon,
+    .rule-detail-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      border-radius: 16px;
+      background: rgba(180, 190, 254, 0.14);
+      border: 1px solid rgba(180, 190, 254, 0.28);
+    }
+
+    .rule-card-icon {
+      width: 42px;
+      height: 42px;
+      font-size: 1.45rem;
+    }
+
+    .rule-card-category,
+    .rule-detail-category {
+      display: inline-flex;
+      width: fit-content;
+      padding: 6px 9px;
+      border-radius: 999px;
+      color: #cdd6f4;
+      background: rgba(203, 166, 247, 0.13);
+      border: 1px solid rgba(203, 166, 247, 0.28);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .rule-card-title {
+      margin: 2px 0 0;
+      font-size: 1.16rem;
+      line-height: 1.2;
+    }
+
+    .rule-card-short {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .rule-detail-panel {
+      position: sticky;
+      top: 104px;
+      padding: 24px;
+      background: linear-gradient(180deg, rgba(49, 50, 68, 0.98), rgba(69, 71, 90, 0.92));
+      border: 1px solid rgba(180, 190, 254, 0.34);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .rule-detail-heading {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+
+    .rule-detail-icon {
+      width: 54px;
+      height: 54px;
+      font-size: 1.8rem;
+    }
+
+    .rule-detail-title {
+      margin-bottom: 8px;
+      font-size: clamp(1.55rem, 3vw, 2.1rem);
+    }
+
+    .rule-detail-summary {
+      margin: 0 0 18px;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .rule-detail-list {
+      display: grid;
+      gap: 10px;
+      margin: 0 0 18px;
+      padding-left: 20px;
+    }
+
+    .rule-detail-list li {
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .rule-detail-note {
+      margin: 0;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(180, 190, 254, 0.13);
+      border: 1px solid rgba(180, 190, 254, 0.28);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    .rules-discretion-note {
+      margin: 0 0 32px;
+      padding: 22px;
+      border-radius: 20px;
+      background: rgba(49, 50, 68, 0.82);
+      border: 1px solid rgba(203, 166, 247, 0.32);
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 980px) {
+      .rules-shell {
+        grid-template-columns: 1fr;
+      }
+
+      .rule-detail-panel {
+        position: static;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .rules-page-hero {
+        padding-top: 28px;
+      }
+
+      .rules-page-card {
+        padding: 22px;
+      }
+
+      .rules-card-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .rule-card-button {
+        transition: none !important;
+        transform: none !important;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -853,191 +1078,107 @@
   </header>
 
   <main>
-    <section class="hero" id="home">
-      <div class="container hero-grid">
-        <div class="hero-card fade-in slide-up">
-          <div class="eyebrow">Survival SMP • Community Driven</div>
-          <h1>Build higher on Pinnacle SMP</h1>
-          <p>
-            Welcome to Pinnacle SMP. We are a small, growing, and old Minecraft community.
-            Build, Explore, and Make Friends with us!
-          </p>
-          <div class="cta-row">
-            <a class="btn btn-primary hover-lift" href="#apply-here">Apply</a>
-            <a class="btn btn-secondary hover-lift" href="about-us.html">About Pinnacle</a>
-            <a class="btn btn-secondary hover-lift" href="about-season-12.html">About Season 12</a>
-            <a class="btn btn-secondary btn-disabled" href="http://pinnaclesmp.mcserv.fun:1041" target="_blank" rel="noopener noreferrer" aria-disabled="true" tabindex="-1">Live Map</a>
-          </div>
+    <section class="rules-page-hero" id="home">
+      <div class="container">
+        <div class="rules-page-card fade-in slide-up">
+          <h1>Server Rules</h1>
+          <p>Review the rules here before applying. Click a rule card to view the full details.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-label="Server rules list and details">
+      <div class="container rules-shell">
+        <div class="rules-card-grid fade-in slide-up" aria-label="Rule cards">
+          <button class="rule-card-button" type="button" data-rule-key="age" aria-pressed="true" aria-current="true">
+            <span class="rule-card-top"><span class="rule-card-icon" aria-hidden="true">🔞</span><span class="rule-card-category">Community Standards</span></span>
+            <strong class="rule-card-title">18+ Only</strong>
+            <span class="rule-card-short">Players must be 18 years old or older.</span>
+          </button>
+          <button class="rule-card-button" type="button" data-rule-key="cheating" aria-pressed="false">
+            <span class="rule-card-top"><span class="rule-card-icon" aria-hidden="true">💎</span><span class="rule-card-category">Gameplay Rules</span></span>
+            <strong class="rule-card-title">No Cheating</strong>
+            <span class="rule-card-short">No x-ray, duping, exploits, or unfair mods.</span>
+          </button>
+          <button class="rule-card-button" type="button" data-rule-key="griefing" aria-pressed="false">
+            <span class="rule-card-top"><span class="rule-card-icon" aria-hidden="true">🔥</span><span class="rule-card-category">Gameplay Rules</span></span>
+            <strong class="rule-card-title">No Griefing</strong>
+            <span class="rule-card-short">No stealing, lava casting, or unwanted destruction.</span>
+          </button>
+          <button class="rule-card-button" type="button" data-rule-key="pvp" aria-pressed="false">
+            <span class="rule-card-top"><span class="rule-card-icon" aria-hidden="true">⚔️</span><span class="rule-card-category">Gameplay Rules</span></span>
+            <strong class="rule-card-title">PvP Requires Consent</strong>
+            <span class="rule-card-short">No random PvP or harmful item use.</span>
+          </button>
+          <button class="rule-card-button" type="button" data-rule-key="respect" aria-pressed="false">
+            <span class="rule-card-top"><span class="rule-card-icon" aria-hidden="true">🛡️</span><span class="rule-card-category">Community Standards</span></span>
+            <strong class="rule-card-title">Respect Others</strong>
+            <span class="rule-card-short">No harassment, hate speech, or personal attacks.</span>
+          </button>
+          <button class="rule-card-button" type="button" data-rule-key="chat" aria-pressed="false">
+            <span class="rule-card-top"><span class="rule-card-icon" aria-hidden="true">💬</span><span class="rule-card-category">Community Standards</span></span>
+            <strong class="rule-card-title">Chat Rules</strong>
+            <span class="rule-card-short">No spam, advertising, or public non-English chat.</span>
+          </button>
+          <button class="rule-card-button" type="button" data-rule-key="lag" aria-pressed="false">
+            <span class="rule-card-top"><span class="rule-card-icon" aria-hidden="true">⚙️</span><span class="rule-card-category">Server Etiquette</span></span>
+            <strong class="rule-card-title">Limit Lag</strong>
+            <span class="rule-card-short">Keep farms and machines efficient.</span>
+          </button>
+          <button class="rule-card-button" type="button" data-rule-key="chunks" aria-pressed="false">
+            <span class="rule-card-top"><span class="rule-card-icon" aria-hidden="true">🌐</span><span class="rule-card-category">Server Etiquette</span></span>
+            <strong class="rule-card-title">No Chunk Loaders</strong>
+            <span class="rule-card-short">Do not keep chunks loaded while away.</span>
+          </button>
+          <button class="rule-card-button" type="button" data-rule-key="gambling" aria-pressed="false">
+            <span class="rule-card-top"><span class="rule-card-icon" aria-hidden="true">🎲</span><span class="rule-card-category">Server Etiquette</span></span>
+            <strong class="rule-card-title">No Gambling or Scamming</strong>
+            <span class="rule-card-short">No casinos, mystery boxes, or scams.</span>
+          </button>
+          <button class="rule-card-button" type="button" data-rule-key="reports" aria-pressed="false">
+            <span class="rule-card-top"><span class="rule-card-icon" aria-hidden="true">📣</span><span class="rule-card-category">Server Etiquette</span></span>
+            <strong class="rule-card-title">Report Issues</strong>
+            <span class="rule-card-short">Report problems instead of mini-moderating.</span>
+          </button>
+          <button class="rule-card-button" type="button" data-rule-key="alts" aria-pressed="false">
+            <span class="rule-card-top"><span class="rule-card-icon" aria-hidden="true">👥</span><span class="rule-card-category">Gameplay Rules</span></span>
+            <strong class="rule-card-title">No Alt Accounts</strong>
+            <span class="rule-card-short">Do not use alts or bypass punishments.</span>
+          </button>
+          <button class="rule-card-button" type="button" data-rule-key="illegal" aria-pressed="false">
+            <span class="rule-card-top"><span class="rule-card-icon" aria-hidden="true">🚫</span><span class="rule-card-category">Server Etiquette</span></span>
+            <strong class="rule-card-title">No Illegal Activity</strong>
+            <span class="rule-card-short">No illegal content or activity.</span>
+          </button>
         </div>
 
-        <aside class="panel stats-card fade-in slide-up">
-          <div class="server-card">
-            <div class="tag">26.1.2</div> <div class="tag">Survival</div> <div class="tag">Whitelisted</div>
-            <h3 style="margin-top: 12px;">Ready for your next world?</h3>
-            <p class="mobile-note"></p>
-            <button class="server-ip-pill" type="button" data-server-ip="pinnaclesmp.mcserv.fun" aria-label="Copy server IP address pinnaclesmp.mcserv.fun to clipboard">
-              <span class="default-label">pinnaclesmp.mcserv.fun</span>
-              <span class="hover-label">Copy This IP</span>
-              <span class="copied-label">Copied!</span>
-            </button>
-          </div>
-
-          <div class="status-grid">
-            <div class="status-item">
-              <strong>24/7</strong>
-              <span>Server uptime</span>
-            </div>
-            <div class="status-item">
-              <strong>Events</strong>
-              <span>Community focused</span>
-            </div>
-            <div class="status-item">
-              <strong>Vanilla+</strong>
-              <span>Vanilla first</span>
+        <aside class="rule-detail-panel fade-in slide-up" data-rule-detail-panel aria-live="polite" aria-label="Selected rule details">
+          <div class="rule-detail-heading">
+            <span class="rule-detail-icon" data-rule-icon aria-hidden="true">🔞</span>
+            <div>
+              <span class="rule-detail-category" data-rule-category>Community Standards</span>
+              <h2 class="rule-detail-title" data-rule-title>18+ Only</h2>
             </div>
           </div>
-
-          <div class="card" style="padding:18px; background: rgba(30,30,46,0.45); border: 1px solid rgba(180,190,254,0.22); border-radius:18px;">
-            <h3>Why players stay</h3>
-            <p>
-              Long-term worlds, community trust, vanilla first, and an atmosphere that feels welcoming,
-              with a community that is always happy to help!
-            </p>
-          </div>
+          <p class="rule-detail-summary" data-rule-summary>Pinnacle SMP is an 18+ server. You must be 18 years old or older to join.</p>
+          <ul class="rule-detail-list" data-rule-list>
+            <li>Members must be 18 or older.</li>
+            <li>This applies to all applicants and players.</li>
+            <li>Age requirements help keep the server mature and community-focused.</li>
+          </ul>
+          <p class="rule-detail-note"><strong>Note:</strong> <span data-rule-note>Players who do not meet the age requirement are not eligible to join.</span></p>
         </aside>
       </div>
     </section>
 
-    <section class="section" id="news">
+    <section class="section" aria-label="Rule discretion note and application">
       <div class="container">
-        <div class="section-heading fade-in slide-up">
-          <div>
-            <div class="eyebrow">Latest Updates</div>
-            <h2>Server News</h2>
-          </div>
-        </div>
-
-        <div class="news-grid fade-in slide-up">
-          <article class="card news-card hover-lift fade-in slide-up">
-            <span class="tag">Announcement</span>
-            <h3>June 2026 Award Winners Announced</h3>
-            <p>
-              Pinnacle SMP is proud to announce the June 2026 award winners!
-            </p>
-            <a href="news.html#news-june-2026-award-winners-announced-2026-06-01" style="color: var(--cyan); font-weight: 700;">Read more →</a>
-          </article>
-
-          <article class="card news-card hover-lift fade-in slide-up">
-            <span class="tag">Announcement</span>
-            <h3>Gallery Update</h3>
-            <p>
-              The Pinnacle SMP Gallery is getting a cleaner layout for Season 12!...
-            </p>
-            <a href="news.html#gallery-update-may-26" style="color: var(--cyan); font-weight: 700;">Read more →</a>
-          </article>
-                  
-          <article class="card news-card hover-lift fade-in slide-up">
-            <span class="tag">Community Vote</span>
-            <h3>Community Votes to Wait for 26.2</h3>
-            <p>
-              The Pinnacle SMP community recently held a vote on whether the server should switch to Paper 26.1.2 now or wait for the upcoming 26.2 release...
-            </p>
-            <a href="news.html#news-community-votes-to-wait-for-26-2-2026-05-06" style="color: var(--cyan); font-weight: 700;">Read more →</a>
-          </article>
-
+        <div class="rules-discretion-note fade-in slide-up">
+          <p>Staff may use discretion when handling situations that are not directly covered here. When in doubt, ask an Admin or Founding Member.</p>
+          <a class="btn btn-primary hover-lift" href="https://discord.gg/97hdX25n7F" target="_blank" rel="noopener noreferrer">Open Application</a>
         </div>
       </div>
     </section>
-
-    <section class="section" id="events">
-      <div class="container">
-        <div class="section-heading fade-in slide-up">
-          <div>
-            <div class="eyebrow">Community Schedule</div>
-            <h2>Server Events</h2>
-          </div>
-        </div>
-
-        <div class="events-table-wrap fade-in slide-up">
-          <table class="events-table">
-            <thead>
-              <tr>
-                <th scope="col">Event Title</th>
-                <th scope="col">Location</th>
-                <th scope="col">Date</th>
-                <th scope="col">Time</th>
-              </tr>
-            </thead>
-            <tbody>
-                <tr>
-                <td>Tournament #4 - The Great Boat Race</td>
-                <td>IG-1</td>
-                <td>Rescheduling</td>
-                <td>Rescheduling</td>
-              </tr>
-              <tr>
-                <td>Server Tour #2</td>
-                <td>IG-1</td>
-                <td>TBD</td>
-                <td>TBD</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="join">
-      <div class="container">
-        <div class="section-heading fade-in slide-up">
-          <div>
-            <div class="eyebrow">Join Pinnacle</div>
-            <h2>Join</h2>
-          </div>
-        </div>
-
-        <div class="join-grid fade-in slide-up">
-          <article class="card hover-lift fade-in slide-up" id="about-us">
-            <div class="tag">About Us</div>
-            <h3 style="margin-top: 14px;">What Pinnacle SMP is about</h3>
-            <p>
-              Pinnacle SMP is designed to feel like a strong community first and a server second: long-term progression,
-              memorable events, collaborative building, and a polished experience that makes players want to keep coming back.
-            </p>
-            <ul class="about-list">
-              <li>Community-focused survival gameplay</li>
-              <li>Vanilla first server experience</li>
-              <li>Room for builders, explorers, redstoners, and casual players</li>
-              <li>Events and seasonal highlights to keep things fresh</li>
-            </ul>
-            <div class="cta-row">
-              <a class="btn btn-secondary hover-lift" href="about-us.html">Learn more</a>
-              <a class="btn btn-secondary hover-lift" href="vote-history.html">Vote History</a>
-              <a class="btn btn-secondary hover-lift" href="members.html">View Members</a>
-            </div>
-          </article>
-
-          <article class="card hover-lift fade-in slide-up" id="apply-here">
-            <div class="tag">Apply Here</div>
-            <h3 style="margin-top: 14px;">Application flow</h3>
-            <p>
-              Please allow up to 24hrs for your application to be processesed. You may recieve an interview message before
-              being accepted.
-            </p>
-            <ol class="apply-steps">
-              <li>Read the server rules.</li>
-              <li>Learn about the community and server style.</li>
-              <li>Submit your application through the official form.</li>
-              <li>Wait for approval instructions from staff.</li>
-            </ol>
-            <div class="cta-row">
-              <a class="btn btn-primary hover-lift" href="rules.html">Review Rules Before Applying</a>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
   </main>
 
   <footer class="site-footer">
@@ -1240,6 +1381,214 @@
         });
       });
     })();
+
+    (() => {
+      const rules = {
+        age: {
+          title: "18+ Only",
+          category: "Community Standards",
+          icon: "🔞",
+          summary: "Pinnacle SMP is an 18+ server. You must be 18 years old or older to join.",
+          details: [
+            "Members must be 18 or older.",
+            "This applies to all applicants and players.",
+            "Age requirements help keep the server mature and community-focused."
+          ],
+          note: "Players who do not meet the age requirement are not eligible to join."
+        },
+        cheating: {
+          title: "No Cheating",
+          category: "Gameplay Rules",
+          icon: "💎",
+          summary: "Do not use cheats, x-ray, duping, exploits, hacked clients, or unfair mods.",
+          details: [
+            "No x-ray, kill aura, fly hacks, botting, or exploit abuse.",
+            "Duping and bug abuse are not allowed.",
+            "Map downloads, unofficial maps, or unfair use of the seed are considered cheating.",
+            "Exploits caused by plugins or vanilla bugs must be reported and may not be used."
+          ],
+          note: "Allowed mods include Fullbright, performance/FPS mods, Optifine, Lunar Client, Badlion Client, and mini-maps or waypoints that only show known information."
+        },
+        griefing: {
+          title: "No Griefing",
+          category: "Gameplay Rules",
+          icon: "🔥",
+          summary: "No griefing, stealing, or unwanted destruction anywhere on the server.",
+          details: [
+            "This includes claimed land, unclaimed land, member bases, public areas, and revenge griefing.",
+            "Mass destruction of the map is considered griefing.",
+            "No lava casting.",
+            "Do not fill another player’s inventory with unwanted items.",
+            "Do not steal from other players."
+          ],
+          note: "If you are unsure whether something counts as griefing, ask an Admin or Founding Member first."
+        },
+        pvp: {
+          title: "PvP Requires Consent",
+          category: "Gameplay Rules",
+          icon: "⚔️",
+          summary: "PvP must be agreed to by all players involved. Random PvP is not allowed.",
+          details: [
+            "Do not attack players without consent.",
+            "If PvP rules are agreed upon, they must be followed.",
+            "Using items that negatively affect other players may count as unconsented PvP or griefing.",
+            "Reporting issues is preferred over escalating fights."
+          ],
+          note: "Hitting another player can make situations harder to judge, so report problems instead of turning them into fights."
+        },
+        respect: {
+          title: "Respect Others",
+          category: "Community Standards",
+          icon: "🛡️",
+          summary: "Treat others with respect and decency. Harassment, hate speech, racism, and personal attacks are not allowed.",
+          details: [
+            "No harassment or personal attacks.",
+            "No hate speech, racism, or excessive sexual content.",
+            "No excessive swearing or hostile behavior.",
+            "If someone is harassing you, report it instead of retaliating."
+          ],
+          note: "Report problems to an Admin or Founding Member through Discord. Do not argue or retaliate."
+        },
+        chat: {
+          title: "Chat Rules",
+          category: "Community Standards",
+          icon: "💬",
+          summary: "Keep public chat readable, respectful, and in English so staff can properly moderate it.",
+          details: [
+            "No spamming, begging, or advertising.",
+            "Public chat must stay in English.",
+            "Non-English languages may be used in private messages if both players are comfortable with it.",
+            "Avoid sensitive topics in public chat, including self-harm, politics, drugs, violence, and religion."
+          ],
+          note: "Politics or religion may only be discussed if the other person agrees. If they want it to stop, you must stop."
+        },
+        lag: {
+          title: "Limit Lag",
+          category: "Server Etiquette",
+          icon: "⚙️",
+          summary: "Build farms and machines responsibly. Redstone, entities, and farms are allowed only if they do not cause excessive lag.",
+          details: [
+            "Redstone clocks, entity cramming, and mob farms are allowed if they do not cause too much lag.",
+            "Machines should be useful and efficient.",
+            "Machines that run constantly and do not produce anything useful should be turned off when not in use.",
+            "Staff may ask you to limit, change, or remove lag-heavy builds."
+          ],
+          note: "Machines or farms that constantly retract and replace water sources are not allowed."
+        },
+        chunks: {
+          title: "No Chunk Loaders",
+          category: "Server Etiquette",
+          icon: "🌐",
+          summary: "Chunk loaders are not allowed on Pinnacle SMP.",
+          details: [
+            "Do not build or use chunk loaders.",
+            "Do not create systems intended to keep chunks loaded while players are away.",
+            "If a farm requires constant loading to function, it is not allowed."
+          ],
+          note: "This helps protect server performance for everyone."
+        },
+        gambling: {
+          title: "No Gambling or Scamming",
+          category: "Server Etiquette",
+          icon: "🎲",
+          summary: "Gambling, casinos, chance-based games, mystery boxes, and scamming are not allowed.",
+          details: [
+            "No casinos or gambling builds.",
+            "No chance-based games for profit.",
+            "No mystery boxes or similar systems.",
+            "Do not scam other players."
+          ],
+          note: "This rule helps protect players and reduces situations where admins have to judge malicious intent."
+        },
+        reports: {
+          title: "Report Issues",
+          category: "Server Etiquette",
+          icon: "📣",
+          summary: "Do not try to moderate other players on behalf of staff. Report issues instead.",
+          details: [
+            "Do not take over situations staff are already handling.",
+            "It is okay to remind someone of a rule, but do not argue or escalate.",
+            "If asked or allowed by an admin, you may help.",
+            "Report issues to an Admin or Founding Member."
+          ],
+          note: "If an admin is already dealing with a situation, let them handle it."
+        },
+        alts: {
+          title: "No Alt Accounts",
+          category: "Gameplay Rules",
+          icon: "👥",
+          summary: "Alt accounts are not allowed.",
+          details: [
+            "Do not use alternate Minecraft accounts on the server.",
+            "Do not use another account to bypass punishments.",
+            "Joining with another account after being banned will result in harsher punishment."
+          ],
+          note: "This applies to ban evasion, mute evasion, and other punishment bypass attempts."
+        },
+        illegal: {
+          title: "No Illegal Activity",
+          category: "Server Etiquette",
+          icon: "🚫",
+          summary: "Illegal content or activity is not allowed in-game, on Discord, or anywhere else the community operates.",
+          details: [
+            "Do not share illegal content.",
+            "Do not conduct illegal activity through the community.",
+            "This applies in-game, on Discord, and anywhere else Pinnacle SMP operates.",
+            "Questions of legality are left to admin discretion."
+          ],
+          note: "Staff may remove content or take action when needed to protect the community."
+        }
+      };
+
+      const panel = document.querySelector("[data-rule-detail-panel]");
+      const buttons = document.querySelectorAll("[data-rule-key]");
+      if (!panel || !buttons.length) return;
+
+      const title = panel.querySelector("[data-rule-title]");
+      const category = panel.querySelector("[data-rule-category]");
+      const icon = panel.querySelector("[data-rule-icon]");
+      const summary = panel.querySelector("[data-rule-summary]");
+      const list = panel.querySelector("[data-rule-list]");
+      const note = panel.querySelector("[data-rule-note]");
+
+      const setActiveRule = (key, shouldScroll = false) => {
+        const rule = rules[key];
+        if (!rule) return;
+
+        buttons.forEach((button) => {
+          const isActive = button.dataset.ruleKey === key;
+          button.setAttribute("aria-pressed", String(isActive));
+          if (isActive) {
+            button.setAttribute("aria-current", "true");
+          } else {
+            button.removeAttribute("aria-current");
+          }
+        });
+
+        title.textContent = rule.title;
+        category.textContent = rule.category;
+        icon.textContent = rule.icon;
+        summary.textContent = rule.summary;
+        note.textContent = rule.note;
+        list.innerHTML = "";
+        rule.details.forEach((detail) => {
+          const item = document.createElement("li");
+          item.textContent = detail;
+          list.appendChild(item);
+        });
+
+        if (shouldScroll && window.matchMedia("(max-width: 980px)").matches) {
+          panel.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      };
+
+      buttons.forEach((button) => {
+        button.addEventListener("click", () => setActiveRule(button.dataset.ruleKey, true));
+      });
+
+      setActiveRule("age");
+    })();
+
   </script>
 </body>
 </html>
