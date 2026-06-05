@@ -231,20 +231,27 @@
 <body>
 
   <header class="site-header">
-    <div class="nav-wrap">
-      <a href="index.html#home" class="brand">
-        <img class="brand-logo" src="https://res.cloudinary.com/ds4p9jsuf/image/upload/v1780430105/94ED434F-0A09-4D1B-9E18-B5B4B9248641_fbtaz7.png" alt="Pinnacle SMP Season 12 logo" />
-        <span>Pinnacle SMP</span>
-      </a>
+    <div class="container nav-wrap">
+      <div class="brand-group">
+        <a href="index.html#home" class="brand">
+          <img class="brand-logo" src="https://res.cloudinary.com/ds4p9jsuf/image/upload/v1780430105/94ED434F-0A09-4D1B-9E18-B5B4B9248641_fbtaz7.png" alt="Pinnacle SMP Season 12 logo" />
+          <span>Pinnacle SMP</span>
+        </a>
+        <a id="server-status-badge" class="brand-status" href="members.html" aria-live="polite">
+          <span class="status-dot brand-status-dot" aria-hidden="true"></span>
+          <span id="server-status-text">Checking…</span>
+        </a>
+      </div>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav">Menu</button>
+
       <nav id="mobile-nav" aria-label="Main navigation">
         <div class="cta-row nav-buttons" role="list">
-          <a class="btn btn-secondary hover-lift" href="index.html#home">Home</a>
-          <a class="btn btn-secondary hover-lift" href="index.html#news">Server News</a>
-          <a class="btn btn-secondary hover-lift" href="index.html#events">Events</a>
-          <a class="btn btn-secondary hover-lift" href="index.html#rules">Server Rules</a>
-          <a class="btn btn-secondary hover-lift" href="gallery.html">Gallery</a>
-          <a class="btn btn-secondary hover-lift" href="index.html#join">Join</a>
+              <a class="btn btn-secondary hover-lift" href="index.html#home">Home</a>
+              <a class="btn btn-secondary hover-lift" href="index.html#news">Server News</a>
+              <a class="btn btn-secondary hover-lift" href="index.html#events">Events</a>
+              <a class="btn btn-secondary hover-lift" href="rules.html">Server Rules</a>
+              <a class="btn btn-secondary hover-lift" href="gallery.html">Gallery</a>
+              <a class="btn btn-secondary hover-lift" href="index.html#join">Join</a>
         </div>
       </nav>
     </div>
@@ -270,6 +277,58 @@ Currently Pinnacle is on its 12th season and has no current plans on starting se
     </section>
   </main>
 
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <div class="brand" style="margin-bottom: 12px;">
+          <img class="brand-logo" src="https://res.cloudinary.com/ds4p9jsuf/image/upload/v1780430105/94ED434F-0A09-4D1B-9E18-B5B4B9248641_fbtaz7.png" alt="Pinnacle SMP Season 12 logo" />
+          <span>Pinnacle SMP</span>
+        </div>
+        <p>
+          The Pinnacle SMP server is in no way affiliated with Mojang Studios or Microsoft,
+          nor should it be considered endorsed by either company.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Membership</h4>
+        <div class="footer-links">
+          <a href="about-us.html">About Us</a>
+          <a href="members.html">Members</a>
+          <a href="vote-history.html">Vote History</a>
+          <a href="tournament-standings.html">Tournament Standings</a>
+          <a href="rules.html">Server Rules</a>
+          <a href="index.html#news">Server News</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-links">
+          <a href="https://forms.gle/iLaR76yLUEnRFyt58" target="_blank" rel="noopener noreferrer">Contact Us</a>
+          <a href="faq.html">FAQs</a>
+          <a href="https://forms.gle/2Wp7HmhhMbxEsafM7" target="_blank" rel="noopener noreferrer">Ban Appeal</a>
+          <a href="https://forms.gle/gB6qyvpkKUXfC9jr9" target="_blank" rel="noopener noreferrer">Plugin Suggestions</a>
+          <a href="https://discord.gg/97hdX25n7F" target="_blank" rel="noopener noreferrer">Whitelist Application</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>External</h4>
+        <div class="footer-links">
+          <a href="vote-links.html">Vote Links</a>
+          <a href="https://www.minecraft.net/en-us/minecraft-tips-for-beginners#getting_started" target="_blank" rel="noopener noreferrer">How to Play</a>
+          <a href="https://www.minecraft.net/" target="_blank" rel="noopener noreferrer">Minecraft.net</a>
+          <a href="https://www.bisecthosting.com/donate/299b5130" target="_blank" rel="noopener noreferrer">Server Donation</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      © 2026 Pinnacle SMP. All rights reserved.
+    </div>
+  </footer>
+
   <script>
     (() => {
       const header = document.querySelector('.site-header');
@@ -294,5 +353,7 @@ Currently Pinnacle is on its 12th season and has no current plans on starting se
     })();
   </script>
 
+  <script src="assets/server-status.js"></script>
+  <script src="assets/server-status-badge.js"></script>
 </body>
 </html>

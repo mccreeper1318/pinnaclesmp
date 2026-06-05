@@ -94,7 +94,7 @@ body {
   letter-spacing: 0.03em;
   text-transform: uppercase;
 }
-.status-dot {
+.profile-status .status-dot {
   width: 10px;
   height: 10px;
   border-radius: 999px;
@@ -174,4 +174,25 @@ body {
   .hero { grid-template-columns: 1fr; text-align: center; }
   .player-head, .head-placeholder { margin-inline: auto; }
   .col-4, .col-6, .col-8 { grid-column: span 12; }
+}
+
+.site-footer .brand-logo,
+.site-footer img.brand-logo {
+  width: 46px !important;
+  height: 46px !important;
+  max-width: 46px !important;
+  max-height: 46px !important;
+  display: block !important;
+  object-fit: contain !important;
+  flex-shrink: 0 !important;
+}
+
+@media (max-width: 760px) {
+  .site-footer .brand-logo,
+  .site-footer img.brand-logo {
+    width: 42px !important;
+    height: 42px !important;
+    max-width: 42px !important;
+    max-height: 42px !important;
+  }
 }
