@@ -94,7 +94,7 @@ body {
   letter-spacing: 0.03em;
   text-transform: uppercase;
 }
-.status-dot {
+.profile-status .status-dot {
   width: 10px;
   height: 10px;
   border-radius: 999px;

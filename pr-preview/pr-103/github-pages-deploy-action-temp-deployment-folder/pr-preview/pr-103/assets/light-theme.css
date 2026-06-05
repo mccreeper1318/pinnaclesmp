@@ -263,6 +263,24 @@
   font-size: 0.95rem !important;
 }
 
+.site-footer .brand {
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+}
+
+.site-footer .brand-logo {
+  width: 46px !important;
+  height: 46px !important;
+  object-fit: contain !important;
+  flex-shrink: 0 !important;
+}
+
+.site-footer .brand span { font-size: 1rem !important; }
+
 .site-footer .footer-brand p,
 .site-footer .footer-col a {
   color: var(--muted) !important;
@@ -313,6 +331,9 @@
   .site-header .brand { gap: 10px !important; }
   .site-header .brand span { font-size: 0.95rem !important; letter-spacing: 0.06em !important; }
   .site-header .brand-logo { width: 42px !important; height: 42px !important; }
+  .site-footer .brand { gap: 10px !important; }
+  .site-footer .brand span { font-size: 0.95rem !important; letter-spacing: 0.06em !important; }
+  .site-footer .brand-logo { width: 42px !important; height: 42px !important; }
   .site-header .brand-status { margin-left: 0 !important; padding: 6px 10px !important; font-size: 0.74rem !important; }
   .site-header .menu-toggle { display: inline-flex !important; }
 
