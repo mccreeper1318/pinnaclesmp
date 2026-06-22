@@ -99,7 +99,8 @@
 
 
 .site-warning-banner {
-  position: relative;
+  position: sticky;
+  top: 82px;
   z-index: 45;
   background: linear-gradient(135deg, rgba(249, 226, 175, 0.96), rgba(250, 179, 135, 0.96));
   border-bottom: 1px solid rgba(250, 179, 135, 0.62);
@@ -117,6 +118,10 @@
 }
 
 @media (max-width: 760px) {
+  .site-warning-banner {
+    top: 70px;
+  }
+
   .site-warning-banner__inner {
     width: min(calc(100% - 20px), 1240px);
     font-size: 0.92rem;
