@@ -16,8 +16,8 @@
     label.textContent = `Online ${playersOnline}/20`;
   };
 
-  const refreshServerStatus = async () => {
-    const data = await statusService.fetchServerStatus();
+  const refreshServerStatus = async (force = false) => {
+    const data = await statusService.fetchServerStatus({ force });
     if (!data.online) {
       setOffline();
       return;
@@ -27,5 +27,5 @@
   };
 
   refreshServerStatus();
-  window.setInterval(refreshServerStatus, 30_000);
+  window.setInterval(() => refreshServerStatus(true), 30_000);
 })();
