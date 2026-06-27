@@ -20,6 +20,6 @@
     const playerName = container.dataset.player;
     const url = `/assets/player-stats/players/${encodeURIComponent(playerName)}.json?v=${Date.now()}`;
     try { const response = await fetch(url, { cache: 'no-store' }); if (!response.ok) throw new Error(`HTTP ${response.status}`); renderDashboard(container, await response.json()); }
-    catch (error) { renderFallback(container, playerName, 'Latest JSON could not be loaded yet. Please check back after the next PinnacleStats export.'); }
+    catch (error) { renderFallback(container, playerName, 'Stats are not available for this member yet. They may not have server stat data published under this username.'); }
   });
 })();
