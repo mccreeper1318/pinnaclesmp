@@ -20,6 +20,6 @@
     const playerName = container.dataset.player;
     const url = `/assets/player-stats/players/${encodeURIComponent(playerName)}.json?v=${Date.now()}`;
     try { const response = await fetch(url, { cache: 'no-store' }); if (!response.ok) throw new Error(`HTTP ${response.status}`); renderDashboard(container, await response.json()); }
-    catch (error) { renderFallback(container, playerName, 'Stats are not available for this member yet. They may not have server stat data published under this username.'); }
+    catch (error) { renderFallback(container, playerName, 'No server stats are available for this player yet. This usually means they have not joined the server since stats tracking was added, or their stats have not been published yet.'); }
   });
 })();
