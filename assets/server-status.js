@@ -86,5 +86,48 @@
     return inFlightRequest;
   };
 
+
+  const initDismissibleWarningBanner = () => {
+    const banner = document.querySelector(".site-warning-banner");
+    if (!banner) return;
+
+    const dismissedKey = "pinnacle-membership-warning-dismissed";
+
+    try {
+      if (window.localStorage.getItem(dismissedKey) === "true") {
+        banner.hidden = true;
+        return;
+      }
+    } catch (error) {
+      // Ignore unavailable storage; the banner can still be dismissed for this page view.
+    }
+
+    if (banner.querySelector(".site-warning-banner__dismiss")) return;
+
+    const dismissButton = document.createElement("button");
+    dismissButton.className = "site-warning-banner__dismiss";
+    dismissButton.type = "button";
+    dismissButton.setAttribute("aria-label", "Close membership notice");
+    dismissButton.textContent = "×";
+
+    dismissButton.addEventListener("click", () => {
+      banner.hidden = true;
+
+      try {
+        window.localStorage.setItem(dismissedKey, "true");
+      } catch (error) {
+        // Ignore unavailable storage; hiding the banner for this page view is enough.
+      }
+    });
+
+    banner.appendChild(dismissButton);
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initDismissibleWarningBanner, { once: true });
+  } else {
+    initDismissibleWarningBanner();
+  }
+
   window.PinnacleServerStatus = { fetchServerStatus };
 })();
