@@ -21,6 +21,11 @@
         opacity:1 !important;
         -webkit-text-fill-color:#444 !important;
       }
+      .profile-site-shell .stat-row__label {
+        color:#333 !important;
+        opacity:1 !important;
+        -webkit-text-fill-color:#333 !important;
+      }
       .profile-site-shell .stat-row__value,
       .profile-site-shell .stat-row__list,
       .profile-site-shell .stat-row__list li {
@@ -32,6 +37,11 @@
         color:#555 !important;
         opacity:1 !important;
         -webkit-text-fill-color:#555 !important;
+      }
+      .profile-site-shell .footnote {
+        color:#333 !important;
+        opacity:1 !important;
+        -webkit-text-fill-color:#333 !important;
       }
     `;
     document.head.appendChild(style);
