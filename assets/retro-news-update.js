@@ -61,6 +61,42 @@
     return true;
   }
 
+  function getHashArticle(archive) {
+    if (!location.hash) return null;
+
+    let id;
+    try {
+      id = decodeURIComponent(location.hash.slice(1));
+    } catch {
+      id = location.hash.slice(1);
+    }
+
+    const target = document.getElementById(id);
+    return target instanceof HTMLDetailsElement && target.classList.contains('news-archive-item') && archive.contains(target)
+      ? target
+      : null;
+  }
+
+  function openArchiveArticle(archive, newest) {
+    const hashArticle = getHashArticle(archive);
+
+    if (hashArticle) {
+      archive.querySelectorAll('details.news-archive-item').forEach(item => {
+        item.open = item === hashArticle;
+      });
+      return;
+    }
+
+    // Only make the newest article the default when the URL is not targeting
+    // another archive entry. An unknown hash leaves the archive's existing
+    // open state untouched rather than overriding the requested destination.
+    if (!location.hash) {
+      archive.querySelectorAll('details.news-archive-item').forEach(item => {
+        item.open = item === newest;
+      });
+    }
+  }
+
   function updateArchive() {
     if (!/(^|\/)news\.html$/.test(location.pathname)) return true;
     const archive = document.querySelector('.news-archive');
@@ -79,7 +115,13 @@
       archive.prepend(newest);
     }
 
-    archive.querySelectorAll('details.news-archive-item').forEach(item => { item.open = item === newest; });
+    openArchiveArticle(archive, newest);
+
+    if (!archive.dataset.hashListenerAdded) {
+      window.addEventListener('hashchange', () => openArchiveArticle(archive, newest));
+      archive.dataset.hashListenerAdded = 'true';
+    }
+
     archive.dataset.retroNewsReady = 'true';
     return true;
   }
