@@ -16,7 +16,6 @@
     const style = document.createElement('style');
     style.id = 'retro-news-update-style';
     style.textContent = `
-      .news-heading-row{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
       .new-badge{display:inline-block;margin-left:8px;padding:2px 7px;border:2px outset #fff;background:#ff0;color:#c00;font:bold 12px "Courier New",monospace;vertical-align:middle;animation:retro-news-blink .8s steps(1,end) infinite}
       @keyframes retro-news-blink{0%,49%{visibility:visible}50%,100%{visibility:hidden}}
       @media (prefers-reduced-motion:reduce){.new-badge{animation:none}}
@@ -25,7 +24,10 @@
   }
 
   function updateHome() {
-    if (!/(^|\/)index\.html$/.test(location.pathname) && location.pathname !== '/' && !/\/pr-preview\/pr-\d+\/?$/.test(location.pathname)) return false;
+    const isHome = /(^|\/)index\.html$/.test(location.pathname) || location.pathname === '/' || /\/pr-preview\/pr-\d+\/?$/.test(location.pathname);
+    if (!isHome) return true;
+    if (document.querySelector('.newest-news-item .new-badge')) return true;
+
     const heading = [...document.querySelectorAll('main.content h2')].find(el => el.textContent.trim() === 'Latest Server News');
     if (!heading) return false;
 
@@ -49,9 +51,10 @@
   }
 
   function updateArchive() {
-    if (!/(^|\/)news\.html$/.test(location.pathname)) return false;
+    if (!/(^|\/)news\.html$/.test(location.pathname)) return true;
     const archive = document.querySelector('.news-archive');
     if (!archive) return false;
+    if (archive.dataset.retroNewsReady === 'true') return true;
 
     let newest = document.getElementById(ARTICLE.id);
     if (!newest) {
@@ -63,23 +66,18 @@
     }
 
     archive.querySelectorAll('details.news-archive-item').forEach(item => { item.open = item === newest; });
+    archive.dataset.retroNewsReady = 'true';
     return true;
   }
 
-  function apply() {
-    addStyles();
-    const homeDone = updateHome();
-    const archiveDone = updateArchive();
-    return homeDone || archiveDone;
-  }
-
   function start() {
-    apply();
+    addStyles();
     let attempts = 0;
     const timer = setInterval(() => {
       attempts += 1;
-      apply();
-      if (attempts >= 40) clearInterval(timer);
+      const homeReady = updateHome();
+      const archiveReady = updateArchive();
+      if ((homeReady && archiveReady) || attempts >= 40) clearInterval(timer);
     }, 250);
   }
 
