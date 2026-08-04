@@ -7,7 +7,7 @@
     body: `<p>The Pinnacle SMP website has received a complete visual overhaul inspired by the personal websites, gaming fan pages, and community portals of the late 1990s.</p>
       <p>The new design uses classic beveled panels, bright blue title bars, compact sidebars, pixel-style details, scrolling announcements, web counters, and other familiar elements from the early days of the internet. The goal was to give Pinnacle a more distinctive and memorable home while reflecting the community-focused character of the server.</p>
       <p>Although the website now looks intentionally retro, its important modern features remain available. Visitors can still view live server information, open member profiles, browse PinnacleStats dashboards, check tournament standings, read server rules, access voting and contact links, and explore the complete Season 11 and Season 12 screenshot galleries.</p>
-      <p>The members page has also been reorganized with rank-colored sections and direct links to each player profile. Server news is now stored in a collapsible archive so older announcements remain available without making the page excessively long.</p>
+      <p>Server news is now stored in a collapsible archive so older announcements remain available without making the page excessively long.</p>
       <p>This redesign gives Pinnacle SMP a website that feels less like a generic modern template and more like a community site built specifically for the server—just with a little dial-up-era personality.</p>`
   };
 
@@ -16,7 +16,18 @@
     const style = document.createElement('style');
     style.id = 'retro-news-update-style';
     style.textContent = `
-      .new-badge{display:inline-block;margin-left:8px;padding:2px 7px;border:2px outset #fff;background:#ff0;color:#c00;font:bold 12px "Courier New",monospace;vertical-align:middle;animation:retro-news-blink .8s steps(1,end) infinite}
+      .new-badge{
+        display:inline;
+        margin-left:8px;
+        color:#c00;
+        background:none;
+        border:0;
+        padding:0;
+        font:bold 13px "Courier New",monospace;
+        letter-spacing:.04em;
+        vertical-align:baseline;
+        animation:retro-news-blink .8s steps(1,end) infinite;
+      }
       @keyframes retro-news-blink{0%,49%{visibility:visible}50%,100%{visibility:hidden}}
       @media (prefers-reduced-motion:reduce){.new-badge{animation:none}}
     `;
@@ -50,11 +61,50 @@
     return true;
   }
 
+  function getHashArticle(archive) {
+    if (!location.hash) return null;
+
+    let id;
+    try {
+      id = decodeURIComponent(location.hash.slice(1));
+    } catch {
+      id = location.hash.slice(1);
+    }
+
+    const target = document.getElementById(id);
+    return target instanceof HTMLDetailsElement && target.classList.contains('news-archive-item') && archive.contains(target)
+      ? target
+      : null;
+  }
+
+  function openArchiveArticle(archive, newest) {
+    const hashArticle = getHashArticle(archive);
+
+    if (hashArticle) {
+      archive.querySelectorAll('details.news-archive-item').forEach(item => {
+        item.open = item === hashArticle;
+      });
+      return;
+    }
+
+    // Only make the newest article the default when the URL is not targeting
+    // another archive entry. An unknown hash leaves the archive's existing
+    // open state untouched rather than overriding the requested destination.
+    if (!location.hash) {
+      archive.querySelectorAll('details.news-archive-item').forEach(item => {
+        item.open = item === newest;
+      });
+    }
+  }
+
   function updateArchive() {
     if (!/(^|\/)news\.html$/.test(location.pathname)) return true;
     const archive = document.querySelector('.news-archive');
     if (!archive) return false;
     if (archive.dataset.retroNewsReady === 'true') return true;
+
+    const intro = archive.previousElementSibling;
+    if (intro?.tagName === 'P') intro.textContent = 'Open an article to read it.';
 
     let newest = document.getElementById(ARTICLE.id);
     if (!newest) {
@@ -65,7 +115,13 @@
       archive.prepend(newest);
     }
 
-    archive.querySelectorAll('details.news-archive-item').forEach(item => { item.open = item === newest; });
+    openArchiveArticle(archive, newest);
+
+    if (!archive.dataset.hashListenerAdded) {
+      window.addEventListener('hashchange', () => openArchiveArticle(archive, newest));
+      archive.dataset.hashListenerAdded = 'true';
+    }
+
     archive.dataset.retroNewsReady = 'true';
     return true;
   }
