@@ -1,133 +1,52 @@
 (() => {
-  const STATUS_API = "https://api.mcsrvstat.us/3/pinnaclesmp.mcserv.fun";
-  const CACHE_KEY = "pinnacle-server-status";
-  const CACHE_TTL = 25_000;
-  const REQUEST_TIMEOUT = 5_000;
-  let inFlightRequest = null;
+  const STATUS_API='https://api.mcsrvstat.us/3/pinnaclesmp.mcserv.fun';
+  const CACHE_KEY='pinnacle-server-status', CACHE_TTL=25000, REQUEST_TIMEOUT=5000;
+  let inFlightRequest=null;
+  const normalize=list=>{const n=p=>typeof p==='string'?p:(p&&typeof p.name==='string'?p.name:null);return Array.isArray(list)?list.map(n).filter(Boolean):(list&&typeof list==='object'?Object.values(list).map(n).filter(Boolean):[])};
+  const unavailable=()=>({available:false,online:false,playersOnline:0,playersMax:20,onlinePlayers:[],version:'Paper 26.2'});
+  const read=()=>{try{const c=JSON.parse(sessionStorage.getItem(CACHE_KEY)||'null');return c&&Date.now()-c.cachedAt<=CACHE_TTL?c.status:null}catch{return null}};
+  const write=status=>{try{sessionStorage.setItem(CACHE_KEY,JSON.stringify({cachedAt:Date.now(),status}))}catch{}};
+  async function request(){const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),REQUEST_TIMEOUT);try{const response=await fetch(STATUS_API,{cache:'no-store',signal:controller.signal});if(!response.ok)throw new Error('Bad response');const data=await response.json(),onlinePlayers=normalize(data?.players?.list),playersOnline=Number.isFinite(Number(data?.players?.online))?Number(data.players.online):onlinePlayers.length,playersMax=Number.isFinite(Number(data?.players?.max))?Number(data.players.max):20;return{available:true,online:!!data.online,playersOnline,playersMax,onlinePlayers,version:data.version||'Paper 26.2'}}finally{clearTimeout(timer)}}
+  async function fetchServerStatus({force=false}={}){const cached=!force?read():null;if(cached)return cached;if(!inFlightRequest)inFlightRequest=request().then(s=>(write(s),s)).catch(()=>read()||unavailable()).finally(()=>inFlightRequest=null);return inFlightRequest}
+  window.PinnacleServerStatus={fetchServerStatus};
 
-  const normalizePlayerList = (listValue) => {
-    const getPlayerName = (player) => {
-      if (typeof player === "string") return player;
-      if (player && typeof player === "object" && typeof player.name === "string") {
-        return player.name;
+  const inProfiles=/\/profiles\//.test(location.pathname);
+  if(inProfiles&&!document.querySelector('style[data-profile-readability]')){
+    const style=document.createElement('style');
+    style.dataset.profileReadability='true';
+    style.textContent=`
+      .profile-site-shell .stat-category-card > p,
+      .profile-site-shell .stat-category-card > .stat-category-description {
+        color:#444 !important;
+        opacity:1 !important;
+        -webkit-text-fill-color:#444 !important;
       }
-      return null;
-    };
-
-    if (Array.isArray(listValue)) {
-      return listValue.map(getPlayerName).filter((playerName) => typeof playerName === "string");
-    }
-
-    if (listValue && typeof listValue === "object") {
-      return Object.values(listValue).map(getPlayerName).filter((playerName) => typeof playerName === "string");
-    }
-
-    return [];
-  };
-
-  const offlineStatus = () => ({ online: false, playersOnline: 0, onlinePlayers: [] });
-
-  const readCachedStatus = () => {
-    try {
-      const cached = JSON.parse(window.sessionStorage.getItem(CACHE_KEY) || "null");
-      if (!cached || Date.now() - cached.cachedAt > CACHE_TTL) return null;
-      return cached.status;
-    } catch (error) {
-      return null;
-    }
-  };
-
-  const writeCachedStatus = (status) => {
-    try {
-      window.sessionStorage.setItem(CACHE_KEY, JSON.stringify({ cachedAt: Date.now(), status }));
-    } catch (error) {
-      // Ignore unavailable storage; the live request result is still returned.
-    }
-  };
-
-  const requestStatus = async () => {
-    const controller = new AbortController();
-    const timeoutId = window.setTimeout(() => controller.abort(), REQUEST_TIMEOUT);
-
-    try {
-      const response = await fetch(STATUS_API, { cache: "no-store", signal: controller.signal });
-      if (!response.ok) throw new Error("Bad response");
-      const data = await response.json();
-
-      const onlinePlayers = normalizePlayerList(data?.players?.list);
-      const playersOnlineRaw = Number(data?.players?.online);
-      const playersOnline = Number.isFinite(playersOnlineRaw) ? playersOnlineRaw : onlinePlayers.length;
-      const hasExplicitOnlineFlag = typeof data?.online === "boolean";
-      const inferredOnline = onlinePlayers.length > 0 || playersOnline > 0 || Number(data?.players?.max) > 0;
-      const online = hasExplicitOnlineFlag ? data.online : inferredOnline;
-
-      return online ? { online: true, playersOnline, onlinePlayers } : offlineStatus();
-    } finally {
-      window.clearTimeout(timeoutId);
-    }
-  };
-
-  const fetchServerStatus = async ({ force = false } = {}) => {
-    const cached = !force ? readCachedStatus() : null;
-    if (cached) return cached;
-
-    if (!inFlightRequest) {
-      inFlightRequest = requestStatus()
-        .then((status) => {
-          writeCachedStatus(status);
-          return status;
-        })
-        .catch(() => readCachedStatus() || offlineStatus())
-        .finally(() => {
-          inFlightRequest = null;
-        });
-    }
-
-    return inFlightRequest;
-  };
-
-
-  const initDismissibleWarningBanner = () => {
-    const banner = document.querySelector(".site-warning-banner");
-    if (!banner) return;
-
-    const dismissedKey = "pinnacle-membership-warning-dismissed";
-
-    try {
-      if (window.localStorage.getItem(dismissedKey) === "true") {
-        banner.hidden = true;
-        return;
+      .profile-site-shell .stat-row__label {
+        color:#333 !important;
+        opacity:1 !important;
+        -webkit-text-fill-color:#333 !important;
       }
-    } catch (error) {
-      // Ignore unavailable storage; the banner can still be dismissed for this page view.
-    }
-
-    if (banner.querySelector(".site-warning-banner__dismiss")) return;
-
-    const dismissButton = document.createElement("button");
-    dismissButton.className = "site-warning-banner__dismiss";
-    dismissButton.type = "button";
-    dismissButton.setAttribute("aria-label", "Close membership notice");
-    dismissButton.textContent = "×";
-
-    dismissButton.addEventListener("click", () => {
-      banner.hidden = true;
-
-      try {
-        window.localStorage.setItem(dismissedKey, "true");
-      } catch (error) {
-        // Ignore unavailable storage; hiding the banner for this page view is enough.
+      .profile-site-shell .stat-row__value,
+      .profile-site-shell .stat-row__list,
+      .profile-site-shell .stat-row__list li {
+        color:#111 !important;
+        opacity:1 !important;
+        -webkit-text-fill-color:#111 !important;
       }
-    });
-
-    banner.appendChild(dismissButton);
-  };
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initDismissibleWarningBanner, { once: true });
-  } else {
-    initDismissibleWarningBanner();
+      .profile-site-shell .highlight-card__amount {
+        color:#555 !important;
+        opacity:1 !important;
+        -webkit-text-fill-color:#555 !important;
+      }
+      .profile-site-shell .footnote {
+        color:#333 !important;
+        opacity:1 !important;
+        -webkit-text-fill-color:#333 !important;
+      }
+    `;
+    document.head.appendChild(style);
   }
 
-  window.PinnacleServerStatus = { fetchServerStatus };
+  const retro=document.querySelector('link[href$="assets/style.css"]');
+  if(!retro&&!document.querySelector('script[data-major-loader]')){const script=document.createElement('script');script.src=`${inProfiles?'../':''}assets/script.js`;script.dataset.majorLoader='true';script.defer=true;document.head.appendChild(script)}
 })();
