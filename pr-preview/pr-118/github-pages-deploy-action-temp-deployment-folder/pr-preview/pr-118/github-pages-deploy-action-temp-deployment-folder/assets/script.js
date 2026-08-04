@@ -126,7 +126,7 @@
       </section>
       <section class="box">
         <div class="box-title">Web Counter</div>
-        <div class="box-body center"><div class="hit-counter" data-counter>0000000</div><p class="small">page views since reset</p></div>
+        <div class="box-body center"><div class="hit-counter" data-counter>0000000</div><p class="small">unique visitors since reset</p></div>
       </section>
       <section class="box">
         <div class="box-title">Server Time</div>
@@ -160,36 +160,25 @@
     const counters = document.querySelectorAll('[data-counter]');
     if (!counters.length) return;
 
+    const countedKey = 'pinnacle-global-visitor-counted';
+    const firstVisit = !localStorage.getItem(countedKey);
     const base = 'https://api.counterapi.dev/v1/pinnaclesmp-org/website-visitors';
-    const lastValueKey = 'pinnacle-last-counter-value';
-
-    counters.forEach(counter => {
-      const caption = counter.parentElement?.querySelector('.small');
-      if (caption) caption.textContent = 'page views since reset';
-    });
-
-    const display = value => {
-      const safeValue = Number.isFinite(value) && value >= 0 ? Math.floor(value) : 0;
-      counters.forEach(el => { el.textContent = String(safeValue).padStart(7, '0'); });
-    };
 
     try {
-      const response = await fetch(`${base}/up?t=${Date.now()}`, { cache: 'no-store' });
-      if (!response.ok) throw new Error(`Counter request failed: HTTP ${response.status}`);
+      const response = await fetch(firstVisit ? `${base}/up` : `${base}/`, { cache: 'no-store' });
+      if (!response.ok) throw new Error('Counter request failed');
       const data = await response.json();
-      const value = Number(data.count ?? data.value);
-      if (!Number.isFinite(value)) throw new Error('Counter returned an invalid value');
-      localStorage.setItem(lastValueKey, String(value));
-      localStorage.setItem('pinnacle-local-counter', String(value));
-      display(value);
-    } catch (error) {
-      console.warn('Shared page counter unavailable; continuing from the last displayed value.', error);
-      let value = Number(localStorage.getItem(lastValueKey) || localStorage.getItem('pinnacle-local-counter') || 0);
-      if (!Number.isFinite(value) || value < 0) value = 0;
-      value += 1;
-      localStorage.setItem(lastValueKey, String(value));
-      localStorage.setItem('pinnacle-local-counter', String(value));
-      display(value);
+      const value = Number(data.count ?? data.value ?? 0);
+      if (firstVisit) localStorage.setItem(countedKey, 'true');
+      counters.forEach(el => { el.textContent = String(Number.isFinite(value) ? value : 0).padStart(7, '0'); });
+    } catch {
+      let value = Number(localStorage.getItem('pinnacle-local-counter') || 0);
+      if (firstVisit) {
+        value += 1;
+        localStorage.setItem('pinnacle-local-counter', String(value));
+        localStorage.setItem(countedKey, 'true');
+      }
+      counters.forEach(el => { el.textContent = String(value).padStart(7, '0'); });
     }
   }
 

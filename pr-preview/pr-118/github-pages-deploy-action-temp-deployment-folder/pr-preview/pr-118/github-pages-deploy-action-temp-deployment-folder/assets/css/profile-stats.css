@@ -1,0 +1,22 @@
+.dynamic-profile { margin-top: 18px; }
+.stats-loading, .stats-fallback { margin: 0; border: 1px solid var(--line); border-radius: 18px; padding: 22px; background: var(--panel); color: var(--muted); font-weight: 700; text-align: center; }
+.stats-fallback strong { display: block; color: var(--accent); font-size: 1.15rem; margin-bottom: 8px; }
+.profile-nickname, .stats-updated { margin: 8px 0 0; color: var(--muted); font-weight: 700; }
+.stats-updated.is-stale { color: var(--warn); }
+.stats-dashboard { display: grid; gap: 16px; }
+.stats-summary { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; }
+.stat-tile, .highlight-card, .stat-category-card { border: 1px solid var(--line); border-radius: 16px; background: linear-gradient(180deg, rgba(180, 190, 254, 0.12), rgba(49, 50, 68, 0.96)); box-shadow: 0 14px 30px rgba(30, 30, 46, 0.18); }
+.stat-tile { padding: 16px; min-height: 112px; }
+.stat-tile__label, .highlight-card__label, .stat-row__label { color: var(--muted); font-size: 0.83rem; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; }
+.stat-tile__value { margin-top: 10px; color: var(--text); font-size: clamp(1.35rem, 3vw, 2rem); font-weight: 900; line-height: 1.05; }
+.stats-highlights, .stats-categories { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+.highlight-card, .stat-category-card { padding: 16px; }
+.highlight-card__value { margin-top: 8px; color: var(--accent); font-size: 1.25rem; font-weight: 900; }
+.highlight-card__amount { margin-top: 6px; color: var(--muted); font-weight: 700; }
+.stat-category-card h2 { margin: 0 0 6px; color: var(--accent); font-size: 1.1rem; }
+.stat-category-card p { margin: 0 0 14px; color: var(--muted); line-height: 1.55; }
+.stat-row { display: grid; gap: 6px; padding: 10px 0; border-top: 1px solid rgba(185, 199, 233, 0.2); }
+.stat-row__value { color: var(--text); font-weight: 800; }
+.stat-row__list { margin: 8px 0 0; padding-left: 18px; color: var(--text); font-weight: 700; line-height: 1.7; }
+@media (max-width: 980px) { .stats-summary { grid-template-columns: repeat(3, minmax(0, 1fr)); } .stats-highlights, .stats-categories { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 620px) { .stats-summary, .stats-highlights, .stats-categories { grid-template-columns: 1fr; } }
