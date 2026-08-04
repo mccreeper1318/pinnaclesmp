@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="Pinnacle SMP — a community-driven, whitelisted Vanilla+ Minecraft server.">
-  <title>Frequently Asked Questions | Pinnacle SMP</title>
+  <title>Guestbook | Pinnacle SMP</title>
   <link rel="icon" href="assets/diamond.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/style.css">
 </head>
@@ -15,7 +15,7 @@
     <img class="logo" src="assets/logo.svg" alt="Pinnacle SMP Minecraft Community — Season 12">
     <p class="tagline">BUILD • EXPLORE • MAKE FRIENDS • BUILD HIGHER</p>
   </header>
-  <div class="marquee-box" aria-label="Server announcement"><span class="marquee-track">PINNACLE SMP • SEASON 12 • PAPER 26.2 • WHITELISTED VANILLA+ • 18+ COMMUNITY • APPLICATIONS TEMPORARILY CLOSED</span></div>
+  <div class="marquee-box" aria-label="Server announcement"><span class="marquee-track">SIGN THE PINNACLE GUESTBOOK • LEAVE A MESSAGE • BUILD HIGHER!</span></div>
   <div class="main-grid">
     <aside class="sidebar">
       <section class="box">
@@ -28,10 +28,10 @@
 <li><a href="standings.html">Tournament Standings</a></li>
 <li><a href="gallery.html">Gallery</a></li>
 <li><a href="rules.html">Server Rules</a></li>
-<li><a href="faq.html" class="active">FAQs</a></li>
+<li><a href="faq.html">FAQs</a></li>
 <li><a href="links.html">Links & Voting</a></li>
 <li><a href="join.html">Join / Contact</a></li>
-<li><a href="guestbook.html">Guestbook</a></li></ul></nav>
+<li><a href="guestbook.html" class="active">Guestbook</a></li></ul></nav>
       </section>
       <section class="box">
         <div class="box-title">Quick Connect</div>
@@ -54,19 +54,17 @@
       <section class="box">
         <div class="box-body">
           
-<h1>Frequently Asked Questions</h1>
-<div class="faq-item"><div class="faq-question">What is Vanilla+?</div><div class="faq-answer">Pinnacle runs Paper and uses plugins, but the goal is to preserve the core vanilla Minecraft experience rather than becoming heavily modded or overloaded with systems.</div></div>
-<div class="faq-item"><div class="faq-question">What does whitelisted mean?</div><div class="faq-answer">Only approved players on the server whitelist can connect. Pinnacle normally uses an application process for adults age 18 and older, although applications are currently closed.</div></div>
-<div class="faq-item"><div class="faq-question">How old is the current world?</div><div class="faq-answer">Season 12 began in April 2026. There is no fixed reset schedule and no current reset planned. A reset requires at least 90% agreement in a vote of server members.</div></div>
-<div class="faq-item"><div class="faq-question">Where is the server hosted?</div><div class="faq-answer">The server is hosted in the eastern United States and is intended to remain available 24/7.</div></div>
-<div class="faq-item"><div class="faq-question">Is there a live world map?</div><div class="faq-answer">Yes. Use the <a href="https://map.pinnaclesmp.com/" target="_blank" rel="noopener">live map</a> or the direct map link listed on the Links page.</div></div>
-<div class="faq-item"><div class="faq-question">What happens when applications reopen?</div><div class="faq-answer">Applicants read the rules, answer the application questions, and may receive a short Discord interview. Staff normally tries to respond within about 24 hours, although real-life schedules can cause delays.</div></div>
-<div class="faq-item"><div class="faq-question">My application was accepted. How do I connect?</div><div class="faq-answer">Check the <strong>#server-info</strong> channel in the Pinnacle Discord for the current connection information and staff instructions.</div></div>
-<div class="faq-item"><div class="faq-question">Which client mods are allowed?</div><div class="faq-answer">The public FAQ states that only performance-enhancing mods are allowed. Ask an Admin or Founding Member before using any tool that might provide an advantage.</div></div>
-<div class="faq-item"><div class="faq-question">How quickly does Pinnacle update Minecraft?</div><div class="faq-answer">Updates are normally installed after the appropriate server software is available from the host and required plugins are compatible. Discord and in-game announcements are used when an update is approaching.</div></div>
-<div class="faq-item"><div class="faq-question">Can I suggest an event or plugin?</div><div class="faq-answer">Yes. Contact an Admin or Founding Member for event ideas, or use the official Plugin Suggestions form on the Links page.</div></div>
-<div class="faq-item"><div class="faq-question">Can a banned player appeal?</div><div class="faq-answer">Yes. The official Ban Appeal form is linked from the Join / Contact and Links pages.</div></div>
-<div class="faq-item"><div class="faq-question">How are membership promotions decided?</div><div class="faq-answer">There is no fixed promotion timer. Rank changes are based on overall involvement, contributions, conduct, and becoming part of the community.</div></div>
+<h1>Sign the Pinnacle Guestbook!</h1>
+<p>This retro guestbook is a browser-local demonstration. Entries stay only on the device and browser used to add them; they are not sent to Pinnacle SMP or published online.</p>
+<form id="guestbook-form" class="form-90s">
+  <label for="name">Your Name / Minecraft Name</label><input id="name" name="name" maxlength="40" required>
+  <label for="realm">Season / Realm</label><input id="realm" name="realm" maxlength="60">
+  <label for="message">Message</label><textarea id="message" name="message" maxlength="500" required></textarea>
+  <p><button class="button-90s" type="submit">SIGN GUESTBOOK</button> <button class="button-90s" id="clear-guestbook" type="button">RESET DEMO</button></p>
+</form>
+<hr class="pixel-rule">
+<h2>Recent Visitors</h2>
+<div id="guestbook-entries"></div>
 
         </div>
       </section>
