@@ -1,4 +1,198 @@
 (function(){
+  /*
+   * Live status service.
+   *
+   * The dedicated Pinnacle endpoint is always tried first. Until that HTTPS
+   * endpoint is exposed, the site uses mcstatus.io as the fast primary
+   * Minecraft ping and mcsrvstat.us as a secondary fallback.
+   */
+  const DIRECT_STATUS_API = 'https://status.pinnaclesmp.org/api/status';
+  const MCSTATUS_API = 'https://api.mcstatus.io/v2/status/java/pinnaclesmp.mcserv.fun?query=false&timeout=2.5';
+  const MCSRVSTAT_API = 'https://api.mcsrvstat.us/3/pinnaclesmp.mcserv.fun';
+  const CACHE_KEY = 'pinnacle-live-status-v2';
+  const LAST_ONLINE_KEY = 'pinnacle-last-confirmed-online-v2';
+  const CACHE_TTL = 8000;
+  const ONLINE_GRACE = 75000;
+  let inFlight = null;
+
+  const normalizePlayers = value => {
+    if (!value) return [];
+    const list = Array.isArray(value) ? value : (typeof value === 'object' ? Object.values(value) : []);
+    return list.map(player => {
+      if (typeof player === 'string') return player;
+      return player?.name_clean || player?.name_raw || player?.name || null;
+    }).filter(Boolean);
+  };
+
+  const unavailable = () => ({
+    available: false,
+    online: false,
+    playersOnline: 0,
+    playersMax: 20,
+    onlinePlayers: [],
+    version: 'Paper 26.2',
+    source: 'none'
+  });
+
+  function readCache(){
+    try {
+      const cached = JSON.parse(sessionStorage.getItem(CACHE_KEY) || 'null');
+      return cached && Date.now() - cached.savedAt <= CACHE_TTL ? cached.status : null;
+    } catch { return null; }
+  }
+
+  function writeCache(status){
+    try { sessionStorage.setItem(CACHE_KEY, JSON.stringify({ savedAt: Date.now(), status })); } catch {}
+    if (status.online) {
+      try { localStorage.setItem(LAST_ONLINE_KEY, JSON.stringify({ savedAt: Date.now(), status })); } catch {}
+    }
+  }
+
+  function applyOnlineGrace(status){
+    if (status.online) return status;
+    try {
+      const previous = JSON.parse(localStorage.getItem(LAST_ONLINE_KEY) || 'null');
+      if (previous?.status?.online && Date.now() - previous.savedAt <= ONLINE_GRACE) {
+        return { ...previous.status, available: true, stale: true, source: `${previous.status.source || 'cached'}-grace` };
+      }
+    } catch {}
+    return status;
+  }
+
+  async function getJson(url, timeoutMs){
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeoutMs);
+    try {
+      const response = await fetch(url, { cache: 'no-store', signal: controller.signal, mode: 'cors' });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      return await response.json();
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+
+  async function fetchDirect(){
+    const data = await getJson(`${DIRECT_STATUS_API}?t=${Date.now()}`, 1800);
+    const updated = Date.parse(data.updatedAt || data.time || data.timestamp || '');
+    if (Number.isFinite(updated) && Date.now() - updated > 45000) throw new Error('Direct status is stale');
+    return {
+      available: true,
+      online: Boolean(data.online),
+      playersOnline: Number(data.playersOnline ?? data.players?.online ?? 0),
+      playersMax: Number(data.playersMax ?? data.players?.max ?? 20),
+      onlinePlayers: normalizePlayers(data.onlinePlayers ?? data.players?.list ?? data.players),
+      version: data.version || 'Paper 26.2',
+      source: 'pinnacle-direct'
+    };
+  }
+
+  async function fetchMcstatus(){
+    const data = await getJson(`${MCSTATUS_API}&t=${Date.now()}`, 3800);
+    return {
+      available: true,
+      online: Boolean(data.online),
+      playersOnline: Number(data.players?.online ?? 0),
+      playersMax: Number(data.players?.max ?? 20),
+      onlinePlayers: normalizePlayers(data.players?.list),
+      version: data.version?.name_clean || data.version?.name_raw || data.version?.name || data.software || 'Paper 26.2',
+      source: 'mcstatus.io'
+    };
+  }
+
+  async function fetchMcsrvstat(){
+    const data = await getJson(`${MCSRVSTAT_API}?t=${Date.now()}`, 5500);
+    return {
+      available: true,
+      online: Boolean(data.online),
+      playersOnline: Number(data.players?.online ?? 0),
+      playersMax: Number(data.players?.max ?? 20),
+      onlinePlayers: normalizePlayers(data.players?.list),
+      version: data.version || data.protocol?.name || 'Paper 26.2',
+      source: 'mcsrvstat.us'
+    };
+  }
+
+  async function requestStatus(){
+    const checks = [fetchDirect(), fetchMcstatus(), fetchMcsrvstat()]
+      .map(promise => promise.then(status => ({ status })).catch(error => ({ error })));
+
+    return await new Promise(resolve => {
+      let finished = 0;
+      let bestOffline = null;
+      let resolved = false;
+
+      checks.forEach(check => check.then(result => {
+        finished += 1;
+        if (!resolved && result.status?.online) {
+          resolved = true;
+          resolve(result.status);
+          return;
+        }
+        if (result.status?.available && !bestOffline) bestOffline = result.status;
+        if (!resolved && finished === checks.length) {
+          resolved = true;
+          resolve(bestOffline || unavailable());
+        }
+      }));
+    });
+  }
+
+  async function fetchServerStatus({ force = false } = {}){
+    const cached = force ? null : readCache();
+    if (cached) return cached;
+    if (!inFlight) {
+      inFlight = requestStatus()
+        .then(applyOnlineGrace)
+        .then(status => { writeCache(status); return status; })
+        .catch(() => applyOnlineGrace(readCache() || unavailable()))
+        .finally(() => { inFlight = null; });
+    }
+    return inFlight;
+  }
+
+  window.PinnacleServerStatus = { fetchServerStatus };
+
+  const normalizeName = value => String(value ?? '').toLowerCase().replace(/[^a-z0-9_]/g, '');
+  function paintLiveStatus(data){
+    const available = data.available !== false;
+    const state = !available ? 'STATUS UNAVAILABLE' : data.online ? 'ONLINE' : 'OFFLINE';
+    const online = data.online ? Number(data.playersOnline || 0) : 0;
+    const maximum = Number(data.playersMax || 20);
+
+    document.querySelectorAll('[data-server-status]').forEach(el => { el.textContent = state; });
+    document.querySelectorAll('[data-player-count]').forEach(el => { el.textContent = `${online} / ${maximum}`; });
+    document.querySelectorAll('[data-server-version]').forEach(el => { el.textContent = data.version || 'Paper 26.2'; });
+    document.querySelectorAll('[data-live-dot]').forEach(dot => {
+      dot.classList.remove('offline', 'unknown');
+      if (!available) dot.classList.add('unknown');
+      else if (!data.online) dot.classList.add('offline');
+    });
+
+    const onlineNames = new Set((data.onlinePlayers || []).map(normalizeName));
+    document.querySelectorAll('[data-member-card]').forEach(card => {
+      const names = String(card.dataset.usernames || card.dataset.username || '').split(',').map(normalizeName);
+      const isOnline = names.some(name => onlineNames.has(name));
+      card.classList.toggle('is-online', isOnline);
+      const label = card.querySelector('[data-member-status]');
+      if (label) label.textContent = isOnline ? 'Online' : 'Offline';
+    });
+  }
+
+  async function refreshLiveStatus(force = false){
+    try { paintLiveStatus(await fetchServerStatus({ force })); } catch {}
+  }
+
+  const beginPolling = () => {
+    refreshLiveStatus(true);
+    window.setInterval(() => refreshLiveStatus(true), 15000);
+    window.addEventListener('focus', () => refreshLiveStatus(true));
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) refreshLiveStatus(true);
+    });
+  };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', beginPolling, { once: true });
+  else beginPolling();
+
   const newsArticles = [
     ['plugins','Announcement','July 2, 2026','Recent Plugin Updates and Additions','<p>Pinnacle SMP added several custom plugins and restored key community tools to make the server safer, easier to manage, and more connected across Minecraft, Discord, and the website.</p><ul class="icon-list"><li><strong>FragGuard:</strong> logs world changes and supports investigations and rollbacks.</li><li><strong>FragStealers:</strong> protects storage and supports player mailboxes.</li><li><strong>PinnacleAFK:</strong> displays and announces AFK status with configurable protection.</li><li><strong>PinnacleShop:</strong> provides protected player shops.</li><li><strong>PinnacleStats:</strong> exports current player statistics to the website.</li><li><strong>squaremap, DeathsToDiscord, and LastSeenToDiscord:</strong> restored mapping and Discord information.</li></ul>'],
     ['rollback','News','June 24, 2026','Griefing Incident and Rollback','<p>A serious griefing incident affected spawn and several player bases. The server was restored using the June 20 save so damaged areas could be recovered cleanly.</p><p>FragGuard was then created to log block changes, explosions, fire spread, liquids, pistons, and other world activity, allowing staff to investigate and roll back smaller areas without restoring the entire server.</p>'],
@@ -43,6 +237,5 @@
     box.innerHTML = `<h1>Pinnacle SMP Galleries</h1><p>Browse the complete screenshot archives from the current and previous seasons.</p><div class="gallery-season-cards"><a class="gallery-season-card" href="gallery-season-12.html"><img src="https://res.cloudinary.com/ds4p9jsuf/image/upload/v1779704250/spawnportal_uu837o.png" alt="Season 12 gallery cover"><span><strong>Season 12 Gallery</strong><small>Browse folders, featured builds, and community screenshots</small></span></a><a class="gallery-season-card" href="gallery-season-11.html"><img src="https://res.cloudinary.com/ds4p9jsuf/image/upload/v1777776796/2026-01-26_20.25.19_2_vzvcr1.png" alt="Season 11 gallery cover"><span><strong>Season 11 Gallery</strong><small>Open the complete Season 11 screenshot archive</small></span></a></div>`;
   }
 
-
-window.PinnacleMajorContent={rebuildNews,rebuildMembers,rebuildGalleryLanding};
+  window.PinnacleMajorContent={rebuildNews,rebuildMembers,rebuildGalleryLanding};
 })();
