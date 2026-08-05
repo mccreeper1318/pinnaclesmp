@@ -1,55 +1,54 @@
-# Pinnacle SMP — 1990s Website Edition
+# Pinnacle SMP Website
 
-A self-contained, multi-page static website customized with public information from PinnacleSMP.org while preserving the exact visual style of the original 1990s gaming-guild template.
+The official static website for Pinnacle SMP, hosted with GitHub Pages at `pinnaclesmp.org`.
 
-## Pages
+## Current site
 
-- `index.html` — Home, server status, news, and events
-- `about.html` — Pinnacle history and membership system
-- `season12.html` — Season 12 overview
-- `news.html` — Current news archive
-- `members.html` — Public roster and monthly awards
-- `standings.html` — 2026 tournament standings
-- `gallery.html` — Offline retro gallery with links to live galleries
-- `rules.html` — Current public rule summary
-- `faq.html` — Frequently asked questions
-- `links.html` — Official links, forms, voting, and donation
-- `join.html` — Application status and contact information
-- `guestbook.html` — Browser-local guestbook demonstration
-- `404.html` — Custom error page
+The website uses a custom retro late-1990s gaming-community design with modern responsive behavior and live server information.
 
-## Assets
+Main sections include:
 
-All design assets are stored locally in `assets/`, including:
+- Home and server news
+- About Pinnacle and Season 12 information
+- Member roster and live PinnacleStats profiles
+- Tournament standings
+- Season 11 and Season 12 screenshot galleries
+- Server rules and FAQs
+- Links, voting, applications, and contact information
+- Player-facing Plugins Wiki
 
-- CSS and JavaScript
-- Retro header logo
-- Official Pinnacle SMP logo
-- Backgrounds, icons, avatars, badges, and gallery illustrations
+## Member profiles
 
-The site loads without any CSS or JavaScript CDN. The live status panel makes one optional request to the public mcsrvstat.us API. If that request fails, the site displays a status-unavailable fallback.
+Member profiles use one shared native retro profile viewer at `profiles/index.html`. The selected player is passed through the `player` query parameter, for example:
 
-## Preview
+```text
+profiles/?player=McCreeper1318
+```
 
-Double-click `index.html`, or run a local server:
+Profile statistics are loaded from the static JSON files in `assets/player-stats/`, which are published by PinnacleStats. Old per-player profile URLs are redirected by the custom 404 page for backward compatibility.
+
+## Live features
+
+- Minecraft server status and player count
+- Online member indicators
+- Server software version display
+- Eastern Time server clock
+- Page-view counter
+- Cloudinary-powered screenshot galleries
+- PinnacleStats player dashboards
+
+## Development
+
+The site is plain HTML, CSS, and JavaScript. No build step is required. Run a local web server from the repository root when testing features that use `fetch`:
 
 ```bash
-cd pinnacle_smp_1990s_website
 python3 -m http.server 8000
 ```
 
 Then open `http://localhost:8000`.
 
-## Publishing
+Pull requests are deployed to temporary GitHub Pages previews by `.github/workflows/pr-preview.yml`.
 
-The folder can be uploaded to GitHub Pages, Netlify, Cloudflare Pages, Neocities, or ordinary static hosting.
+## Notice
 
-## Content date
-
-Public Pinnacle SMP information was reviewed and packaged on August 4, 2026. Live information may change after that date. Links point to the current official pages and forms.
-
-## Important notes
-
-- The Gallery page's four bundled images are decorative retro illustrations, not live-server screenshots.
-- The guestbook saves only to the visitor's own browser.
-- Pinnacle SMP is not affiliated with or endorsed by Mojang Studios or Microsoft.
+Pinnacle SMP is not affiliated with or endorsed by Mojang Studios or Microsoft.
