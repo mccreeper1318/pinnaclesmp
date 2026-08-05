@@ -4,7 +4,7 @@
   border:3px double #800000;
   background:#fff4bf;
 }
-.wiki-updated strong{display:block;color:#800000;font-family:"Courier New",monospace;margin-bottom:4px}
+.wiki-updated>strong{display:block;color:#800000;font-family:"Courier New",monospace;margin-bottom:4px}
 .wiki-updated span{display:block}
 .wiki-legend{
   margin:10px 0 14px;
