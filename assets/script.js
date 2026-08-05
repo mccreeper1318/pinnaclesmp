@@ -13,7 +13,39 @@
       .replace(/When Applications Reopen/gi, 'How to Apply');
   }
 
+  function ensurePluginsWikiLink() {
+    const wikiHref = new URL('../plugins-wiki.html', loader.src).href;
+    const onWikiPage = /\/(?:plugins-wiki|plugin-[^/]+)\.html$/.test(location.pathname);
+
+    document.querySelectorAll('.nav-list').forEach(list => {
+      const existing = [...list.querySelectorAll('a')].find(link =>
+        /plugins-wiki\.html(?:$|[?#])/.test(link.getAttribute('href') || '')
+      );
+
+      if (existing) {
+        existing.classList.toggle('active', onWikiPage);
+        return;
+      }
+
+      const item = document.createElement('li');
+      const link = document.createElement('a');
+      link.href = wikiHref;
+      link.textContent = 'Plugins Wiki';
+      if (onWikiPage) link.classList.add('active');
+      item.appendChild(link);
+
+      const galleryItem = [...list.querySelectorAll('a')]
+        .find(candidate => /gallery\.html(?:$|[?#])/.test(candidate.getAttribute('href') || ''))
+        ?.closest('li');
+
+      if (galleryItem) galleryItem.after(item);
+      else list.appendChild(item);
+    });
+  }
+
   function applyMembershipOpen() {
+    ensurePluginsWikiLink();
+
     document.querySelectorAll('.marquee-track').forEach(el => {
       let text = replaceMembershipText(el.textContent);
       if (!/ACCEPTING NEW MEMBERS/i.test(text)) text = `${text.trim()} • NOW ACCEPTING NEW MEMBERS`;
