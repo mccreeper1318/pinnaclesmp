@@ -4,9 +4,12 @@
 
   function replaceMembershipText(value) {
     return String(value)
-      .replace(/APPLICATIONS TEMPORARILY CLOSED/gi, 'NOW ACCEPTING NEW MEMBERS')
       .replace(/WHITELIST APPLICATIONS ARE TEMPORARILY CLOSED/gi, 'WHITELIST APPLICATIONS ARE OPEN')
+      .replace(/APPLICATIONS TEMPORARILY CLOSED/gi, 'NOW ACCEPTING NEW MEMBERS')
+      .replace(/APPLICATIONS ARE CLOSED/gi, 'APPLICATIONS ARE OPEN')
       .replace(/Pinnacle SMP is not accepting additional new members at this time\./gi, 'Pinnacle SMP is accepting new members.')
+      .replace(/Pinnacle SMP is not currently accepting new members\./gi, 'Pinnacle SMP is accepting new members.')
+      .replace(/Pinnacle SMP is not accepting new members\./gi, 'Pinnacle SMP is accepting new members.')
       .replace(/When Applications Reopen/gi, 'How to Apply');
   }
 
@@ -14,18 +17,19 @@
     document.querySelectorAll('.marquee-track').forEach(el => {
       let text = replaceMembershipText(el.textContent);
       if (!/ACCEPTING NEW MEMBERS/i.test(text)) text = `${text.trim()} • NOW ACCEPTING NEW MEMBERS`;
-      el.textContent = text;
+      if (el.textContent !== text) el.textContent = text;
     });
 
     document.querySelectorAll('.closed-status').forEach(el => {
-      if (/application|member/i.test(el.textContent)) {
-        el.textContent = 'WHITELIST APPLICATIONS ARE OPEN — PINNACLE SMP IS ACCEPTING NEW MEMBERS';
-        el.classList.add('membership-open-status');
-      }
+      if (!/application|member/i.test(el.textContent)) return;
+      const message = 'WHITELIST APPLICATIONS ARE OPEN — PINNACLE SMP IS ACCEPTING NEW MEMBERS';
+      if (el.textContent.trim() !== message) el.textContent = message;
+      el.classList.add('membership-open-status');
     });
 
     document.querySelectorAll('h2').forEach(el => {
-      el.textContent = replaceMembershipText(el.textContent);
+      const updated = replaceMembershipText(el.textContent);
+      if (updated !== el.textContent) el.textContent = updated;
     });
 
     const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
