@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 130">
+<defs><linearGradient id="g" x1="0" x2="1"><stop stop-color="#00ffff"/><stop offset=".5" stop-color="#fff"/><stop offset="1" stop-color="#ff00ff"/></linearGradient></defs>
+<rect x="4" y="4" width="752" height="122" rx="4" fill="#000044" stroke="#ffff00" stroke-width="6"/>
+<path d="M15 110H745M15 20H745" stroke="#00ffff" stroke-width="4" stroke-dasharray="10 8"/>
+<text x="380" y="62" text-anchor="middle" font-family="Verdana,Arial" font-size="55" font-weight="900" fill="url(#g)" stroke="#000" stroke-width="5" paint-order="stroke">PINNACLE SMP</text>
+<text x="380" y="99" text-anchor="middle" font-family="Courier New,monospace" font-size="21" font-weight="bold" fill="#ffff00">MINECRAFT COMMUNITY • SEASON 12</text>
+<g fill="#c0c0c0" stroke="#000" stroke-width="3">
+  <path d="M22 82L45 35l23 47z"/><path d="M692 82l23-47 23 47z"/>
+</g>
+<g fill="#fff"><path d="M37 52l8-17 9 18-7-5z"/><path d="M707 52l8-17 9 18-7-5z"/></g>
+</svg>
