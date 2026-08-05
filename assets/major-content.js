@@ -24,6 +24,16 @@
     }).filter(Boolean);
   };
 
+  const formatVersion = value => {
+    const text = String(value || '').trim();
+    if (!text) return 'Paper 26.2';
+    if (/^paper\b/i.test(text)) return text.replace(/^paper/i, 'Paper');
+    const release = text.match(/\b26\.2(?:\.\d+)?\b/);
+    if (release) return `Paper ${release[0]}`;
+    if (/^\d+(?:\.\d+)+$/.test(text)) return `Paper ${text}`;
+    return text;
+  };
+
   const unavailable = () => ({
     available: false,
     online: false,
@@ -81,7 +91,7 @@
       playersOnline: Number(data.playersOnline ?? data.players?.online ?? 0),
       playersMax: Number(data.playersMax ?? data.players?.max ?? 20),
       onlinePlayers: normalizePlayers(data.onlinePlayers ?? data.players?.list ?? data.players),
-      version: data.version || 'Paper 26.2',
+      version: formatVersion(data.version),
       source: 'pinnacle-direct'
     };
   }
@@ -94,7 +104,7 @@
       playersOnline: Number(data.players?.online ?? 0),
       playersMax: Number(data.players?.max ?? 20),
       onlinePlayers: normalizePlayers(data.players?.list),
-      version: data.version?.name_clean || data.version?.name_raw || data.version?.name || data.software || 'Paper 26.2',
+      version: formatVersion(data.version?.name_clean || data.version?.name_raw || data.version?.name || data.software),
       source: 'mcstatus.io'
     };
   }
@@ -107,7 +117,7 @@
       playersOnline: Number(data.players?.online ?? 0),
       playersMax: Number(data.players?.max ?? 20),
       onlinePlayers: normalizePlayers(data.players?.list),
-      version: data.version || data.protocol?.name || 'Paper 26.2',
+      version: formatVersion(data.version || data.protocol?.name),
       source: 'mcsrvstat.us'
     };
   }
@@ -161,7 +171,7 @@
 
     document.querySelectorAll('[data-server-status]').forEach(el => { el.textContent = state; });
     document.querySelectorAll('[data-player-count]').forEach(el => { el.textContent = `${online} / ${maximum}`; });
-    document.querySelectorAll('[data-server-version]').forEach(el => { el.textContent = data.version || 'Paper 26.2'; });
+    document.querySelectorAll('[data-server-version]').forEach(el => { el.textContent = formatVersion(data.version); });
     document.querySelectorAll('[data-live-dot]').forEach(dot => {
       dot.classList.remove('offline', 'unknown');
       if (!available) dot.classList.add('unknown');
@@ -211,7 +221,7 @@
     if (!/\/news\.html$/.test(location.pathname) && location.pathname !== '/news.html') return;
     const box = document.querySelector('main.content .box-body');
     if (!box) return;
-    box.innerHTML = `<h1>Server News Archive</h1><p>Open an article to read it. Older stories remain available without making the page excessively long.</p><div class="news-archive">${newsArticles.map((a,i)=>`<details class="news-archive-item" id="${a[0]}"${i===0?' open':''}><summary><span><span class="news-date">${a[2].toUpperCase()}</span><strong>${a[3]}</strong></span><span class="archive-tag">${a[1]}</span></summary><div class="news-archive-body">${a[4]}</div></details>`).join('')}</div>`;
+    box.innerHTML = `<h1>Server News Archive</h1><p>Open an article to read it.</p><div class="news-archive">${newsArticles.map((a,i)=>`<details class="news-archive-item" id="${a[0]}"${i===0?' open':''}><summary><span><span class="news-date">${a[2].toUpperCase()}</span><strong>${a[3]}</strong></span><span class="archive-tag">${a[1]}</span></summary><div class="news-archive-body">${a[4]}</div></details>`).join('')}</div>`;
   }
 
   const ranks = [
@@ -227,7 +237,7 @@
     if (!/\/members\.html$/.test(location.pathname) && location.pathname !== '/members.html') return;
     const box = document.querySelector('main.content .box-body');
     if (!box) return;
-    box.innerHTML = `<h1>Pinnacle SMP Members</h1><p>Every member card opens that player’s profile and current PinnacleStats dashboard.</p>${ranks.map(([title,cls,people])=>`<section class="roster-section"><h2>${title}<span class="roster-count">${people.length}</span></h2><div class="roster-grid">${people.map(([display,file,img,aliases])=>`<a class="roster-name rank-${cls}" href="profiles/${file}.html" data-member-card data-username="${file==='laurentziu'?'laurentziu143':file}"${aliases?` data-usernames="${aliases}"`:''}>${img?`<img src="assets/player_heads/${img}" alt="${display} player head">`:'<span class="roster-placeholder">?</span>'}<span class="roster-text"><strong>${display}</strong><small><span class="mini-status-dot"></span><span data-member-status>Offline</span></small></span></a>`).join('')}</div></section>`).join('')}<p class="source-note">Roster information was last updated on August 4, 2026. Member profiles are updated regularly.</p>`;
+    box.innerHTML = `<h1>Pinnacle SMP Members</h1><p>Every member card opens that player’s profile and current PinnacleStats dashboard.</p>${ranks.map(([title,cls,people])=>`<section class="roster-section"><h2>${title}<span class="roster-count">${people.length}</span></h2><div class="roster-grid">${people.map(([display,file,img,aliases])=>`<a class="roster-name rank-${cls}" href="profiles/?player=${encodeURIComponent(file)}" data-member-card data-username="${file==='laurentziu'?'laurentziu143':file}"${aliases?` data-usernames="${aliases}"`:''}>${img?`<img src="assets/player_heads/${img}" alt="${display} player head">`:'<span class="roster-placeholder">?</span>'}<span class="roster-text"><strong>${display}</strong><small><span class="mini-status-dot"></span><span data-member-status>Offline</span></small></span></a>`).join('')}</div></section>`).join('')}<p class="source-note">Roster information was last updated on August 4, 2026. Member profiles are updated regularly.</p>`;
   }
 
   function rebuildGalleryLanding(){
