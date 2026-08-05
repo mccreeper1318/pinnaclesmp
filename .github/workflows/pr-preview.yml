@@ -18,12 +18,24 @@ jobs:
 
     steps:
       - name: Check out repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
+
+      - name: Stage preview site
+        if: github.event.action != 'closed'
+        run: |
+          rm -rf _preview-site
+          mkdir -p _preview-site
+          rsync -a --delete \
+            --exclude '.git/' \
+            --exclude '.github/' \
+            --exclude '_preview-site/' \
+            --exclude 'github-pages-deploy-action-temp-deployment-folder/' \
+            ./ _preview-site/
 
       - name: Deploy preview
         uses: rossjrw/pr-preview-action@v1
         with:
-          source-dir: ./
+          source-dir: ./_preview-site
           preview-branch: gh-pages
           umbrella-dir: pr-preview
           pages-base-url: www.pinnaclesmp.org
