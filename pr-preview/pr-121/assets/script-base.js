@@ -137,7 +137,6 @@
     applySharedCleanup();
     window.PinnacleMajorContent?.rebuildNews();
     window.PinnacleMajorContent?.rebuildMembers();
-    window.PinnacleMajorContent?.rebuildGalleryLanding();
     applySharedCleanup();
 
     document.querySelectorAll('[data-year]').forEach(element => { element.textContent = new Date().getFullYear(); });
