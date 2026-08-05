@@ -1,159 +1,70 @@
-(function () {
-  if (window.__pinnacleMajorScriptLoaded) return;
-  window.__pinnacleMajorScriptLoaded = true;
+(() => {
+  if (window.__pinnacleBaseScriptLoaded) return;
+  window.__pinnacleBaseScriptLoaded = true;
 
+  const loader = document.currentScript;
   const inProfiles = /\/profiles\//.test(location.pathname);
   const prefix = inProfiles ? '../' : '';
   const mapUrl = 'http://pinnaclesmp.mcserv.fun:1041/';
-  const statusApi = 'https://api.mcsrvstat.us/3/pinnaclesmp.mcserv.fun';
 
   if (!document.querySelector('link[data-major-update]')) {
     const link = document.createElement('link');
     link.rel = 'stylesheet';
-    link.href = `${prefix}assets/major-update.css`;
+    link.href = new URL('major-update.css', loader.src).href;
     link.dataset.majorUpdate = 'true';
     document.head.appendChild(link);
   }
 
-  const normalize = value => String(value ?? '').toLowerCase().replace(/[^a-z0-9_]/g, '');
-
-  function globalChanges() {
-    document.querySelectorAll('.top-strip span').forEach(el => {
-      if (el.textContent.trim() === 'SURFING SINCE 2012') el.textContent = 'ONLINE SINCE 2012';
+  function applySharedCleanup() {
+    document.querySelectorAll('.top-strip span').forEach(element => {
+      if (element.textContent.trim() === 'SURFING SINCE 2012') element.textContent = 'ONLINE SINCE 2012';
     });
 
-    document.querySelectorAll('a[href="guestbook.html"],a[href="../guestbook.html"]').forEach(a => {
-      (a.closest('li') || a).remove();
+    document.querySelectorAll('a[href="guestbook.html"],a[href="../guestbook.html"]').forEach(link => {
+      (link.closest('li') || link).remove();
     });
 
-    document.querySelectorAll('a').forEach(a => {
-      const text = a.textContent.trim();
-      if (/Live World Map|LIVE MAP|OPEN MAP|DIRECT MAP/i.test(text) || a.href.includes('map.pinnaclesmp.com')) {
-        a.href = mapUrl;
+    document.querySelectorAll('a').forEach(link => {
+      const text = link.textContent.trim();
+      if (/Live World Map|LIVE MAP|OPEN MAP|DIRECT MAP/i.test(text) || link.href.includes('map.pinnaclesmp.com')) {
+        link.href = mapUrl;
       }
     });
 
-    document.querySelectorAll('.box-title').forEach(el => {
-      if (el.textContent.trim() === 'Eastern Time') el.textContent = 'Server Time';
+    document.querySelectorAll('.box-title').forEach(element => {
+      if (element.textContent.trim() === 'Eastern Time') element.textContent = 'Server Time';
     });
 
     document.querySelectorAll('.webring').forEach(ring => {
-      const rootPrefix = inProfiles ? '../' : '';
-      ring.innerHTML = `<a href="${rootPrefix}members.html">« Members</a><strong>PINNACLE</strong><a href="${rootPrefix}links.html#voting">Vote »</a>`;
+      ring.innerHTML = `<a href="${prefix}members.html">« Members</a><strong>PINNACLE</strong><a href="${prefix}links.html#voting">Vote »</a>`;
     });
 
-    document.querySelectorAll('p.center a,.callout a').forEach(a => {
-      if (/CHECK LIVE RULES PAGE/i.test(a.textContent)) a.closest('p')?.remove();
+    document.querySelectorAll('p.center a,.callout a').forEach(link => {
+      if (/CHECK LIVE RULES PAGE/i.test(link.textContent)) link.closest('p')?.remove();
     });
 
-    const linksHeading = [...document.querySelectorAll('h1')].find(h => h.textContent.includes('Links, Forms & Voting'));
+    const linksHeading = [...document.querySelectorAll('h1')].find(heading => heading.textContent.includes('Links, Forms & Voting'));
     if (linksHeading) {
       document.querySelectorAll('.link-card').forEach(card => {
         const title = card.querySelector('h3')?.textContent.trim();
         if (title === 'Official Website') card.remove();
         if (title === 'Live World Map') {
-          const links = [...card.querySelectorAll('a')];
-          links.forEach((a, index) => {
+          [...card.querySelectorAll('a')].forEach((link, index) => {
             if (index === 0) {
-              a.href = mapUrl;
-              a.textContent = 'OPEN MAP';
+              link.href = mapUrl;
+              link.textContent = 'OPEN MAP';
             } else {
-              a.remove();
+              link.remove();
             }
           });
         }
       });
     }
 
-    const joinHeading = [...document.querySelectorAll('h1')].find(h => h.textContent.includes('Join / Contact'));
+    const joinHeading = [...document.querySelectorAll('h1')].find(heading => heading.textContent.includes('Join / Contact'));
     if (joinHeading) {
-      const items = [...document.querySelectorAll('ol.rules li')];
-      items.find(li => /Learn about Pinnacle/i.test(li.textContent))?.remove();
+      [...document.querySelectorAll('ol.rules li')].find(item => /Learn about Pinnacle/i.test(item.textContent))?.remove();
     }
-  }
-
-  function sharedSidebar(active) {
-    const items = [
-      ['index.html', 'Home'],
-      ['about.html', 'About Pinnacle'],
-      ['season12.html', 'Season 12'],
-      ['news.html', 'Server News'],
-      ['members.html', 'Members'],
-      ['standings.html', 'Tournament Standings'],
-      ['gallery.html', 'Gallery'],
-      ['rules.html', 'Server Rules'],
-      ['faq.html', 'FAQs'],
-      ['links.html', 'Links & Voting'],
-      ['join.html', 'Join / Contact']
-    ];
-
-    return `<aside class="sidebar">
-      <section class="box">
-        <div class="box-title">Main Menu</div>
-        <nav><ul class="nav-list">${items.map(([href, label]) => `<li><a href="${prefix}${href}"${href === active ? ' class="active"' : ''}>${label}</a></li>`).join('')}</ul></nav>
-      </section>
-      <section class="box">
-        <div class="box-title">Quick Connect</div>
-        <div class="box-body small">
-          <p><strong>Server IP:</strong><br>pinnaclesmp.mcserv.fun</p>
-          <p><strong>Capacity:</strong><br>20 players</p>
-          <p><strong>Edition:</strong><br>Java Edition</p>
-          <p><a href="${mapUrl}" target="_blank" rel="noopener">Live World Map</a></p>
-          <p><a href="https://discord.gg/97hdX25n7F" target="_blank" rel="noopener">Pinnacle Discord</a></p>
-        </div>
-      </section>
-      <section class="box">
-        <div class="box-title">Cool Links</div>
-        <div class="box-body center"><div class="webring"><a href="${prefix}members.html">« Members</a><strong>PINNACLE</strong><a href="${prefix}links.html#voting">Vote »</a></div></div>
-      </section>
-    </aside>`;
-  }
-
-  function rightbar() {
-    return `<aside class="rightbar">
-      <section class="box">
-        <div class="box-title">Server Status</div>
-        <div class="box-body center">
-          <p class="status-online"><span class="status-dot unknown" data-live-dot></span><span data-server-status>CHECKING...</span></p>
-          <p><strong data-player-count>— / 20</strong> players</p>
-          <p><span class="server-version" data-server-version>Paper 26.2</span></p>
-          <p class="small"><strong>pinnaclesmp.mcserv.fun</strong></p>
-        </div>
-      </section>
-      <section class="box">
-        <div class="box-title">Official Emblem</div>
-        <div class="box-body center"><img class="official-logo" src="${prefix}assets/pinnacle-logo.png" alt="Official Pinnacle SMP logo"></div>
-      </section>
-      <section class="box">
-        <div class="box-title">Web Counter</div>
-        <div class="box-body center"><div class="hit-counter" data-counter>0000000</div><p class="small">page views since reset</p></div>
-      </section>
-      <section class="box">
-        <div class="box-title">Server Time</div>
-        <div class="box-body center small" data-clock>Loading...</div>
-      </section>
-    </aside>`;
-  }
-
-  function wrapLegacyPage(main, active, tagline) {
-    if (!main || document.querySelector('.profile-site-shell,.gallery-site-shell')) return;
-
-    document.querySelector('.site-header')?.remove();
-    document.querySelector('.site-warning-banner')?.remove();
-    document.querySelector('.site-footer')?.remove();
-    document.getElementById('particle-bg')?.remove();
-    document.body.classList.add('retro-wrapped-page');
-
-    const shell = document.createElement('div');
-    shell.className = `site-shell ${active === 'members.html' ? 'profile-site-shell' : 'gallery-site-shell'}`;
-    shell.innerHTML = `<div class="top-strip"><span>PINNACLE SMP ONLINE NETWORK</span><span>ONLINE SINCE 2012</span></div>
-      <header class="header"><img class="logo" src="${prefix}assets/logo.svg" alt="Pinnacle SMP"><p class="tagline">${tagline}</p></header>
-      <div class="marquee-box"><span class="marquee-track">PINNACLE SMP • SEASON 12 • PAPER 26.2 • WHITELISTED VANILLA+ • 18+ COMMUNITY</span></div>
-      <div class="main-grid">${sharedSidebar(active)}<main class="content"><section class="box"><div class="box-body" data-legacy-slot></div></section></main>${rightbar()}</div>
-      <footer class="footer"><div>© 2012–<span data-year></span> Pinnacle SMP. All rights reserved.</div><div><a href="${prefix}index.html">Home</a> | <a href="${prefix}members.html">Members</a></div></footer>`;
-
-    shell.querySelector('[data-legacy-slot]').appendChild(main);
-    document.body.prepend(shell);
   }
 
   async function visitorCounter() {
@@ -162,16 +73,15 @@
 
     const base = 'https://api.counterapi.dev/v1/pinnaclesmp-org/website-visitors';
     const lastValueKey = 'pinnacle-last-counter-value';
+    const display = value => {
+      const safeValue = Number.isFinite(value) && value >= 0 ? Math.floor(value) : 0;
+      counters.forEach(element => { element.textContent = String(safeValue).padStart(7, '0'); });
+    };
 
     counters.forEach(counter => {
       const caption = counter.parentElement?.querySelector('.small');
       if (caption) caption.textContent = 'page views since reset';
     });
-
-    const display = value => {
-      const safeValue = Number.isFinite(value) && value >= 0 ? Math.floor(value) : 0;
-      counters.forEach(el => { el.textContent = String(safeValue).padStart(7, '0'); });
-    };
 
     try {
       const response = await fetch(`${base}/up?t=${Date.now()}`, { cache: 'no-store' });
@@ -182,8 +92,7 @@
       localStorage.setItem(lastValueKey, String(value));
       localStorage.setItem('pinnacle-local-counter', String(value));
       display(value);
-    } catch (error) {
-      console.warn('Shared page counter unavailable; continuing from the last displayed value.', error);
+    } catch {
       let value = Number(localStorage.getItem(lastValueKey) || localStorage.getItem('pinnacle-local-counter') || 0);
       if (!Number.isFinite(value) || value < 0) value = 0;
       value += 1;
@@ -193,9 +102,9 @@
     }
   }
 
-  function clock() {
-    const render = () => document.querySelectorAll('[data-clock]').forEach(el => {
-      el.textContent = new Date().toLocaleString('en-US', {
+  function startClock() {
+    const render = () => document.querySelectorAll('[data-clock]').forEach(element => {
+      element.textContent = new Date().toLocaleString('en-US', {
         timeZone: 'America/New_York',
         weekday: 'short',
         month: 'short',
@@ -207,108 +116,37 @@
       });
     });
     render();
-    setInterval(render, 1000);
+    window.setInterval(render, 1000);
   }
 
-  function paintStatus(data) {
-    const available = data.available !== false;
-    const state = !available ? 'STATUS UNAVAILABLE' : data.online ? 'ONLINE' : 'OFFLINE';
-    const onlineCount = data.online ? Number(data.playersOnline || 0) : 0;
-    const maxCount = Number(data.playersMax || 20);
-
-    document.querySelectorAll('[data-server-status]').forEach(el => { el.textContent = state; });
-    document.querySelectorAll('[data-player-count]').forEach(el => { el.textContent = `${onlineCount} / ${maxCount}`; });
-    document.querySelectorAll('[data-server-version]').forEach(el => { el.textContent = data.version || 'Paper 26.2'; });
-    document.querySelectorAll('[data-live-dot]').forEach(dot => {
-      dot.classList.remove('offline', 'unknown');
-      if (!available) dot.classList.add('unknown');
-      else if (!data.online) dot.classList.add('offline');
+  function enableCopyButtons() {
+    document.addEventListener('click', async event => {
+      const button = event.target.closest('[data-copy-ip]');
+      if (!button) return;
+      const result = button.parentElement?.querySelector('.copy-result');
+      try {
+        await navigator.clipboard.writeText(button.dataset.copyIp || 'pinnaclesmp.mcserv.fun');
+        if (result) result.textContent = 'Copied!';
+      } catch {
+        if (result) result.textContent = 'Copy failed';
+      }
     });
-
-    const onlinePlayers = new Set((data.onlinePlayers || []).map(normalize));
-    document.querySelectorAll('[data-member-card]').forEach(card => {
-      const candidates = String(card.dataset.usernames || card.dataset.username || '').split(',').map(normalize);
-      const online = candidates.some(name => onlinePlayers.has(name));
-      card.classList.toggle('is-online', online);
-      const label = card.querySelector('[data-member-status]');
-      if (label) label.textContent = online ? 'Online' : 'Offline';
-    });
-  }
-
-  function normalizePlayerList(value) {
-    if (Array.isArray(value)) {
-      return value.map(player => typeof player === 'string' ? player : player?.name).filter(Boolean);
-    }
-    if (value && typeof value === 'object') {
-      return Object.values(value).map(player => typeof player === 'string' ? player : player?.name).filter(Boolean);
-    }
-    return [];
-  }
-
-  async function fetchStatusDirectly() {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 10000);
-    try {
-      const response = await fetch(`${statusApi}?t=${Date.now()}`, {
-        cache: 'no-store',
-        signal: controller.signal,
-        mode: 'cors'
-      });
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      const data = await response.json();
-      return {
-        available: true,
-        online: Boolean(data.online),
-        playersOnline: Number(data.players?.online || 0),
-        playersMax: Number(data.players?.max || 20),
-        onlinePlayers: normalizePlayerList(data.players?.list),
-        version: data.version || data.protocol?.name || 'Paper 26.2'
-      };
-    } finally {
-      clearTimeout(timeout);
-    }
-  }
-
-  async function status() {
-    try {
-      const service = window.PinnacleServerStatus;
-      const data = service?.fetchServerStatus
-        ? await service.fetchServerStatus({ force: true })
-        : await fetchStatusDirectly();
-      paintStatus(data);
-    } catch (error) {
-      console.warn('Unable to retrieve live Pinnacle SMP status.', error);
-      paintStatus({ available: false, online: false, playersOnline: 0, playersMax: 20, onlinePlayers: [], version: 'Paper 26.2' });
-    }
-  }
-
-  function profileOrGalleryWrap() {
-    if (inProfiles) {
-      wrapLegacyPage(document.querySelector('main.page'), 'members.html', 'PLAYER PROFILE • LIVE PINNACLESTATS');
-    } else if (/gallery-season-(11|12)\.html$/.test(location.pathname)) {
-      wrapLegacyPage(document.querySelector('main.container'), 'gallery.html', 'COMMUNITY SCREENSHOT ARCHIVE');
-    }
   }
 
   function start() {
-    profileOrGalleryWrap();
-    globalChanges();
+    applySharedCleanup();
     window.PinnacleMajorContent?.rebuildNews();
     window.PinnacleMajorContent?.rebuildMembers();
-    window.PinnacleMajorContent?.rebuildGalleryLanding();
-    globalChanges();
+    applySharedCleanup();
 
-    const year = document.querySelector('[data-year]');
-    if (year) year.textContent = new Date().getFullYear();
-
+    document.querySelectorAll('[data-year]').forEach(element => { element.textContent = new Date().getFullYear(); });
     visitorCounter();
-    clock();
-    status();
-    setInterval(status, 60000);
+    startClock();
+    enableCopyButtons();
   }
 
   function boot() {
-    const src = `${prefix}assets/major-content.js`;
+    const src = new URL('major-content.js', loader.src).href;
     if (window.PinnacleMajorContent) {
       start();
       return;
@@ -320,9 +158,6 @@
     document.head.appendChild(script);
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', boot, { once: true });
-  } else {
-    boot();
-  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot, { once: true });
+  else boot();
 })();
