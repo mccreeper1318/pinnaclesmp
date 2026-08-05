@@ -15,34 +15,6 @@
     document.head.appendChild(link);
   }
 
-  function formatVersionLabel(value) {
-    const text = String(value || '').trim();
-    if (!text) return 'Paper 26.2';
-    if (/^paper\b/i.test(text)) return text.replace(/^paper/i, 'Paper');
-    const release = text.match(/\b26\.2(?:\.\d+)?\b/);
-    if (release) return `Paper ${release[0]}`;
-    if (/^\d+(?:\.\d+)+$/.test(text)) return `Paper ${text}`;
-    return text;
-  }
-
-  function normalizeVersionLabels() {
-    document.querySelectorAll('[data-server-version]').forEach(element => {
-      const formatted = formatVersionLabel(element.textContent);
-      if (element.textContent !== formatted) element.textContent = formatted;
-    });
-  }
-
-  function rewriteLegacyProfileLinks() {
-    document.querySelectorAll('a[href]').forEach(link => {
-      const raw = link.getAttribute('href') || '';
-      const match = raw.match(/^(.*profiles\/)([^/?#]+)\.html(?:[?#].*)?$/i);
-      if (!match) return;
-      let player = match[2];
-      try { player = decodeURIComponent(player); } catch {}
-      link.setAttribute('href', `${match[1]}?player=${encodeURIComponent(player)}`);
-    });
-  }
-
   function applySharedCleanup() {
     document.querySelectorAll('.top-strip span').forEach(element => {
       if (element.textContent.trim() === 'SURFING SINCE 2012') element.textContent = 'ONLINE SINCE 2012';
@@ -93,9 +65,6 @@
     if (joinHeading) {
       [...document.querySelectorAll('ol.rules li')].find(item => /Learn about Pinnacle/i.test(item.textContent))?.remove();
     }
-
-    rewriteLegacyProfileLinks();
-    normalizeVersionLabels();
   }
 
   async function visitorCounter() {
@@ -123,7 +92,7 @@
       localStorage.setItem(lastValueKey, String(value));
       localStorage.setItem('pinnacle-local-counter', String(value));
       display(value);
-    } catch (error) {
+    } catch {
       let value = Number(localStorage.getItem(lastValueKey) || localStorage.getItem('pinnacle-local-counter') || 0);
       if (!Number.isFinite(value) || value < 0) value = 0;
       value += 1;
@@ -175,9 +144,6 @@
     visitorCounter();
     startClock();
     enableCopyButtons();
-
-    const versionObserver = new MutationObserver(normalizeVersionLabels);
-    versionObserver.observe(document.documentElement, { childList: true, characterData: true, subtree: true });
   }
 
   function boot() {
