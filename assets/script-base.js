@@ -136,7 +136,6 @@
   function start() {
     applySharedCleanup();
     window.PinnacleMajorContent?.rebuildNews();
-    window.PinnacleMajorContent?.rebuildMembers();
     applySharedCleanup();
 
     document.querySelectorAll('[data-year]').forEach(element => { element.textContent = new Date().getFullYear(); });
