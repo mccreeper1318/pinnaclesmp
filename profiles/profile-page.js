@@ -31,7 +31,6 @@
     { key: 'NoctuLocktoo', player: 'NoctuLocktoo', head: 'NoctuLocktoo.png' },
     { key: 'ImThaBLADE', player: 'ImThaBLADE', head: 'ImThaBLADE.png' },
     { key: 'laurentziu', player: 'laurentziu143', head: 'laurentziu143.png', aliases: ['laurentziu143'] },
-    { key: 'NateOnGuitar', player: 'NateOnGuitar' },
     { key: 'Ciupi8983', player: 'Ciupi8983', head: 'Ciupi8983.png' },
     { key: 'Kelly_E', player: 'Kelly_E', head: 'Kelly_E.png' }
   ];
