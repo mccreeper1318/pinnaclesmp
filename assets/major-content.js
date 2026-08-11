@@ -224,22 +224,6 @@
     box.innerHTML = `<h1>Server News Archive</h1><p>Open an article to read it.</p><div class="news-archive">${newsArticles.map((a,i)=>`<details class="news-archive-item" id="${a[0]}"${i===0?' open':''}><summary><span><span class="news-date">${a[2].toUpperCase()}</span><strong>${a[3]}</strong></span><span class="archive-tag">${a[1]}</span></summary><div class="news-archive-body">${a[4]}</div></details>`).join('')}</div>`;
   }
 
-  const ranks = [
-    ['Founding Members','founder',[['McCreeper1318','McCreeper1318','McCreeper1318.png'],['JohnnyKilroy','JohnnyKilroy','JohnnyKilroy.png'],['Piff','Piff',null],['Jeff','Jeff',null]]],
-    ['Admin','admin',[['Atlaskytan','Atlaskytan','Atlaskytan.png']]],
-    ['Legacy Members','legacy',[['BeansUniverse','BeansUniverse','BeansUniverse.png'],['MoeBe10','MoeBe10','MoeBe10.png'],['rad1709 (IronArmored)','rad1709','IronArmored.png','rad1709,IronArmored'],['GodlyCris','GodlyCris','GodlyCris.png'],['mermaidxellie','mermaidxellie','mermaidxellie.png'],['BadFiction','BadFiction','BadFiction.png']]],
-    ['Full Members','full',[['pinapple_pete','pinapple_pete','pinapple_pete.png'],['misfiired','misfiired','misfiired.png'],['notnownotnever','notnownotnever','notnownotnever.png'],['Poplare (Shiny)','Poplare','Poplare.png','Poplare,Shiny'],['Beslife','Beslife','Beslife.png'],['nicholattee (Nic/Duck)','nicholattee','nicholattee.png','nicholattee,Nic,Duck'],['StirfrySurprise','StirfrySurprise','StirfrySurprise.png'],['kylethecaver','kylethecaver','kylethecaver.png'],['Kananers','Kananers','Kananers.png'],['BACONcuzBACON','BACONcuzBACON','BACONcuzBACON.png'],['Aryamii','Aryamii','Aryamii.png'],['t0w0fu','t0w0fu','t0w0fu.png'],['BraneFX','BraneFX','BraneFX.png'],['Diissonance','Diissonance','Diissonance.png'],['Someperso','Someperso','Someperso.png'],['Ratatuii20','Ratatuii20','Ratatuii20.png'],['SweetBunny16','SweetBunny16','SweetBunny16.png']]],
-    ['New Members','new',[['NoctuLocktoo','NoctuLocktoo','NoctuLocktoo.png'],['ImThaBLADE','ImThaBLADE','ImThaBLADE.png'],['Von420','Von420','Von420.png'],['Poker118','Poker118','poker118.png'],['laurentziu143','laurentziu','laurentziu143.png'],['NateOnGuitar','NateOnGuitar',null],['blade326','blade326',null],['Dino353','Dino353',null],['Towmanger','Towmanger',null],['hor1z3n','hor1z3n',null]]],
-    ['Banned','banned',[['Ciupi8983','Ciupi8983','Ciupi8983.png'],['Kelly_E','Kelly_E','Kelly_E.png']]]
-  ];
-
-  function rebuildMembers(){
-    if (!/\/members\.html$/.test(location.pathname) && location.pathname !== '/members.html') return;
-    const box = document.querySelector('main.content .box-body');
-    if (!box) return;
-    box.innerHTML = `<h1>Pinnacle SMP Members</h1><p>Every member card opens that player’s profile and current PinnacleStats dashboard.</p>${ranks.map(([title,cls,people])=>`<section class="roster-section"><h2>${title}<span class="roster-count">${people.length}</span></h2><div class="roster-grid">${people.map(([display,file,img,aliases])=>`<a class="roster-name rank-${cls}" href="profiles/?player=${encodeURIComponent(file)}" data-member-card data-username="${file==='laurentziu'?'laurentziu143':file}"${aliases?` data-usernames="${aliases}"`:''}>${img?`<img src="assets/player_heads/${img}" alt="${display} player head">`:'<span class="roster-placeholder">?</span>'}<span class="roster-text"><strong>${display}</strong><small><span class="mini-status-dot"></span><span data-member-status>Offline</span></small></span></a>`).join('')}</div></section>`).join('')}<p class="source-note">Roster information was last updated on August 4, 2026. Member profiles are updated regularly.</p>`;
-  }
-
   function rebuildGalleryLanding(){
     if (!/\/gallery\.html$/.test(location.pathname) && location.pathname !== '/gallery.html') return;
     const box = document.querySelector('main.content .box-body');
@@ -247,5 +231,5 @@
     box.innerHTML = `<h1>Pinnacle SMP Galleries</h1><p>Browse the complete screenshot archives from the current and previous seasons.</p><div class="gallery-season-cards"><a class="gallery-season-card" href="gallery-season-12.html"><img src="https://res.cloudinary.com/ds4p9jsuf/image/upload/v1779704250/spawnportal_uu837o.png" alt="Season 12 gallery cover"><span><strong>Season 12 Gallery</strong><small>Browse folders, featured builds, and community screenshots</small></span></a><a class="gallery-season-card" href="gallery-season-11.html"><img src="https://res.cloudinary.com/ds4p9jsuf/image/upload/v1777776796/2026-01-26_20.25.19_2_vzvcr1.png" alt="Season 11 gallery cover"><span><strong>Season 11 Gallery</strong><small>Open the complete Season 11 screenshot archive</small></span></a></div>`;
   }
 
-  window.PinnacleMajorContent={rebuildNews,rebuildMembers,rebuildGalleryLanding};
+  window.PinnacleMajorContent={rebuildNews,rebuildGalleryLanding};
 })();

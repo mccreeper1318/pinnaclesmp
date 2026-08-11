@@ -28,16 +28,7 @@
     { key: 'Someperso', player: 'Someperso', head: 'Someperso.png' },
     { key: 'Ratatuii20', player: 'Ratatuii20', head: 'Ratatuii20.png' },
     { key: 'SweetBunny16', player: 'SweetBunny16', head: 'SweetBunny16.png' },
-    { key: 'NoctuLocktoo', player: 'NoctuLocktoo', head: 'NoctuLocktoo.png' },
-    { key: 'ImThaBLADE', player: 'ImThaBLADE', head: 'ImThaBLADE.png' },
-    { key: 'Von420', player: 'Von420', head: 'Von420.png' },
-    { key: 'Poker118', player: 'Poker118', head: 'poker118.png' },
     { key: 'laurentziu', player: 'laurentziu143', head: 'laurentziu143.png', aliases: ['laurentziu143'] },
-    { key: 'NateOnGuitar', player: 'NateOnGuitar' },
-    { key: 'blade326', player: 'blade326' },
-    { key: 'Dino353', player: 'Dino353' },
-    { key: 'Towmanger', player: 'Towmanger' },
-    { key: 'hor1z3n', player: 'hor1z3n' },
     { key: 'Ciupi8983', player: 'Ciupi8983', head: 'Ciupi8983.png' },
     { key: 'Kelly_E', player: 'Kelly_E', head: 'Kelly_E.png' }
   ];
