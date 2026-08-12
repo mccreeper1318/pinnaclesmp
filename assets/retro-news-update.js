@@ -1,5 +1,36 @@
 (() => {
   const ARTICLE = {
+    id: 'fall-build-2026',
+    date: 'AUG 12, 2026',
+    archiveDate: 'AUGUST 12, 2026',
+    title: '🍂 Pinnacle SMP Fall Build Contest 🍂',
+    summary: 'Build something that captures the feeling of fall, win a prize, and keep your winning build featured at Spawn!',
+    tag: 'Event',
+    body: `<p>Fall is coming to <strong>Pinnacle SMP</strong>, and we're celebrating with a <strong>Fall Build Contest at Spawn!</strong></p>
+      <h3>🎃 Theme: <strong>Autumn Harvest</strong></h3>
+      <p>Build something that captures the feeling of fall! This could be a cozy autumn cottage, pumpkin patch, harvest festival, haunted farmhouse, corn maze, fall market, or anything else that fits the season.</p>
+      <p>All contest builds must be constructed <strong>at Spawn</strong> so everyone can walk around and check out the entries.</p>
+      <h3>🏆 Prizes</h3>
+      <p>🥇 <strong>1st Place:</strong> 32 Diamonds + Fall Build Contest Champion recognition<br>
+      🥈 <strong>2nd Place:</strong> 16 Diamonds<br>
+      🥉 <strong>3rd Place:</strong> 8 Diamonds</p>
+      <p>The winning build will also remain featured at Spawn as part of the season's history!</p>
+      <h3>📜 Contest Rules</h3>
+      <ul>
+        <li>Builds must follow the <strong>Autumn Harvest</strong> theme.</li>
+        <li>All entries must be built at <strong>Spawn</strong>.</li>
+        <li>You may build alone or work with another member.</li>
+        <li>Builds should be created specifically for this contest.</li>
+        <li>Have fun with it! Creativity and atmosphere matter more than simply building the biggest structure.</li>
+      </ul>
+      <p>📅 <strong>Start:</strong> Sep. 1, 2026<br>
+      📅 <strong>Deadline:</strong> Dec. 1, 2026</p>
+      <p>Once the contest ends, the entries will be judged and the winners announced!</p>
+      <p>Grab some pumpkins, leaves, hay bales, and spruce wood and help give Spawn a proper fall makeover. 🍁</p>
+      <p><strong>Good luck, and happy building!</strong></p>`
+  };
+
+  const PREVIOUS_ARTICLE = {
     id: 'new-member-activity-purge',
     date: 'AUG 06, 2026',
     archiveDate: 'AUGUST 6, 2026',
@@ -13,7 +44,7 @@
       <p>Thanks for helping us keep the community active and welcoming!</p>`
   };
 
-  const PREVIOUS_ARTICLE = {
+  const OLDER_ARTICLE = {
     id: 'retro-redesign',
     date: 'AUG 04, 2026',
     archiveDate: 'AUGUST 4, 2026',
@@ -133,6 +164,9 @@
 
     const intro = archive.previousElementSibling;
     if (intro?.tagName === 'P') intro.textContent = 'Open an article to read it.';
+
+    const older = ensureArchiveArticle(archive, OLDER_ARTICLE, false);
+    archive.prepend(older);
 
     const previous = ensureArchiveArticle(archive, PREVIOUS_ARTICLE, false);
     archive.prepend(previous);
