@@ -29,6 +29,7 @@
     { key: 'Ratatuii20', player: 'Ratatuii20', head: 'Ratatuii20.png' },
     { key: 'SweetBunny16', player: 'SweetBunny16', head: 'SweetBunny16.png' },
     { key: 'laurentziu', player: 'laurentziu143', head: 'laurentziu143.png', aliases: ['laurentziu143'] },
+    { key: 'Sleepy_Carson', player: 'Sleepy_Carson' },
     { key: 'Ciupi8983', player: 'Ciupi8983', head: 'Ciupi8983.png' },
     { key: 'Kelly_E', player: 'Kelly_E', head: 'Kelly_E.png' }
   ];
