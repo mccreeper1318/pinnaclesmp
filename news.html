@@ -1,35 +1,81 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Pinnacle SMP — a community-driven, whitelisted Vanilla+ Minecraft server.">
-  <title>Server News | Pinnacle SMP</title>
-  <link rel="icon" href="assets/diamond.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/style.css">
-</head>
-<body>
-<div class="site-shell">
-  <div class="top-strip"><span>PINNACLE SMP ONLINE NETWORK</span><span>SURFING SINCE 2012</span></div>
-  <header class="header"><img class="logo" src="assets/logo.svg" alt="Pinnacle SMP Minecraft Community — Season 12"><p class="tagline">BUILD • EXPLORE • MAKE FRIENDS • BUILD HIGHER</p></header>
-  <div class="marquee-box" aria-label="Server announcement"><span class="marquee-track">PINNACLE SMP • SEASON 12 • PAPER 26.2 • WHITELISTED VANILLA+ • 18+ COMMUNITY • APPLICATIONS TEMPORARILY CLOSED</span></div>
-  <div class="main-grid">
-    <aside class="sidebar">
-      <section class="box"><div class="box-title">Main Menu</div><nav><ul class="nav-list"><li><a href="index.html">Home</a></li><li><a href="about.html">About Pinnacle</a></li><li><a href="season12.html">Season 12</a></li><li><a href="news.html" class="active">Server News</a></li><li><a href="members.html">Members</a></li><li><a href="standings.html">Tournament Standings</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="rules.html">Server Rules</a></li><li><a href="faq.html">FAQs</a></li><li><a href="links.html">Links & Voting</a></li><li><a href="join.html">Join / Contact</a></li></ul></nav></section>
-      <section class="box"><div class="box-title">Quick Connect</div><div class="box-body small"><p><strong>Server IP:</strong><br>pinnaclesmp.mcserv.fun</p><p><strong>Capacity:</strong><br>20 players</p><p><strong>Edition:</strong><br>Java Edition</p><p><a href="http://pinnaclesmp.mcserv.fun:1041/" target="_blank" rel="noopener">Live World Map</a></p><p><a href="https://discord.gg/97hdX25n7F" target="_blank" rel="noopener">Pinnacle Discord</a></p></div></section>
-      <section class="box"><div class="box-title">Cool Links</div><div class="box-body center"><div class="webring"><a href="members.html">« Members</a><strong>PINNACLE</strong><a href="links.html#voting">Vote »</a></div></div></section>
-    </aside>
-    <main class="content"><section class="box"><div class="box-body"><h1>Server News Archive</h1><p>Loading the complete news archive…</p></div></section></main>
-    <aside class="rightbar">
-      <section class="box"><div class="box-title">Server Status</div><div class="box-body center"><p class="status-online"><span class="status-dot unknown" data-live-dot></span><span data-server-status>CHECKING...</span></p><p><strong data-player-count>— / 20</strong> players</p><p><span class="server-version" data-server-version>Paper 26.2</span></p><p class="small"><strong>pinnaclesmp.mcserv.fun</strong></p></div></section>
-      <section class="box"><div class="box-title">Official Emblem</div><div class="box-body center"><img class="official-logo" src="assets/pinnacle-logo.png" alt="Official Pinnacle SMP mountain logo"></div></section>
-      <section class="box"><div class="box-title">Web Counter</div><div class="box-body center"><div class="hit-counter" data-counter>0000000</div><p class="small">unique visitors since reset</p></div></section>
-      <section class="box"><div class="box-title">Server Time</div><div class="box-body center small" data-clock>Loading...</div></section>
-    </aside>
-  </div>
-  <footer class="footer"><div>© 2012–<span data-year></span> Pinnacle SMP. All rights reserved.</div><div><a href="index.html">Home</a> | <a href="members.html">Members</a></div><div class="small">Pinnacle SMP is not affiliated with or endorsed by Mojang Studios or Microsoft.</div></footer>
-</div>
-<script src="assets/script.js"></script>
-<script src="assets/retro-news-update.js"></script>
-</body>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Pinnacle SMP — a community-driven, whitelisted Vanilla+ Minecraft server.">
+    <meta name="theme-color" content="#102b48">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Server News | Pinnacle SMP">
+    <meta property="og:description" content="Pinnacle SMP — a community-driven, whitelisted Vanilla+ Minecraft server.">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Server News | Pinnacle SMP">
+    <meta name="twitter:description" content="Pinnacle SMP — a community-driven, whitelisted Vanilla+ Minecraft server.">
+    <meta property="og:image" content="assets/images/social-card.webp">
+    <meta name="twitter:image" content="assets/images/social-card.webp">
+    <title>Server News | Pinnacle SMP</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/theme.css">
+  </head>
+  <body class="inner-page page-news">
+    
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header" data-header>
+      <div class="container nav-shell">
+        <a class="brand-lockup" href="index.html" aria-label="Pinnacle SMP home">
+          <span class="brand-icon"><svg aria-hidden="true" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 20 8-14 4 7 3-4 6 11H3Z"/><path d="m8 12 3-2 3 3"/></svg></span>
+          <span class="brand-name">PINNACLE <span>SMP</span></span>
+        </a>
+        <button class="mobile-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="primary-navigation" aria-label="Open navigation"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+        <nav class="primary-nav" id="primary-navigation" aria-label="Main navigation">
+          <a class="nav-link" href="index.html">Home</a><a class="nav-link" href="about.html">About</a><a class="nav-link" href="season12.html">Season 12</a><a class="nav-link is-active" href="news.html">News</a><a class="nav-link" href="members.html">Members</a><a class="nav-link" href="rules.html">Rules</a>
+          <details class="nav-more">
+            <summary>More <svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m7 10 5 5 5-5"/></svg></summary>
+            <div class="nav-dropdown"><a class="dropdown-link" href="gallery.html">Gallery</a><a class="dropdown-link" href="standings.html">Tournament Standings</a><a class="dropdown-link" href="plugins-wiki.html">Plugins Wiki</a><a class="dropdown-link" href="faq.html">FAQs</a><a class="dropdown-link" href="links.html">Links &amp; Voting</a><a class="dropdown-link" href="join.html">Join / Contact</a></div>
+          </details>
+        </nav>
+        <div class="header-actions">
+          <a class="online-pill" href="members.html" aria-label="Live server status"><span class="status-dot unknown" data-live-dot></span><span data-player-count>— / 20</span></a>
+          <a class="nav-cta" href="join.html">JOIN US <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        </div>
+      </div>
+    </header>
+    
+    
+    <main id="main-content" class="content site-main">
+      <section class="hero hero-interior"><div class="hero-background"></div><div class="container interior-hero-content"><p class="hero-eyebrow">SERVER NEWS</p><h1>Server News Archive</h1><p>Updates, announcements, events, and moments from the community.</p></div></section>
+      <section class="interior-section"><div class="container"><div class="interior-content"><section class="box news-archive-shell"><div class="box-body"><div class="archive-intro"><p class="eyebrow">COMMUNITY UPDATES</p><p>Explore announcements, server updates, events, and community moments from Pinnacle SMP.</p></div><div class="news-card-grid"><article class="news-archive-card" id="fall-build-2026"><div class="archive-card-meta"><span class="tag tag-event">EVENT</span><time class="news-date">AUGUST 12, 2026</time><span class="archive-new">NEW</span></div><h2>🍂 Pinnacle SMP Fall Build Contest 🍂</h2><p>Build something that captures the feeling of fall, win a prize, and keep your winning build featured at Spawn!</p><a class="archive-read-more" href="news-fall-build-2026.html">READ FULL ARTICLE <svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a></article><article class="news-archive-card" id="new-member-activity-purge"><div class="archive-card-meta"><span class="tag tag-announcement">ANNOUNCEMENT</span><time class="news-date">AUGUST 6, 2026</time></div><h2>New Member Activity Purge — Monday, August 10</h2><p>New Members with 0 playtime will be removed from the whitelist on Monday. Recently accepted players should log in before then to keep their place.</p><a class="archive-read-more" href="news-new-member-activity-purge.html">READ FULL ARTICLE <svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a></article><article class="news-archive-card" id="retro-redesign"><div class="archive-card-meta"><span class="tag tag-announcement">ANNOUNCEMENT</span><time class="news-date">AUGUST 4, 2026</time></div><h2>Pinnacle SMP Website Gets a Retro &#x27;90s Redesign</h2><p>The Pinnacle SMP website has been rebuilt with a colorful late-&#x27;90s internet look while retaining modern server information, member profiles, statistics, galleries, and live tools.</p><a class="archive-read-more" href="news-retro-redesign.html">READ FULL ARTICLE <svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a></article><article class="news-archive-card" id="plugins"><div class="archive-card-meta"><span class="tag tag-announcement">ANNOUNCEMENT</span><time class="news-date">JULY 2, 2026</time></div><h2>Recent Plugin Updates and Additions</h2><p>Pinnacle SMP added several custom plugins and restored key community tools to make the server safer, easier to manage, and more connected across Minecraft, Discord, and the website.</p><a class="archive-read-more" href="news-plugins.html">READ FULL ARTICLE <svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a></article><article class="news-archive-card" id="rollback"><div class="archive-card-meta"><span class="tag tag-news">NEWS</span><time class="news-date">JUNE 24, 2026</time></div><h2>Griefing Incident and Rollback</h2><p>A serious griefing incident affected spawn and several player bases. The server was restored using the June 20 save so damaged areas could be recovered cleanly.</p><a class="archive-read-more" href="news-rollback.html">READ FULL ARTICLE <svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a></article><article class="news-archive-card" id="paper"><div class="archive-card-meta"><span class="tag tag-update">UPDATE</span><time class="news-date">JUNE 22, 2026</time></div><h2>We Have Updated to Paper 26.2!</h2><p>Pinnacle SMP moved back to Paper and updated to Paper 26.2: Chaos Cubed. The move restored plugin support while keeping ordinary survival gameplay mostly vanilla.</p><a class="archive-read-more" href="news-paper.html">READ FULL ARTICLE <svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a></article><article class="news-archive-card" id="june-awards"><div class="archive-card-meta"><span class="tag tag-announcement">ANNOUNCEMENT</span><time class="news-date">JUNE 1, 2026</time></div><h2>June 2026 Award Winners Announced</h2><p>nicholattee won the Member Base Highlight, mermaidxellie won the Gameplay Award, and Atlaskytan and mermaidxellie tied for the Community Award.</p><a class="archive-read-more" href="news-june-awards.html">READ FULL ARTICLE <svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a></article><article class="news-archive-card" id="gallery-update"><div class="archive-card-meta"><span class="tag tag-announcement">ANNOUNCEMENT</span><time class="news-date">MAY 28, 2026</time></div><h2>Gallery Update</h2><p>The Season 12 gallery received a folder-style layout to make its growing screenshot archive easier to browse.</p><a class="archive-read-more" href="news-gallery-update.html">READ FULL ARTICLE <svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a></article><article class="news-archive-card" id="wait-26-2"><div class="archive-card-meta"><span class="tag tag-community-vote">COMMUNITY VOTE</span><time class="news-date">MAY 6, 2026</time></div><h2>Community Votes to Wait for 26.2</h2><p>The community voted 0–5 to wait for Paper 26.2 instead of moving temporarily to Paper 26.1.2.</p><a class="archive-read-more" href="news-wait-26-2.html">READ FULL ARTICLE <svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a></article><article class="news-archive-card" id="may-awards"><div class="archive-card-meta"><span class="tag tag-announcement">ANNOUNCEMENT</span><time class="news-date">MAY 4, 2026</time></div><h2>Monthly Member Awards</h2><p>Atlaskytan and McCreeper1318 tied for Member Base Highlight. Kananers won the Gameplay Award, and McCreeper1318 won the Community Award.</p><a class="archive-read-more" href="news-may-awards.html">READ FULL ARTICLE <svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a></article><article class="news-archive-card" id="legacy"><div class="archive-card-meta"><span class="tag tag-announcement">ANNOUNCEMENT</span><time class="news-date">APRIL 24, 2026</time></div><h2>New Legacy Members</h2><p>mermaidxellie and Atlaskytan were promoted to Legacy Members for consistent participation, contributions across Seasons 11 and 12, and their growth within the community.</p><a class="archive-read-more" href="news-legacy.html">READ FULL ARTICLE <svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a></article><article class="news-archive-card" id="season-start"><div class="archive-card-meta"><span class="tag tag-announcement">ANNOUNCEMENT</span><time class="news-date">APRIL 14, 2026</time></div><h2>Season 12 Has Begun</h2><p>Season 12 officially launched with a new world and a fresh opportunity to explore, build, and grow together.</p><a class="archive-read-more" href="news-season-start.html">READ FULL ARTICLE <svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a></article><article class="news-archive-card" id="update-progress"><div class="archive-card-meta"><span class="tag tag-announcement">ANNOUNCEMENT</span><time class="news-date">APRIL 6, 2026</time></div><h2>Update Still In Progress</h2><p>Paper developers released alpha builds for 26.1.1 but had not announced a stable-build date.</p><a class="archive-read-more" href="news-update-progress.html">READ FULL ARTICLE <svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a></article><article class="news-archive-card" id="ranks"><div class="archive-card-meta"><span class="tag tag-announcement">ANNOUNCEMENT</span><time class="news-date">MARCH 24, 2026</time></div><h2>Ranks System Update</h2><p>Rank advancement was changed to better reflect activity, contribution, conduct, collaboration, and community involvement instead of relying only on time played.</p><a class="archive-read-more" href="news-ranks.html">READ FULL ARTICLE <svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a></article></div></div></section></div></div></section>
+      <section class="community-banner compact-banner"><div class="container banner-inner"><div><p class="eyebrow">PINNACLE SMP</p><h2>Community first. Server second.</h2><p>Whitelisted · Vanilla+ · Paper 26.2 · Java Edition · 18+ only</p></div><a class="button button-gold" href="join.html">JOIN THE COMMUNITY <svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a></div></section>
+    </main>
+    
+    
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div class="footer-intro">
+          <a class="footer-brand" href="index.html"><svg aria-hidden="true" width="29" height="29" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 20 8-14 4 7 3-4 6 11H3Z"/><path d="m8 12 3-2 3 3"/></svg> <span>PINNACLE SMP</span></a>
+          <p>A small, established Minecraft community built around long-term survival worlds, trust, collaborative projects, and a welcoming atmosphere.</p>
+          <button class="footer-ip" type="button" data-copy-ip="pinnaclesmp.mcserv.fun"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg> pinnaclesmp.mcserv.fun</button>
+        </div>
+        <div class="footer-column"><h3>Community</h3><a href="about.html">About Pinnacle</a><a href="season12.html">Season 12</a><a href="members.html">Members</a><a href="standings.html">Tournament Standings</a></div>
+        <div class="footer-column"><h3>Information</h3><a href="news.html">Server News</a><a href="gallery.html">Gallery</a><a href="plugins-wiki.html">Plugins Wiki</a><a href="rules.html">Server Rules</a><a href="faq.html">FAQs</a><a href="links.html">Links &amp; Voting</a></div>
+        <div class="footer-column"><h3>Quick connect</h3>
+          <a href="https://discord.gg/97hdX25n7F" target="_blank" rel="noopener">Pinnacle Discord</a>
+          <a href="http://pinnaclesmp.mcserv.fun:1041/" target="_blank" rel="noopener">Live World Map</a>
+          <a href="join.html">Join / Contact</a>
+          <span class="footer-clock"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> <span data-clock>Eastern Time</span></span>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <p>© 2012–<span data-year>2026</span> Pinnacle SMP. All rights reserved.</p>
+        <p>Not affiliated with or endorsed by Mojang Studios or Microsoft.</p>
+      </div>
+    </footer>
+    <div class="copy-toast" role="status" aria-live="polite" data-copy-toast>Server address copied</div>
+    
+    <script src="assets/major-content.js" defer></script>
+    <script src="assets/theme.js" defer></script>
+  </body>
 </html>

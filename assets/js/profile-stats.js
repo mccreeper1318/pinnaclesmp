@@ -40,13 +40,22 @@
   const statsRoot = new URL('../player-stats/players/', loader.src);
   document.querySelectorAll('.dynamic-profile[data-player]').forEach(async container => {
     const playerName = container.dataset.player;
+    const bundledData = window.PinnacleEmbeddedStats?.[playerName];
     const url = new URL(`${encodeURIComponent(playerName)}.json?v=${Date.now()}`, statsRoot);
     try {
+      if (location.protocol === 'file:' && bundledData) {
+        renderDashboard(container, bundledData);
+        return;
+      }
       const response = await fetch(url, { cache: 'no-store' });
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       renderDashboard(container, await response.json());
     } catch (error) {
-      renderFallback(container, playerName, 'No server stats are available for this player yet. This usually means they have not joined since stats tracking was added, or their stats have not been published yet.');
+      if (bundledData) {
+        renderDashboard(container, bundledData);
+      } else {
+        renderFallback(container, playerName, 'No server stats are available for this player yet. This usually means they have not joined since stats tracking was added, or their stats have not been published yet.');
+      }
     }
   });
 })();

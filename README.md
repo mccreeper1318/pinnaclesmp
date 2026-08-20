@@ -1,45 +1,44 @@
 # Pinnacle SMP Website
 
-The official static website for Pinnacle SMP, hosted with GitHub Pages at `pinnaclesmp.org`.
+The official static website for Pinnacle SMP, hosted with GitHub Pages at `www.pinnaclesmp.org`.
 
 ## Current site
 
-The website uses a custom retro late-1990s gaming-community design with modern responsive behavior and live server information.
+The website uses a custom responsive Minecraft community design with live server information and a dedicated Season 12 experience.
 
 Main sections include:
 
-- Home and server news
-- About Pinnacle and Season 12 information
-- Member roster and live PinnacleStats profiles
-- Tournament standings
+- Home, community information, and Season 12
+- Server news cards with standalone article pages
+- Member roster and PinnacleStats player profiles
+- Tournament standings and community events
 - Season 11 and Season 12 screenshot galleries
-- Server rules and FAQs
-- Links, voting, applications, and contact information
-- Player-facing Plugins Wiki
+- Server rules, FAQs, voting, applications, and contact information
+- Player-facing plugin documentation
+- Direct access to the live world map
 
-## Member profiles
+## Member profiles and statistics
 
-Member profiles use one shared native retro profile viewer at `profiles/index.html`. The selected player is passed through the `player` query parameter, for example:
+Member profiles use the shared viewer at `profiles/index.html`. The selected player is provided through the `player` query parameter:
 
 ```text
-profiles/?player=McCreeper1318
+profiles/index.html?player=McCreeper1318
 ```
 
-Profile statistics are loaded from the static JSON files in `assets/player-stats/`, which are published by PinnacleStats. Old per-player profile URLs are redirected by the custom 404 page for backward compatibility.
+PinnacleStats publishes player data in `assets/player-stats/`, including named snapshots, UUID snapshots, and the statistics index. The profile viewer also includes an embedded fallback for portable, offline copies of the site.
 
 ## Live features
 
-- Minecraft server status and player count
+- Minecraft server status and online player count
 - Online member indicators
-- Server software version display
 - Eastern Time server clock
-- Page-view counter
 - Cloudinary-powered screenshot galleries
 - PinnacleStats player dashboards
+- Live world map
 
-## Development
+## Development and publishing
 
-The site is plain HTML, CSS, and JavaScript. No build step is required. Run a local web server from the repository root when testing features that use `fetch`:
+The site uses plain HTML, CSS, and JavaScript and does not require a build step. Run a local web server from the repository root when testing network-backed features:
 
 ```bash
 python3 -m http.server 8000
@@ -47,7 +46,7 @@ python3 -m http.server 8000
 
 Then open `http://localhost:8000`.
 
-Pull requests are deployed to temporary GitHub Pages previews by `.github/workflows/pr-preview.yml`.
+Changes pushed to `main` are automatically deployed to `gh-pages` by `.github/workflows/deploy-pages.yml`. Pull requests receive temporary previews through `.github/workflows/pr-preview.yml`.
 
 ## Notice
 
