@@ -4,7 +4,6 @@
   const titleEl = document.getElementById('gallery-title');
   const descEl = document.getElementById('gallery-description');
   const statusEl = document.getElementById('gallery-status');
-  const crumbsEl = document.getElementById('gallery-breadcrumbs');
   const foldersEl = document.getElementById('folder-grid');
   const imagesEl = document.getElementById('season-gallery-grid');
 
@@ -22,31 +21,6 @@
       trail.push(next);
     }
     return { node: current, trail };
-  }
-
-  function renderBreadcrumbs(trail) {
-    crumbsEl.innerHTML = '';
-    trail.forEach((item, index) => {
-      const isLast = index === trail.length - 1;
-      if (index > 0) {
-        const sep = document.createElement('span');
-        sep.textContent = '›';
-        sep.setAttribute('aria-hidden', 'true');
-        crumbsEl.appendChild(sep);
-      }
-      if (isLast) {
-        const current = document.createElement('span');
-        current.textContent = item.title;
-        current.setAttribute('aria-current', 'page');
-        crumbsEl.appendChild(current);
-      } else {
-        const a = document.createElement('a');
-        const sub = trail.slice(1, index + 1).map((s) => s.id).join('/');
-        a.href = sub ? `gallery-season-12.html?path=${encodeURIComponent(sub)}` : 'gallery-season-12.html';
-        a.textContent = item.title;
-        crumbsEl.appendChild(a);
-      }
-    });
   }
 
   function renderFolderCards(node, trail) {
@@ -134,7 +108,6 @@
   const { node, trail } = resolved;
   titleEl.textContent = `${node.title} Gallery`;
   descEl.textContent = node.description || 'Browse folders and screenshots from this gallery section.';
-  renderBreadcrumbs(trail);
   if (node.children && node.children.length) {
     renderFolderCards(node, trail);
   } else if (node.tags) {
