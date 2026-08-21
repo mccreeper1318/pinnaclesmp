@@ -30,9 +30,10 @@
     { key: 'SweetBunny16', player: 'SweetBunny16', head: 'SweetBunny16.png' },
     { key: 'laurentziu', player: 'laurentziu143', head: 'laurentziu143.png', aliases: ['laurentziu143'] },
     { key: 'Sleepy_Carson', player: 'Sleepy_Carson', head: 'Sleepy_Carson.png' },
-    { key: 'dream1999', player: 'dream1999' },
-    { key: '2b02', player: '2b02' },
-    { key: 'DiamondKiller111', player: 'DiamondKiller111' },
+    { key: 'dream1999', player: 'dream1999', head: 'dream1999.png' },
+    { key: '2b02', player: '2b02', head: '2b02.png' },
+    { key: 'DiamondKiller111', player: 'DiamondKiller111', head: 'DiamondKiller111.png' },
+    { key: 'GOTH_LOV3R', player: 'GOTH_LOV3R', head: 'GOTH_LOV3R.png' },
     { key: 'Ciupi8983', player: 'Ciupi8983', head: 'Ciupi8983.png' },
     { key: 'Kelly_E', player: 'Kelly_E', head: 'Kelly_E.png' }
   ];
