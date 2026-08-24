@@ -34,6 +34,8 @@
     { key: '2b02', player: '2b02', head: '2b02.png' },
     { key: 'DiamondKiller111', player: 'DiamondKiller111', head: 'DiamondKiller111.png' },
     { key: 'GOTH_LOV3R', player: 'GOTH_LOV3R', head: 'GOTH_LOV3R.png' },
+    { key: 'AtlasX__', player: 'AtlasX__', head: 'AtlasX__.png', statsPlayer: 'atlasX__' },
+    { key: '7SSAIN_M', player: '7SSAIN_M' },
     { key: 'Ciupi8983', player: 'Ciupi8983', head: 'Ciupi8983.png' },
     { key: 'Kelly_E', player: 'Kelly_E', head: 'Kelly_E.png' }
   ];
@@ -66,7 +68,7 @@
   document.title = `${profile.player} | Pinnacle SMP Profile`;
   name.textContent = profile.player;
   status.dataset.usernames = statusNames;
-  stats.dataset.player = profile.player;
+  stats.dataset.player = profile.statsPlayer || profile.player;
   stats.dataset.nickname = profile.nickname || '';
   stats.querySelector('.stats-loading').textContent = `Loading latest server statistics for ${profile.player}…`;
 
