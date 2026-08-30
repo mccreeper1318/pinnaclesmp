@@ -35,7 +35,11 @@
     { key: 'DiamondKiller111', player: 'DiamondKiller111', head: 'DiamondKiller111.png' },
     { key: 'GOTH_LOV3R', player: 'GOTH_LOV3R', head: 'GOTH_LOV3R.png' },
     { key: 'AtlasX__', player: 'AtlasX__', head: 'AtlasX__.png', statsPlayer: 'atlasX__' },
-    { key: '7SSAIN_M', player: '7SSAIN_M' },
+    { key: '7SSAIN_M', player: '7SSAIN_M', head: '7SSAIN_M.png' },
+    { key: 'nende04', player: 'nende04', head: 'nende04.png' },
+    { key: 'amidsts_dissent', player: 'amidsts_dissent' },
+    { key: 'Zimzzon', player: 'Zimzzon' },
+    { key: 'LilyOfTheVale08', player: 'LilyOfTheVale08' },
     { key: 'Ciupi8983', player: 'Ciupi8983', head: 'Ciupi8983.png' },
     { key: 'Kelly_E', player: 'Kelly_E', head: 'Kelly_E.png' }
   ];
