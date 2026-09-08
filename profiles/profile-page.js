@@ -40,6 +40,13 @@
     { key: 'amidsts_dissent', player: 'amidsts_dissent' },
     { key: 'Zimzzon', player: 'Zimzzon' },
     { key: 'LilyOfTheVale08', player: 'LilyOfTheVale08' },
+    { key: 'ImThaBLADE', player: 'ImThaBLADE' },
+    { key: 'Jimbob104726', player: 'Jimbob104726' },
+    { key: 'Natedawg1705', player: 'Natedawg1705' },
+    { key: 'NoctuLocktoo', player: 'NoctuLocktoo' },
+    { key: 'Von420', player: 'Von420' },
+    { key: 'blade326', player: 'blade326' },
+    { key: 'poker118', player: 'poker118' },
     { key: 'Ciupi8983', player: 'Ciupi8983', head: 'Ciupi8983.png' },
     { key: 'Kelly_E', player: 'Kelly_E', head: 'Kelly_E.png' }
   ];
