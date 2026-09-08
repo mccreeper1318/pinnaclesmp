@@ -4,9 +4,9 @@
 
   const readStoredTheme = () => {
     try {
-      return window.localStorage.getItem(THEME_STORAGE_KEY) === 'dark' ? 'dark' : 'light';
+      return window.localStorage.getItem(THEME_STORAGE_KEY) === 'light' ? 'light' : 'dark';
     } catch {
-      return 'light';
+      return 'dark';
     }
   };
 
@@ -43,7 +43,7 @@
   };
 
   const applyTheme = (theme, persist = false) => {
-    activeTheme = theme === 'dark' ? 'dark' : 'light';
+    activeTheme = theme === 'light' ? 'light' : 'dark';
     root.dataset.theme = activeTheme;
 
     const themeColor = document.querySelector('meta[name="theme-color"]');
@@ -71,7 +71,7 @@
   }
 
   window.addEventListener('storage', event => {
-    if (event.key === THEME_STORAGE_KEY) applyTheme(event.newValue === 'dark' ? 'dark' : 'light');
+    if (event.key === THEME_STORAGE_KEY) applyTheme(event.newValue === 'light' ? 'light' : 'dark');
   });
 
   const menuButton = document.querySelector('[data-menu-toggle]');
