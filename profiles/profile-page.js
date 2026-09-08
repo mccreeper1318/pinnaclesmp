@@ -37,11 +37,11 @@
     { key: 'AtlasX__', player: 'AtlasX__', head: 'AtlasX__.png', statsPlayer: 'atlasX__' },
     { key: '7SSAIN_M', player: '7SSAIN_M', head: '7SSAIN_M.png' },
     { key: 'nende04', player: 'nende04', head: 'nende04.png' },
-    { key: 'amidsts_dissent', player: 'amidsts_dissent' },
-    { key: 'Zimzzon', player: 'Zimzzon' },
+    { key: 'amidsts_dissent', player: 'amidsts_dissent', head: 'amidsts_dissent.png' },
+    { key: 'Zimzzon', player: 'Zimzzon', head: 'Zimzzon.png' },
     { key: 'LilyOfTheVale08', player: 'LilyOfTheVale08' },
     { key: 'ImThaBLADE', player: 'ImThaBLADE' },
-    { key: 'Jimbob104726', player: 'Jimbob104726' },
+    { key: 'Jimbob104726', player: 'Jimbob104726', head: 'Jimbob104726.png' },
     { key: 'Natedawg1705', player: 'Natedawg1705' },
     { key: 'NoctuLocktoo', player: 'NoctuLocktoo' },
     { key: 'Von420', player: 'Von420' },
@@ -52,6 +52,7 @@
   ];
 
   const normalize = value => String(value || '').toLowerCase().replace(/[^a-z0-9_]/g, '');
+  const headAssetVersion = '20260908b';
   const lookup = new Map();
   profiles.forEach(profile => {
     [profile.key, profile.player, ...(profile.aliases || [])].forEach(alias => lookup.set(normalize(alias), profile));
@@ -86,7 +87,7 @@
   if (profile.head) {
     const image = document.createElement('img');
     image.className = 'profile-player-head';
-    image.src = `../assets/player_heads/${encodeURIComponent(profile.head)}`;
+    image.src = `../assets/player_heads/${encodeURIComponent(profile.head)}?v=${headAssetVersion}`;
     image.alt = `${profile.player} Minecraft player head`;
     image.decoding = 'async';
     headSlot.appendChild(image);
