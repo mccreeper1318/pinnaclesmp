@@ -1,4 +1,4 @@
-/* Site-wide theme switch. Light mode remains the default theme in theme.css. */
+/* Site-wide theme switch. Light mode remains available through the toggle. */
 .theme-toggle {
   position: relative;
   display: inline-flex;
@@ -100,6 +100,14 @@ html[data-theme="dark"] .rules > li {
   border-color: var(--line);
   background: #142737;
 }
+
+/* Preserve member-rank accent colors in dark mode. */
+html[data-theme="dark"] .roster-name.rank-founder { border-left-color: #e27272; }
+html[data-theme="dark"] .roster-name.rank-admin { border-left-color: #e9b03c; }
+html[data-theme="dark"] .roster-name.rank-legacy { border-left-color: #9a7ccc; }
+html[data-theme="dark"] .roster-name.rank-full { border-left-color: #65a8d5; }
+html[data-theme="dark"] .roster-name.rank-new { border-left-color: #65bb85; }
+html[data-theme="dark"] .roster-name.rank-banned { border-left-color: #a79a99; }
 
 html[data-theme="dark"] .feature-icon,
 html[data-theme="dark"] .join-step > span,
