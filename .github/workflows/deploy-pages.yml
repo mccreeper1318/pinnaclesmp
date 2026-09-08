@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - main
+  workflow_run:
+    workflows:
+      - Deploy PR previews
+    types:
+      - completed
   workflow_dispatch:
 
 permissions:
@@ -20,6 +25,8 @@ jobs:
     steps:
       - name: Check out repo
         uses: actions/checkout@v4
+        with:
+          ref: main
 
       - name: Publish root site to gh-pages
         uses: JamesIves/github-pages-deploy-action@v4
