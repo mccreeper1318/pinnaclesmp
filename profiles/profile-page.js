@@ -40,6 +40,7 @@
     { key: 'amidsts_dissent', player: 'amidsts_dissent', head: 'amidsts_dissent.png' },
     { key: 'Zimzzon', player: 'Zimzzon', head: 'Zimzzon.png' },
     { key: 'LilyOfTheVale08', player: 'LilyOfTheVale08' },
+    { key: 'ItsMeDrizzle', player: 'ItsMeDrizzle', head: 'ItsMeDrizzle.png' },
     { key: 'ImThaBLADE', player: 'ImThaBLADE' },
     { key: 'Jimbob104726', player: 'Jimbob104726', head: 'Jimbob104726.png' },
     { key: 'Natedawg1705', player: 'Natedawg1705' },
