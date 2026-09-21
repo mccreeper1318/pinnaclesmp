@@ -228,7 +228,7 @@ td:first-child { font-weight: 800; }
 .rank-legacy { border-left-color: #9a7ccc; }
 .rank-full { border-left-color: #65a8d5; }
 .rank-new { border-left-color: #65bb85; }
-.rank-dewhitelisted { border-left-color: #d78254; opacity: .92; }
+.rank-dewhitelisted { border-left-color: #f28c28; opacity: .92; }
 .rank-banned { border-left-color: #a79a99; opacity: .86; }
 .source-note { margin-top: 22px; color: var(--ink-light) !important; font-size: 12px; }
 .profile-hero { display: grid; grid-template-columns: 114px minmax(0, 1fr); align-items: center; gap: 21px; margin: 22px 0; padding: 20px; border: 1px solid var(--line); border-radius: 18px; background: #f5faff; }
