@@ -49,6 +49,7 @@
     { key: 'ProfessorYankee', player: 'ProfessorYankee', head: 'ProfessorYankee.png' },
     { key: 'braxyybra', player: 'braxyybra', head: 'braxyybra.png' },
     { key: 'Edawg100', player: 'Edawg100' },
+    { key: 'kafelit', player: 'kafelit' },
     { key: 'ImThaBLADE', player: 'ImThaBLADE' },
     { key: 'Jimbob104726', player: 'Jimbob104726', head: 'Jimbob104726.png' },
     { key: 'Natedawg1705', player: 'Natedawg1705' },
