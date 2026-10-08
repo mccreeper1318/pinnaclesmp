@@ -40,7 +40,7 @@
     playersOnline: 0,
     playersMax: 20,
     onlinePlayers: [],
-    version: 'Paper 26.2',
+    version: 'Paper 26.3',
     source: 'none'
   });
 
