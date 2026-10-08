@@ -46,7 +46,7 @@
     
     
     <main id="main-content" class="content site-main">
-      <section class="hero hero-interior"><div class="hero-background"></div><div class="container interior-hero-content"><p class="hero-eyebrow">THE COMMUNITY</p><h1>Pinnacle SMP Members</h1><p>Every member card opens that player’s profile and current PinnacleStats dashboard.</p></div></section>
+      <section class="hero hero-interior"><div class="hero-background"></div><div class="container interior-hero-content"><p class="hero-eyebrow">THE COMMUNITY</p><h1>Pinnacle SMP Members</h1><div class="members-total" role="status" aria-live="polite"><span class="members-total-value" data-members-total>61</span><span class="members-total-label"><strong>Total Members</strong><small>Includes de-whitelisted · excludes banned</small></span></div><p>Every member card opens that player’s profile and current PinnacleStats dashboard.</p></div></section>
       <section class="interior-section"><div class="container"><div class="interior-content">
       <section class="box">
         <div class="box-body">
@@ -133,7 +133,7 @@
 <a class="roster-name rank-dewhitelisted" href="profiles/index.html?player=Toad2452" data-member-card="" data-username="Toad2452"><span class="roster-placeholder">?</span><span class="roster-text"><strong>Toad2452</strong><small><span class="mini-status-dot"></span><span data-member-status="">Offline</span></small></span></a>
 </div></section>
 
-<section class="roster-section"><h2>Banned<span class="roster-count">4</span></h2><div class="roster-grid">
+<section class="roster-section" data-exclude-from-total><h2>Banned<span class="roster-count">4</span></h2><div class="roster-grid">
 <a class="roster-name rank-banned" href="profiles/index.html?player=Ciupi8983" data-member-card="" data-username="Ciupi8983"><img src="assets/player_heads/Ciupi8983.png" alt="Ciupi8983 player head"><span class="roster-text"><strong>Ciupi8983</strong><small><span class="mini-status-dot"></span><span data-member-status="">Offline</span></small></span></a>
 <a class="roster-name rank-banned" href="profiles/index.html?player=Kelly_E" data-member-card="" data-username="Kelly_E"><img src="assets/player_heads/Kelly_E.png" alt="Kelly_E player head"><span class="roster-text"><strong>Kelly_E</strong><small><span class="mini-status-dot"></span><span data-member-status="">Offline</span></small></span></a>
 <a class="roster-name rank-banned" href="profiles/index.html?player=dream1999" data-member-card="" data-username="dream1999"><img src="assets/player_heads/dream1999.png" alt="dream1999 player head"><span class="roster-text"><strong>dream1999</strong><small><span class="mini-status-dot"></span><span data-member-status="">Offline</span></small></span></a>
@@ -171,6 +171,20 @@
     </footer>
     <div class="copy-toast" role="status" aria-live="polite" data-copy-toast>Server address copied</div>
     
+    <script>
+      // Count member cards, including de-whitelisted players, but not the Banned section.
+      (() => {
+        const counter = document.querySelector('[data-members-total]');
+        if (!counter) return;
+
+        const eligibleSections = document.querySelectorAll('.roster-section:not([data-exclude-from-total])');
+        const count = Array.from(eligibleSections).reduce(
+          (total, section) => total + section.querySelectorAll('.roster-name[data-member-card]').length,
+          0
+        );
+        counter.textContent = count.toLocaleString();
+      })();
+    </script>
     <script src="assets/major-content.js" defer></script>
     <script src="assets/theme.js" defer></script>
   </body>
