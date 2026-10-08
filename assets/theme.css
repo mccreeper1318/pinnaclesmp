@@ -209,6 +209,43 @@ td:first-child { font-weight: 800; }
 .standings-table tbody tr:first-child td:first-child { color: #c68613; }
 .download-table td a { font-weight: 800; }
 
+/* Total membership overview for the Members page. */
+.page-members .members-total {
+  display: inline-flex;
+  max-width: 100%;
+  align-items: center;
+  gap: 15px;
+  margin: 14px 0 12px;
+  padding: 11px 20px;
+  border: 1px solid rgba(255, 255, 255, .3);
+  border-radius: 14px;
+  background: rgba(7, 24, 44, .66);
+  box-shadow: 0 8px 26px rgba(0, 0, 0, .12);
+  text-align: left;
+}
+.page-members .members-total-value {
+  color: #fff;
+  font-family: var(--heading);
+  font-size: clamp(34px, 5vw, 45px);
+  font-weight: 700;
+  line-height: 1;
+}
+.page-members .members-total-label {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.page-members .members-total-label strong {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 800;
+}
+.page-members .members-total-label small {
+  color: rgba(255, 255, 255, .82);
+  font-size: 11px;
+  line-height: 1.35;
+}
+
 /* Roster and existing member profiles. */
 .roster-section { padding: 3px 0 12px; }
 .roster-section h2 { display: flex; align-items: center; gap: 10px; }
