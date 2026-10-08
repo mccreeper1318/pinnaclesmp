@@ -26,7 +26,7 @@
 
   const formatVersion = value => {
     const text = String(value || '').trim();
-    if (!text) return 'Paper 26.2';
+    if (!text) return 'Paper 26.3';
     if (/^paper\b/i.test(text)) return text.replace(/^paper/i, 'Paper');
     const release = text.match(/\b26\.2(?:\.\d+)?\b/);
     if (release) return `Paper ${release[0]}`;
@@ -40,7 +40,7 @@
     playersOnline: 0,
     playersMax: 20,
     onlinePlayers: [],
-    version: 'Paper 26.2',
+    version: 'Paper 26.3',
     source: 'none'
   });
 
