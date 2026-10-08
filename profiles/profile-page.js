@@ -57,7 +57,7 @@
     { key: 'NoctuLocktoo', player: 'NoctuLocktoo', head: 'NoctuLocktoo.png' },
     { key: 'Von420', player: 'Von420', head: 'Von420.png' },
     { key: 'MidWarrior3312', player: 'MidWarrior3312', head: 'MidWarrior3312.png', aliases: ['MidWarrior'] },
-    { key: 'ScrubZz21', player: 'ScrubZz21' },
+    { key: 'Jotto1025', player: 'Jotto1025' },
     { key: 'MrWaik', player: 'MrWaik', head: 'MrWaik.png' },
     { key: 'rnvx_7', player: 'rnvx_7', head: 'rnvx_7.png' },
     { key: 'Jtb_7002', player: 'Jtb_7002', head: 'Jtb_7002.png' },
