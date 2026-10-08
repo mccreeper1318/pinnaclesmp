@@ -48,27 +48,27 @@
     { key: 'GreenBeeFly', player: 'GreenBeeFly', head: 'GreenBeeFly.png' },
     { key: 'ProfessorYankee', player: 'ProfessorYankee', head: 'ProfessorYankee.png' },
     { key: 'braxyybra', player: 'braxyybra', head: 'braxyybra.png' },
-    { key: 'Edawg100', player: 'Edawg100' },
-    { key: 'kafelit', player: 'kafelit' },
+    { key: 'Edawg100', player: 'Edawg100', head: 'Edawg100.png' },
+    { key: 'kafelit', player: 'kafelit', head: 'kafelit.png' },
     { key: 'Toad2452', player: 'Toad2452' },
-    { key: 'ImThaBLADE', player: 'ImThaBLADE' },
+    { key: 'ImThaBLADE', player: 'ImThaBLADE', head: 'ImThaBLADE.png' },
     { key: 'Jimbob104726', player: 'Jimbob104726', head: 'Jimbob104726.png' },
-    { key: 'Natedawg1705', player: 'Natedawg1705' },
-    { key: 'NoctuLocktoo', player: 'NoctuLocktoo' },
-    { key: 'Von420', player: 'Von420' },
-    { key: 'MidWarrior', player: 'MidWarrior' },
+    { key: 'Natedawg1705', player: 'Natedawg1705', head: 'Natedawg1705.png' },
+    { key: 'NoctuLocktoo', player: 'NoctuLocktoo', head: 'NoctuLocktoo.png' },
+    { key: 'Von420', player: 'Von420', head: 'Von420.png' },
+    { key: 'MidWarrior3312', player: 'MidWarrior3312', head: 'MidWarrior3312.png', aliases: ['MidWarrior'] },
     { key: 'ScrubZz21', player: 'ScrubZz21' },
-    { key: 'MrWaik', player: 'MrWaik' },
-    { key: 'rnvx_7', player: 'rnvx_7' },
-    { key: 'Jtb_7002', player: 'Jtb_7002' },
-    { key: 'blade326', player: 'blade326' },
-    { key: 'poker118', player: 'poker118' },
+    { key: 'MrWaik', player: 'MrWaik', head: 'MrWaik.png' },
+    { key: 'rnvx_7', player: 'rnvx_7', head: 'rnvx_7.png' },
+    { key: 'Jtb_7002', player: 'Jtb_7002', head: 'Jtb_7002.png' },
+    { key: 'blade326', player: 'blade326', head: 'blade326.png' },
+    { key: 'poker118', player: 'poker118', head: 'poker118.png' },
     { key: 'Ciupi8983', player: 'Ciupi8983', head: 'Ciupi8983.png' },
     { key: 'Kelly_E', player: 'Kelly_E', head: 'Kelly_E.png' }
   ];
 
   const normalize = value => String(value || '').toLowerCase().replace(/[^a-z0-9_]/g, '');
-  const headAssetVersion = '20260908b';
+  const headAssetVersion = '20261008';
   const lookup = new Map();
   profiles.forEach(profile => {
     [profile.key, profile.player, ...(profile.aliases || [])].forEach(alias => lookup.set(normalize(alias), profile));
