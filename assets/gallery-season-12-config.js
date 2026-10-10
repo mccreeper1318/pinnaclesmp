@@ -2,7 +2,7 @@ window.SEASON_12_GALLERY_TREE = {
   id: 'season-12',
   title: 'Season 12',
   description: 'A visual archive of community moments from Pinnacle SMP Season 12.',
-  coverImage: 'https://res.cloudinary.com/ds4p9jsuf/image/upload/v1779704250/spawnportal_uu837o.png',
+  coverImage: 'https://res.cloudinary.com/ds4p9jsuf/image/upload/v1791493133/2026-10-07_22.30.11_y4yo2l.png',
   children: [
     {
       id: 'mbh',
