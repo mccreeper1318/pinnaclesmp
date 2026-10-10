@@ -6,6 +6,7 @@
   const statusEl = document.getElementById('gallery-status');
   const foldersEl = document.getElementById('folder-grid');
   const imagesEl = document.getElementById('season-gallery-grid');
+  const upLinks = document.querySelectorAll('[data-gallery-up]');
 
   const params = new URLSearchParams(window.location.search);
   const path = (params.get('path') || '').split('/').filter(Boolean);
@@ -99,6 +100,7 @@
 
   const resolved = findNodeWithTrail(tree, path);
   if (!resolved) {
+    upLinks.forEach((link) => { link.href = 'gallery-season-12.html'; });
     titleEl.textContent = 'Season 12 Gallery';
     descEl.textContent = 'The folder you requested could not be found.';
     statusEl.textContent = 'Please go back and choose another folder.';
@@ -106,6 +108,19 @@
   }
 
   const { node, trail } = resolved;
+
+  // Always navigate to the actual parent folder, not a fixed gallery index.
+  const parentPath = trail.slice(1, -1).map((entry) => entry.id).join('/');
+  const parentHref = trail.length === 1
+    ? 'gallery.html'
+    : parentPath
+      ? `gallery-season-12.html?path=${encodeURIComponent(parentPath)}`
+      : 'gallery-season-12.html';
+  const parentTitle = trail.length === 1 ? 'Pinnacle Screenshot Galleries' : trail[trail.length - 2].title;
+  upLinks.forEach((link) => {
+    link.href = parentHref;
+    link.setAttribute('aria-label', `Up one level to ${parentTitle}`);
+  });
   titleEl.textContent = `${node.title} Gallery`;
   descEl.textContent = node.description || 'Browse folders and screenshots from this gallery section.';
   if (node.children && node.children.length) {
