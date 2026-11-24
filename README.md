@@ -48,6 +48,18 @@ Then open `http://localhost:8000`.
 
 Changes pushed to `main` are automatically deployed to `gh-pages` by `.github/workflows/deploy-pages.yml`. Pull requests receive temporary previews through `.github/workflows/pr-preview.yml`.
 
+## Temporary Christmas 2026 branding
+
+The Christmas emblem is served from Cloudinary. The original logo asset (`assets/images/pinnacle-logo.webp`), header/footer SVG marks, and favicon (`assets/favicon.svg`) are retained for restoration after the holidays.
+
+To restore the standard branding:
+
+1. In `index.html` and `about.html`, set the official logo image `src` back to its `data-standard-logo` value.
+2. Remove the **Christmas 2026 logo override** block at the end of `assets/theme.css`.
+3. Remove the **Christmas 2026 favicon** block near the top of `assets/theme.js`.
+
+No original logo assets need to be recreated or downloaded.
+
 ## Notice
 
 Pinnacle SMP is not affiliated with or endorsed by Mojang Studios or Microsoft.
