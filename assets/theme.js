@@ -2,6 +2,14 @@
   const THEME_STORAGE_KEY = 'pinnacle-theme';
   const root = document.documentElement;
 
+  // Christmas 2026 favicon. Standard SVG href remains saved for quick restoration.
+  const holidayLogoUrl = 'https://res.cloudinary.com/ds4p9jsuf/image/upload/v1795535380/pinnacle-smp-christmas-logo_tg3a55.webp';
+  document.querySelectorAll('link[rel~="icon"]').forEach(icon => {
+    icon.dataset.standardHref = icon.getAttribute('href') || '';
+    icon.href = holidayLogoUrl;
+    icon.type = 'image/webp';
+  });
+
   const readStoredTheme = () => {
     try {
       return window.localStorage.getItem(THEME_STORAGE_KEY) === 'light' ? 'light' : 'dark';
