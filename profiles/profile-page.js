@@ -64,7 +64,13 @@
     { key: 'blade326', player: 'blade326', head: 'blade326.png' },
     { key: 'poker118', player: 'poker118', head: 'poker118.png' },
     { key: 'Ciupi8983', player: 'Ciupi8983', head: 'Ciupi8983.png' },
-    { key: 'Kelly_E', player: 'Kelly_E', head: 'Kelly_E.png' }
+    { key: 'Kelly_E', player: 'Kelly_E', head: 'Kelly_E.png' },
+    { key: 'Oddly_Mark', player: 'Oddly_Mark' },
+    { key: 'iBullyTTVs', player: 'iBullyTTVs' },
+    { key: 'Itz_Kayak', player: 'Itz_Kayak' },
+    { key: 'EchxStray', player: 'EchxStray' },
+    { key: 'mafioso', player: 'mafioso' },
+    { key: 'Dracadonix', player: 'Dracadonix' }
   ];
 
   const normalize = value => String(value || '').toLowerCase().replace(/[^a-z0-9_]/g, '');
