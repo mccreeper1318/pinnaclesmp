@@ -503,3 +503,22 @@ html[data-theme="dark"] .page-members .members-total {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
+
+/* Christmas 2026 logo override. Original mountain SVGs remain in page markup.
+   Remove this block to restore the standard header/footer marks. */
+.brand-icon {
+  background-image: url("https://res.cloudinary.com/ds4p9jsuf/image/upload/v1795535380/pinnacle-smp-christmas-logo_tg3a55.webp");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+.brand-icon > svg { visibility: hidden; }
+.footer-brand::before {
+  content: "";
+  display: inline-block;
+  flex: 0 0 29px;
+  width: 29px;
+  height: 29px;
+  background: url("https://res.cloudinary.com/ds4p9jsuf/image/upload/v1795535380/pinnacle-smp-christmas-logo_tg3a55.webp") center / contain no-repeat;
+}
+.footer-brand > svg { display: none; }
